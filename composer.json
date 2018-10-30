@@ -12,6 +12,13 @@
             "email": "hillelcoren@gmail.com"
         }
     ],
+    "config": {
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "optimize-autoloader": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "require": {
         "php": ">=7.0.0",
         "ext-gd": "*",
@@ -116,13 +123,6 @@
             "php -r \"copy('.env.example', '.env');\"",
             "php artisan key:generate"
         ]
-    },
-    "minimum-stability": "dev",
-    "prefer-stable": true,
-    "config": {
-        "preferred-install": "dist",
-        "sort-packages": true,
-        "optimize-autoloader": true
     },
     "repositories": [
         {
