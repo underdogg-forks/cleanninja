@@ -239,27 +239,27 @@ class AddTicketsSchema extends Migration
 
         $accounts = \App\Models\Account::all();
 
-        foreach ($accounts as $account){
+        // foreach ($accounts as $account){
 
-            if(!$account->account_ticket_settings) {
+        //     if(!$account->account_ticket_settings) {
 
 
-                /* Create account_ticket_settings record for account */
+        //         /* Create account_ticket_settings record for account */
 
-                $user = $account->users()->where('public_id', '=', 0)->orWhereNull('public_id')->first();
+        //         $user = $account->users()->where('public_id', '=', 0)->orWhereNull('public_id')->first();
 
-                if($user) {
+        //         if($user) {
 
-                    $accountTicketSettings = new \App\Models\AccountTicketSettings();
-                    $accountTicketSettings->ticket_master_id = $user->id;
+        //             $accountTicketSettings = new \App\Models\AccountTicketSettings();
+        //             $accountTicketSettings->ticket_master_id = $user->id;
 
-                    $account->account_ticket_settings()->save($accountTicketSettings);
-                }
-                else
-                    \Illuminate\Support\Facades\Log::error('Account '. $account->id .'does not have a owner user');
-            }
+        //             $account->account_ticket_settings()->save($accountTicketSettings);
+        //         }
+        //         else
+        //             \Illuminate\Support\Facades\Log::error('Account '. $account->id .'does not have a owner user');
+        //     }
 
-        }
+        // }
 
 
 

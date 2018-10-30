@@ -12,7 +12,7 @@ class AddAcceptedCreditCardsToAccountGateways extends Migration
     public function up()
     {
         Schema::table('account_gateways', function ($table) {
-            $table->unsignedInteger('accepted_credit_cards')->nullable();
+            $table->unsignedInteger('accepted_credit_cards')->nullable()->after('config');
         });
     }
 

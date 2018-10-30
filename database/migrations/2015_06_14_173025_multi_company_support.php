@@ -11,7 +11,7 @@ class MultiCompanySupport extends Migration
      */
     public function up()
     {
-        Schema::create('user_accounts', function ($table) {
+        Schema::create('hell_to_the_no_companies', function ($table) {
             $table->increments('id');
             
             $table->unsignedInteger('user_id1')->nullable();

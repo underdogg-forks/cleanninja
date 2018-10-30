@@ -12,10 +12,10 @@ class EnableResumingTasks extends Migration
     public function up()
     {
         Schema::table('tasks', function ($table) {
-            $table->boolean('is_running')->default(false);
-            $table->integer('break_duration')->nullable();
-            $table->timestamp('resume_time')->nullable();
-            $table->text('time_log')->nullable();
+            $table->boolean('is_running')->default(false)->after('is_deleted');
+            $table->integer('break_duration')->nullable()->after('is_running');
+            $table->timestamp('resume_time')->nullable()->after('break_duration');
+            $table->text('time_log')->nullable()->after('resume_time');
         });
 
         $tasks = DB::table('tasks')

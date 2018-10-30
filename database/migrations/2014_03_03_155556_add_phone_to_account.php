@@ -12,8 +12,8 @@ class AddPhoneToAccount extends Migration
     public function up()
     {
         Schema::table('accounts', function ($table) {
-            $table->string('work_phone')->nullable();
-            $table->string('work_email')->nullable();
+            $table->string('work_phone')->nullable()->after('name');
+            $table->string('work_email')->nullable()->after('work_phone');
         });
     }
 

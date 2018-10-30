@@ -12,7 +12,7 @@ class AddDiscountType extends Migration
     public function up()
     {
         Schema::table('invoices', function ($table) {
-            $table->boolean('is_amount_discount')->nullable();
+            $table->boolean('is_amount_discount')->nullable()->after('recurring_invoice_id');
         });
     }
 

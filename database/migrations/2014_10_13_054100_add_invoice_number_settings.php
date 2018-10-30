@@ -12,13 +12,13 @@ class AddInvoiceNumberSettings extends Migration
     public function up()
     {
         Schema::table('accounts', function ($table) {
-            $table->string('invoice_number_prefix')->nullable();
-            $table->integer('invoice_number_counter')->default(1)->nullable();
+            $table->string('invoice_number_prefix')->nullable()->after('slug');
+            $table->integer('invoice_number_counter')->default(1)->nullable()->after('invoice_number_prefix');
 
-            $table->string('quote_number_prefix')->nullable();
-            $table->integer('quote_number_counter')->default(1)->nullable();
+            $table->string('quote_number_prefix')->nullable()->after('invoice_number_counter');
+            $table->integer('quote_number_counter')->default(1)->nullable()->after('quote_number_prefix');
 
-            $table->boolean('share_counter')->default(true);
+            $table->boolean('share_counter')->default(true)->after('quote_number_counter');
         });
 
         // set initial counter value for accounts with invoices

@@ -12,7 +12,7 @@ class AddPdfmakeSupport extends Migration
     public function up()
     {
         Schema::table('invoice_designs', function ($table) {
-            $table->mediumText('pdfmake')->nullable();
+            $table->mediumText('pdfmake')->nullable()->after('javascript');
         });
     }
 

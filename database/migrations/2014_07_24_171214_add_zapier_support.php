@@ -14,14 +14,13 @@ class AddZapierSupport extends Migration
         Schema::create('subscriptions', function ($table) {
             $table->increments('id');
             $table->unsignedInteger('account_id')->nullable();
+            $table->unsignedInteger('event_id')->nullable();
+            $table->string('target_url');
+            $table->foreign('account_id')->references('id')->on('accounts')->onDelete('cascade');
 
             $table->timestamps();
             $table->softDeletes();
 
-            $table->unsignedInteger('event_id')->nullable();
-            $table->string('target_url');
-
-            $table->foreign('account_id')->references('id')->on('accounts')->onDelete('cascade');
         });
     }
 

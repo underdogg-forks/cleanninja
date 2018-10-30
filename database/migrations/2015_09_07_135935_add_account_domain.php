@@ -12,22 +12,22 @@ class AddAccountDomain extends Migration
     public function up()
     {
         Schema::table('accounts', function ($table) {
-            $table->string('iframe_url')->nullable();
-            $table->boolean('military_time')->default(false);
-            $table->unsignedInteger('referral_user_id')->nullable();
+            $table->string('iframe_url')->nullable()->after('slug');
+            $table->boolean('military_time')->default(false)->after('slug');
+            $table->unsignedInteger('referral_user_id')->nullable()->after('slug');
         });
 
         Schema::table('clients', function ($table) {
-            $table->unsignedInteger('language_id')->nullable();
+            $table->unsignedInteger('language_id')->nullable()->after('slug');
             $table->foreign('language_id')->references('id')->on('languages');
         });
 
         Schema::table('invoices', function ($table) {
-            $table->boolean('auto_bill')->default(false);
+            $table->boolean('auto_bill')->default(false)->after('recurring_invoice_id');
         });
 
         Schema::table('users', function ($table) {
-            $table->string('referral_code')->nullable();
+            $table->string('referral_code')->nullable()->after('last_name');
         });
 
         DB::statement('ALTER TABLE invoices MODIFY COLUMN last_sent_date DATE');

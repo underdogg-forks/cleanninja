@@ -12,13 +12,13 @@ class AddReminderSettings extends Migration
     public function up()
     {
         Schema::table('accounts', function ($table) {
-            $table->smallInteger('direction_reminder1')->default(1);
-            $table->smallInteger('direction_reminder2')->default(1);
-            $table->smallInteger('direction_reminder3')->default(1);
+            $table->smallInteger('direction_reminder1')->default(1)->after('enable_email_markup');
+            $table->smallInteger('direction_reminder2')->default(1)->after('direction_reminder1');
+            $table->smallInteger('direction_reminder3')->default(1)->after('direction_reminder2');
 
-            $table->smallInteger('field_reminder1')->default(1);
-            $table->smallInteger('field_reminder2')->default(1);
-            $table->smallInteger('field_reminder3')->default(1);
+            $table->smallInteger('field_reminder1')->default(1)->after('direction_reminder3');
+            $table->smallInteger('field_reminder2')->default(1)->after('field_reminder1');
+            $table->smallInteger('field_reminder3')->default(1)->after('field_reminder2');
         });
     }
 

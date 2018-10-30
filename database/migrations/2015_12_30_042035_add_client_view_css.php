@@ -12,7 +12,7 @@ class AddClientViewCss extends Migration
     public function up()
     {
         Schema::table('accounts', function ($table) {
-            $table->text('client_view_css')->nullable();
+            $table->text('client_view_css')->nullable()->after('slug');
         });
     }
 

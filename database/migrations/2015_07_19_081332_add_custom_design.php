@@ -12,7 +12,7 @@ class AddCustomDesign extends Migration
     public function up()
     {
         Schema::table('accounts', function ($table) {
-            $table->mediumText('custom_design')->nullable();
+            $table->mediumText('custom_design')->nullable()->after('slug');
         });
 
         DB::table('invoice_designs')->insert(['id' => CUSTOM_DESIGN1, 'name' => 'Custom']);

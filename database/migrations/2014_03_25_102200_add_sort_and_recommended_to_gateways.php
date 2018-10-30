@@ -12,9 +12,9 @@ class AddSortAndRecommendedToGateways extends Migration
     public function up()
     {
         Schema::table('gateways', function ($table) {
-            $table->unsignedInteger('sort_order')->default(10000);
-            $table->boolean('recommended')->default(0);
-            $table->string('site_url', 200)->nullable();
+            $table->unsignedInteger('sort_order')->default(10000)->after('name');
+            $table->boolean('recommended')->default(0)->after('sort_order');
+            $table->string('site_url', 200)->nullable()->after('recommended');
         });
     }
     

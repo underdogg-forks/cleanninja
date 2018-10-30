@@ -14,6 +14,6 @@
     "update": "git checkout master && git pull origin master && composer install && composer dump-autoload --optimize && php artisan optimize --force && php artisan migrate --force && php artisan db:seed --class=UpdateSeeder --force && wget -q --spider $(grep -oP '(?<=APP_URL=).*' '.env')'/update?clear_cache=true'"
   },
   "dependencies": {
-    "grunt-dump-dir": "^0.1.2",
+    "grunt-dump-dir": "^0.1.2"
   }
 }

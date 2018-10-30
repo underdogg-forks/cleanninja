@@ -26,15 +26,17 @@ class AddBankAccounts extends Migration
             $table->unsignedInteger('user_id');
             $table->string('username');
 
-            $table->timestamps();
-            $table->softDeletes();
-
             $table->foreign('account_id')->references('id')->on('accounts')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('bank_id')->references('id')->on('banks');
 
             $table->unsignedInteger('public_id')->index();
             $table->unique(['account_id', 'public_id']);
+
+            $table->timestamps();
+            $table->softDeletes();
+
+
         });
     }
 

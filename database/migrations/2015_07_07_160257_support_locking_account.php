@@ -12,12 +12,12 @@ class SupportLockingAccount extends Migration
     public function up()
     {
         Schema::table('users', function ($table) {
-            $table->smallInteger('failed_logins')->nullable();
+            $table->smallInteger('failed_logins')->nullable()->after('last_name');
         });
 
         Schema::table('account_gateways', function ($table) {
-            $table->boolean('show_address')->default(true)->nullable();
-            $table->boolean('update_address')->default(true)->nullable();
+            $table->boolean('show_address')->default(true)->nullable()->after('config');
+            $table->boolean('update_address')->default(true)->nullable()->after('show_address');
         });
     }
 

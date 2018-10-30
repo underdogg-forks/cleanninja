@@ -12,19 +12,19 @@ class AddCustomFields extends Migration
     public function up()
     {
         Schema::table('accounts', function ($table) {
-            $table->string('custom_label1')->nullable();
-            $table->string('custom_value1')->nullable();
+            $table->string('custom_label1')->nullable()->after('name');
+            $table->string('custom_value1')->nullable()->after('custom_label1');
 
-            $table->string('custom_label2')->nullable();
-            $table->string('custom_value2')->nullable();
+            $table->string('custom_label2')->nullable()->after('custom_value1');
+            $table->string('custom_value2')->nullable()->after('custom_label2');
 
-            $table->string('custom_client_label1')->nullable();
-            $table->string('custom_client_label2')->nullable();
+            $table->string('custom_client_label1')->nullable()->after('custom_client_label1');
+            $table->string('custom_client_label2')->nullable()->after('custom_client_label2');
         });
 
         Schema::table('clients', function ($table) {
-            $table->string('custom_value1')->nullable();
-            $table->string('custom_value2')->nullable();
+            $table->string('custom_value1')->nullable()->after('name');
+            $table->string('custom_value2')->nullable()->after('custom_value1');
         });
     }
 

@@ -12,12 +12,12 @@ class AddDefaultTaxRates extends Migration
     public function up()
     {
         Schema::table('accounts', function ($table) {
-            $table->unsignedInteger('default_tax_rate_id')->nullable();
-            $table->smallInteger('recurring_hour')->default(DEFAULT_SEND_RECURRING_HOUR);
+            $table->unsignedInteger('default_tax_rate_id')->nullable()->after('slug');
+            $table->smallInteger('recurring_hour')->default(DEFAULT_SEND_RECURRING_HOUR)->after('default_tax_rate_id');
         });
 
         Schema::table('products', function ($table) {
-            $table->unsignedInteger('default_tax_rate_id')->nullable();
+            $table->unsignedInteger('default_tax_rate_id')->nullable()->after('slug');
         });
     }
 

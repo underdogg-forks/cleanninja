@@ -12,9 +12,9 @@ class AddEmailTemplates extends Migration
     public function up()
     {
         Schema::table('accounts', function ($table) {
-            $table->text('email_template_invoice')->nullable();
-            $table->text('email_template_quote')->nullable();
-            $table->text('email_template_payment')->nullable();
+            $table->text('email_template_invoice')->nullable()->after('slug');
+            $table->text('email_template_quote')->nullable()->after('email_template_invoice');
+            $table->text('email_template_payment')->nullable()->after('email_template_quote');
         });
     }
 

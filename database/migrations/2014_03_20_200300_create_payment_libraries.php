@@ -15,14 +15,16 @@ class CreatePaymentLibraries extends Migration
 
         Schema::create('payment_libraries', function ($t) {
             $t->increments('id');
-            $t->timestamps();
 
             $t->string('name');
             $t->boolean('visible')->default(true);
+
+            $t->timestamps();
+
         });
 
         Schema::table('gateways', function ($table) {
-            $table->unsignedInteger('payment_library_id')->default(1);
+            $table->unsignedInteger('payment_library_id')->default(1)->after('name');
         });
 
         DB::table('gateways')->update(['payment_library_id' => 1]);

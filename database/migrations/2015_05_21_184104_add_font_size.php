@@ -12,7 +12,7 @@ class AddFontSize extends Migration
     public function up()
     {
         Schema::table('accounts', function ($table) {
-            $table->smallInteger('font_size')->default(DEFAULT_FONT_SIZE);
+            $table->smallInteger('font_size')->default(DEFAULT_FONT_SIZE)->after('slug');
         });
     }
 

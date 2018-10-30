@@ -15,8 +15,6 @@ class AddTokens extends Migration
             $table->increments('id');
             $table->unsignedInteger('account_id')->index();
             $table->unsignedInteger('user_id');
-            $table->timestamps();
-            $table->softDeletes();
 
             $table->string('name')->nullable();
             $table->string('token')->unique();
@@ -26,6 +24,11 @@ class AddTokens extends Migration
             
             $table->unsignedInteger('public_id')->nullable();
             $table->unique(['account_id', 'public_id']);
+
+
+            $table->timestamps();
+            $table->softDeletes();
+
         });
 
         Schema::table('activities', function ($table) {

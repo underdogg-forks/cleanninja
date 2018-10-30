@@ -12,11 +12,11 @@ class AddInvoiceFooter extends Migration
     public function up()
     {
         Schema::table('accounts', function ($table) {
-            $table->text('invoice_footer')->nullable();
+            $table->text('invoice_footer')->nullable()->after('slug');
         });
 
         Schema::table('invoices', function ($table) {
-            $table->text('invoice_footer')->nullable();
+            $table->text('invoice_footer')->nullable()->after('slug');
         });
     }
 

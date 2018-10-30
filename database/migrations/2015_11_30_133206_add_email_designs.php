@@ -12,9 +12,9 @@ class AddEmailDesigns extends Migration
     public function up()
     {
         Schema::table('accounts', function ($table) {
-            $table->smallInteger('email_design_id')->default(1);
-            $table->boolean('enable_email_markup')->default(false);
-            $table->string('website')->nullable();
+            $table->smallInteger('email_design_id')->default(1)->after('slug');
+            $table->boolean('enable_email_markup')->default(false)->after('email_design_id');
+            $table->string('website')->nullable()->after('enable_email_markup');
         });
     }
 

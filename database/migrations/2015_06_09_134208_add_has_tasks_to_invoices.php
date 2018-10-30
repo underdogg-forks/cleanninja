@@ -12,7 +12,7 @@ class AddHasTasksToInvoices extends Migration
     public function up()
     {
         Schema::table('invoices', function ($table) {
-            $table->boolean('has_tasks')->default(false);
+            $table->boolean('has_tasks')->default(false)->after('recurring_invoice_id');
         });
 
         $invoices = DB::table('invoices')

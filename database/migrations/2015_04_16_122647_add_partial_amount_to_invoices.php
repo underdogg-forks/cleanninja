@@ -12,13 +12,13 @@ class AddPartialAmountToInvoices extends Migration
     public function up()
     {
         Schema::table('invoices', function ($table) {
-            $table->decimal('partial', 13, 2)->nullable();
+            $table->decimal('partial', 13, 2)->nullable()->after('recurring_invoice_id');
         });
 
         Schema::table('accounts', function ($table) {
-            $table->boolean('utf8_invoices')->default(true);
-            $table->boolean('auto_wrap')->default(false);
-            $table->string('subdomain')->nullable();
+            $table->boolean('utf8_invoices')->default(true)->after('slug');
+            $table->boolean('auto_wrap')->default(false)->after('utf8_invoices');
+            $table->string('subdomain')->nullable()->after('auto_wrap');
         });
     }
 

@@ -12,11 +12,11 @@ class AddCompanyIdNumber extends Migration
     public function up()
     {
         Schema::table('accounts', function ($table) {
-            $table->string('id_number')->nullable();
+            $table->string('id_number')->nullable()->after('slug');
         });
         
         Schema::table('clients', function ($table) {
-            $table->string('id_number')->nullable();
+            $table->string('id_number')->nullable()->after('slug');
         });
     }
 

@@ -22,11 +22,11 @@ class AddSupportForInvoiceDesigns extends Migration
         DB::table('invoice_designs')->insert(['name' => 'Plain']);
 
         Schema::table('invoices', function ($table) {
-            $table->unsignedInteger('invoice_design_id')->default(1);
+            $table->unsignedInteger('invoice_design_id')->default(1)->after('invoice_status_id');
         });
 
         Schema::table('accounts', function ($table) {
-            $table->unsignedInteger('invoice_design_id')->default(1);
+            $table->unsignedInteger('invoice_design_id')->default(1)->after('currency_id');
         });
 
         DB::table('invoices')->update(['invoice_design_id' => 1]);

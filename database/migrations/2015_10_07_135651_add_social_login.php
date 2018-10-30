@@ -12,18 +12,18 @@ class AddSocialLogin extends Migration
     public function up()
     {
         Schema::table('users', function ($table) {
-            $table->string('oauth_user_id')->nullable();
-            $table->unsignedInteger('oauth_provider_id')->nullable();
+            $table->string('oauth_user_id')->nullable()->after('last_name');
+            $table->unsignedInteger('oauth_provider_id')->nullable()->after('oauth_user_id');
         });
 
         Schema::table('accounts', function ($table) {
-            $table->string('custom_invoice_text_label1')->nullable();
-            $table->string('custom_invoice_text_label2')->nullable();
+            $table->string('custom_invoice_text_label1')->nullable()->after('slug');
+            $table->string('custom_invoice_text_label2')->nullable()->after('custom_invoice_text_label1');
         });
 
         Schema::table('invoices', function ($table) {
-            $table->string('custom_text_value1')->nullable();
-            $table->string('custom_text_value2')->nullable();
+            $table->string('custom_text_value1')->nullable()->after('recurring_invoice_id');
+            $table->string('custom_text_value2')->nullable()->after('custom_text_value1');
         });
 
         Schema::table('invitations', function ($table) {

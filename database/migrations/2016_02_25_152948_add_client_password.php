@@ -12,14 +12,14 @@ class AddClientPassword extends Migration
     public function up()
     {
         Schema::table('accounts', function ($table) {
-            $table->boolean('enable_portal_password')->default(0);
-            $table->boolean('send_portal_password')->default(0);
+            $table->boolean('enable_portal_password')->default(0)->after('show_currency_code');
+            $table->boolean('send_portal_password')->default(0)->after('enable_portal_password');
         });
         
         Schema::table('contacts', function ($table) {
-            $table->string('password', 255)->nullable();
-            $table->boolean('confirmation_code', 255)->nullable();
-            $table->boolean('remember_token', 100)->nullable();
+            $table->string('password', 255)->nullable()->after('phone');
+            $table->boolean('confirmation_code', 255)->nullable()->after('password');
+            $table->boolean('remember_token', 100)->nullable()->after('confirmation_code');
         });
     }
 

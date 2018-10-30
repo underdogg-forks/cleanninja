@@ -12,7 +12,7 @@ class EnableForcingJspdf extends Migration
     public function up()
     {
         Schema::table('users', function ($table) {
-            $table->boolean('force_pdfjs')->default(false);
+            $table->boolean('force_pdfjs')->default(false)->after('theme_id');
         });
     }
 

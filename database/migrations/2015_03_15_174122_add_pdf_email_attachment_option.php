@@ -12,7 +12,7 @@ class AddPdfEmailAttachmentOption extends Migration
     public function up()
     {
         Schema::table('accounts', function ($table) {
-            $table->smallInteger('pdf_email_attachment')->default(0);
+            $table->smallInteger('pdf_email_attachment')->default(0)->after('slug');
         });
     }
 

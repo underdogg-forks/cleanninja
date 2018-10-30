@@ -12,8 +12,8 @@ class AddAdvancedSettings extends Migration
     public function up()
     {
         Schema::table('accounts', function ($table) {
-            $table->string('primary_color')->nullable();
-            $table->string('secondary_color')->nullable();
+            $table->string('primary_color')->nullable()->after('name');
+            $table->string('secondary_color')->nullable()->after('primary_color');
         });
 
         Schema::table('payments', function ($table) {

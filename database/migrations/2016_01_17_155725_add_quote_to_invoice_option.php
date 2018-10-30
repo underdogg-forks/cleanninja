@@ -14,7 +14,7 @@ class AddQuoteToInvoiceOption extends Migration
     public function up()
     {
         Schema::table('accounts', function (Blueprint $table) {
-            $table->boolean('auto_convert_quote')->default(true);
+            $table->boolean('auto_convert_quote')->default(true)->after('header_font_id');
         });
         
         // we need to create the last status to resolve a foreign key constraint

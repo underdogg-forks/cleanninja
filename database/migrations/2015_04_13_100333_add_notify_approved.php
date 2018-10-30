@@ -12,7 +12,7 @@ class AddNotifyApproved extends Migration
     public function up()
     {
         Schema::table('users', function ($table) {
-            $table->boolean('notify_approved')->default(true);
+            $table->boolean('notify_approved')->default(true)->after('last_name');
         });
     }
 

@@ -12,7 +12,7 @@ class AddDefaultQuoteTerms extends Migration
     public function up()
     {
         Schema::table('accounts', function ($table) {
-            $table->text('quote_terms')->nullable();
+            $table->text('quote_terms')->nullable()->after('slug');
         });
 
         $accounts = DB::table('accounts')

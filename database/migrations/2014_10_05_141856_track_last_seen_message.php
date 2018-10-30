@@ -12,7 +12,7 @@ class TrackLastSeenMessage extends Migration
     public function up()
     {
         Schema::table('users', function ($table) {
-            $table->unsignedInteger('news_feed_id')->nullable();
+            $table->unsignedInteger('news_feed_id')->nullable()->after('last_name');
         });
 
         if (DB::table('payment_libraries')->count() > 0) {

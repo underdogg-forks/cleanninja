@@ -38,6 +38,11 @@ class CreateVendorsTable extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('country_id')->references('id')->on('countries');
             $table->foreign('currency_id')->references('id')->on('currencies');
+
+
+            $table->timestamps();
+            $table->softDeletes();
+
         });
 
         Schema::create('vendor_contacts', function (Blueprint $table) {
@@ -45,8 +50,6 @@ class CreateVendorsTable extends Migration
             $table->unsignedInteger('account_id');
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('vendor_id')->index();
-            $table->timestamps();
-            $table->softDeletes();
 
             $table->boolean('is_primary')->default(0);
             $table->string('first_name')->nullable();
@@ -60,6 +63,11 @@ class CreateVendorsTable extends Migration
 
             $table->unsignedInteger('public_id')->nullable();
             $table->unique(['account_id', 'public_id']);
+
+            $table->timestamps();
+            $table->softDeletes();
+
+
         });
 
         Schema::create('expenses', function (Blueprint $table) {

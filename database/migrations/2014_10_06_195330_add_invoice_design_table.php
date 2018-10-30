@@ -12,11 +12,11 @@ class AddInvoiceDesignTable extends Migration
     public function up()
     {
         Schema::table('invoice_designs', function ($table) {
-            $table->mediumText('javascript')->nullable();
+            $table->mediumText('javascript')->nullable()->after('name');
         });
 
         Schema::table('accounts', function ($table) {
-            $table->text('invoice_design')->nullable();
+            $table->text('invoice_design')->nullable()->after('slug');
         });
 
         DB::table('invoice_designs')->where('id', 1)->update([

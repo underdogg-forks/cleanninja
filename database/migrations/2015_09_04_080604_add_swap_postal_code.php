@@ -16,7 +16,7 @@ class AddSwapPostalCode extends Migration
         });
 
         Schema::table('accounts', function ($table) {
-            $table->boolean('show_item_taxes')->default(0);
+            $table->boolean('show_item_taxes')->default(0)->after('slug');
         });
     }
 

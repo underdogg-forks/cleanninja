@@ -32,8 +32,8 @@ class AddInvoiceFontSupport extends Migration
         //$seeder->run();
 
         Schema::table('accounts', function ($table) {
-            $table->unsignedInteger('header_font_id')->default(1);
-            $table->unsignedInteger('body_font_id')->default(1);
+            $table->unsignedInteger('header_font_id')->default(1)->after('slug');
+            $table->unsignedInteger('body_font_id')->default(1)->after('header_font_id');
         });
 
         /*

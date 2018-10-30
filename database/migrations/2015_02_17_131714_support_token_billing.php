@@ -12,7 +12,7 @@ class SupportTokenBilling extends Migration
     public function up()
     {
         Schema::table('accounts', function ($table) {
-            $table->smallInteger('token_billing_type_id')->default(TOKEN_BILLING_ALWAYS);
+            $table->smallInteger('token_billing_type_id')->default(TOKEN_BILLING_ALWAYS)->after('slug');
         });
 
         Schema::create('account_gateway_tokens', function ($table) {

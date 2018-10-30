@@ -12,7 +12,7 @@ class AddProPlan extends Migration
     public function up()
     {
         Schema::table('accounts', function ($table) {
-            $table->date('pro_plan_paid')->nullable();
+            $table->date('pro_plan_paid')->nullable()->after('name');
         });
     }
 

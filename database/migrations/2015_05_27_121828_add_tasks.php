@@ -17,8 +17,6 @@ class AddTasks extends Migration
             $table->unsignedInteger('account_id')->index();
             $table->unsignedInteger('client_id')->nullable();
             $table->unsignedInteger('invoice_id')->nullable();
-            $table->timestamps();
-            $table->softDeletes();
 
             $table->timestamp('start_time')->nullable();
             $table->integer('duration')->nullable();
@@ -32,6 +30,11 @@ class AddTasks extends Migration
             
             $table->unsignedInteger('public_id')->index();
             $table->unique(['account_id', 'public_id']);
+
+            $table->timestamps();
+            $table->softDeletes();
+
+
         });
 
         Schema::dropIfExists('timesheets');

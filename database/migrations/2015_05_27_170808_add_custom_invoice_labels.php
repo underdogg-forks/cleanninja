@@ -12,7 +12,7 @@ class AddCustomInvoiceLabels extends Migration
     public function up()
     {
         Schema::table('accounts', function ($table) {
-            $table->text('invoice_labels')->nullable();
+            $table->text('invoice_labels')->nullable()->after('slug');
         });
     }
 

@@ -20,8 +20,6 @@ class AddBankSubaccounts extends Migration
             $table->string('account_name');
             $table->string('account_number');
 
-            $table->timestamps();
-            $table->softDeletes();
 
             $table->foreign('account_id')->references('id')->on('accounts')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
@@ -29,6 +27,11 @@ class AddBankSubaccounts extends Migration
 
             $table->unsignedInteger('public_id')->index();
             $table->unique(['account_id', 'public_id']);
+
+
+            $table->timestamps();
+            $table->softDeletes();
+
         });
 
         Schema::table('expenses', function ($table) {
