@@ -54,7 +54,7 @@ The best places to start when reviewing the code are `app/Http/routes.php <https
 
 To enable each account to have it’s own incrementing Ids (ie, /clients/1) all account entity classes extend the custom EntityModel.php class. This gives each entity a public_id field. You can read more about it in `this post <http://hillelcoren.com/2014/02/11/friendly-urls-with-per-account-incrementing-ids-in-laravel/>`_.
 
-All actions are tracked in the activities table. Example of actions are creating a client, viewing an invoice or entering a payment. This is implemented using Laravel model events. An example can be seen at the bottom of `app/Models/Invoice.php <https://github.com/invoiceninja/invoiceninja/blob/master/app/Models/Invoice.php>`_.
+All actions are tracked in the timeline table. Example of actions are creating a client, viewing an invoice or entering a payment. This is implemented using Laravel model events. An example can be seen at the bottom of `app/Models/Invoice.php <https://github.com/invoiceninja/invoiceninja/blob/master/app/Models/Invoice.php>`_.
 
 Laravel supplies `soft delete <http://laravel.com/docs/4.2/eloquent#soft-deleting>`_ functionality, however in order to ensure referential integrity records are only deleted when a user cancels their account. To support this we’ve added an is_deleted field. When the deleted_at field is set the entity has been archived, when is_deleted is true the entity has been deleted.
 

@@ -381,12 +381,12 @@ class Payment extends EntityModel
 
     public function invoiceJsonBackup()
     {
-        $activity = Activity::wherePaymentId($this->id)
-                        ->whereActivityTypeId(ACTIVITY_TYPE_CREATE_PAYMENT)
+        $timeline = Timeline::wherePaymentId($this->id)
+                        ->whereTimelineTypeId(TIMELINE_TYPE_CREATE_PAYMENT)
                         ->get(['json_backup'])
                         ->first();
 
-        return $activity->json_backup;
+        return $timeline->json_backup;
     }
 }
 

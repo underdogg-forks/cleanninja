@@ -2,7 +2,7 @@
 
 namespace App\Libraries;
 
-use App\Models\Activity;
+use App\Models\Timeline;
 use App\Models\EntityModel;
 use Session;
 use stdClass;
@@ -22,60 +22,60 @@ class HistoryUtils
             $userIds[] = $users;
         }
 
-        $activityTypes = [
-            ACTIVITY_TYPE_CREATE_CLIENT,
-            ACTIVITY_TYPE_CREATE_TASK,
-            ACTIVITY_TYPE_UPDATE_TASK,
-            ACTIVITY_TYPE_CREATE_EXPENSE,
-            ACTIVITY_TYPE_UPDATE_EXPENSE,
-            ACTIVITY_TYPE_CREATE_INVOICE,
-            ACTIVITY_TYPE_UPDATE_INVOICE,
-            ACTIVITY_TYPE_EMAIL_INVOICE,
-            ACTIVITY_TYPE_CREATE_QUOTE,
-            ACTIVITY_TYPE_UPDATE_QUOTE,
-            ACTIVITY_TYPE_EMAIL_QUOTE,
-            ACTIVITY_TYPE_VIEW_INVOICE,
-            ACTIVITY_TYPE_VIEW_QUOTE,
+        $timelineTypes = [
+            TIMELINE_TYPE_CREATE_CLIENT,
+            TIMELINE_TYPE_CREATE_TASK,
+            TIMELINE_TYPE_UPDATE_TASK,
+            TIMELINE_TYPE_CREATE_EXPENSE,
+            TIMELINE_TYPE_UPDATE_EXPENSE,
+            TIMELINE_TYPE_CREATE_INVOICE,
+            TIMELINE_TYPE_UPDATE_INVOICE,
+            TIMELINE_TYPE_EMAIL_INVOICE,
+            TIMELINE_TYPE_CREATE_QUOTE,
+            TIMELINE_TYPE_UPDATE_QUOTE,
+            TIMELINE_TYPE_EMAIL_QUOTE,
+            TIMELINE_TYPE_VIEW_INVOICE,
+            TIMELINE_TYPE_VIEW_QUOTE,
         ];
 
-        $activities = Activity::with(['client.contacts', 'invoice', 'task.project', 'expense'])
+        $timeline = Timeline::with(['client.contacts', 'invoice', 'task.project', 'expense'])
             ->whereIn('user_id', $userIds)
-            ->whereIn('activity_type_id', $activityTypes)
+            ->whereIn('timeline_type_id', $timelineTypes)
             ->orderBy('id', 'desc')
             ->limit(100)
             ->get();
 
-        foreach ($activities->reverse() as $activity) {
-            if ($activity->client && $activity->client->is_deleted) {
+        foreach ($timeline->reverse() as $timeline) {
+            if ($timeline->client && $timeline->client->is_deleted) {
                 continue;
             }
 
-            if ($activity->activity_type_id == ACTIVITY_TYPE_CREATE_CLIENT) {
-                $entity = $activity->client;
-            } elseif ($activity->activity_type_id == ACTIVITY_TYPE_CREATE_TASK || $activity->activity_type_id == ACTIVITY_TYPE_UPDATE_TASK) {
-                $entity = $activity->task;
+            if ($timeline->timeline_type_id == TIMELINE_TYPE_CREATE_CLIENT) {
+                $entity = $timeline->client;
+            } elseif ($timeline->timeline_type_id == TIMELINE_TYPE_CREATE_TASK || $timeline->timeline_type_id == TIMELINE_TYPE_UPDATE_TASK) {
+                $entity = $timeline->task;
                 if (! $entity) {
                     continue;
                 }
-                $entity->setRelation('client', $activity->client);
+                $entity->setRelation('client', $timeline->client);
 
                 if ($entity->project) {
                     $project = $entity->project;
-                    $project->setRelation('client', $activity->client);
+                    $project->setRelation('client', $timeline->client);
                     static::trackViewed($project);
                 }
-            } elseif ($activity->activity_type_id == ACTIVITY_TYPE_CREATE_EXPENSE || $activity->activity_type_id == ACTIVITY_TYPE_UPDATE_EXPENSE) {
-                $entity = $activity->expense;
+            } elseif ($timeline->timeline_type_id == TIMELINE_TYPE_CREATE_EXPENSE || $timeline->timeline_type_id == TIMELINE_TYPE_UPDATE_EXPENSE) {
+                $entity = $timeline->expense;
                 if (! $entity) {
                     continue;
                 }
-                $entity->setRelation('client', $activity->client);
+                $entity->setRelation('client', $timeline->client);
             } else {
-                $entity = $activity->invoice;
+                $entity = $timeline->invoice;
                 if (! $entity) {
                     continue;
                 }
-                $entity->setRelation('client', $activity->client);
+                $entity->setRelation('client', $timeline->client);
             }
 
             static::trackViewed($entity);

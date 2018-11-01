@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Ninja\Repositories\DashboardRepository;
-use App\Ninja\Transformers\ActivityTransformer;
+use App\Ninja\Transformers\TimelineTransformer;
 use Auth;
 
 class DashboardApiController extends BaseAPIController
@@ -24,13 +24,13 @@ class DashboardApiController extends BaseAPIController
         $defaultCurrency = $user->account->currency_id;
 
         $dashboardRepo = $this->dashboardRepo;
-        $activities = $dashboardRepo->activities($accountId, $userId, $viewAll);
+        $timeline = $dashboardRepo->timeline($accountId, $userId, $viewAll);
 
         // optimization for new mobile app
-        if (request()->only_activity) {
+        if (request()->only_timeline) {
             return $this->response([
                 'id' => 1,
-                'activities' => $this->createCollection($activities, new ActivityTransformer(), ENTITY_ACTIVITY),
+                'core__timeline' => $this->createCollection($timeline, new TimelineTransformer(), ENTITY_TIMELINE),
             ]);
         }
 
@@ -52,7 +52,7 @@ class DashboardApiController extends BaseAPIController
             'averageInvoiceCurrency' => (int) ($averageInvoice->count() && $averageInvoice[0]->currency_id ? $averageInvoice[0]->currency_id : $defaultCurrency),
             'invoicesSent' => (int) ($metrics ? $metrics->invoices_sent : 0),
             'activeClients' => (int) ($metrics ? $metrics->active_clients : 0),
-            'activities' => $this->createCollection($activities, new ActivityTransformer(), ENTITY_ACTIVITY),
+            'core__timeline' => $this->createCollection($timeline, new TimelineTransformer(), ENTITY_TIMELINE),
         ];
 
         return $this->response($data);

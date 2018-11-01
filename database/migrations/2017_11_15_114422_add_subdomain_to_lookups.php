@@ -97,7 +97,7 @@ class AddSubdomainToLookups extends Migration
         });
 
         if (Utils::isNinja()) {
-            Schema::table('activities', function ($table) {
+            Schema::table('core__timeline', function ($table) {
                 $table->index('user_id');
             });
         }

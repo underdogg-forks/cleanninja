@@ -40,7 +40,7 @@ infringement under applicable copyright law, except executing it on a
 computer or modifying a private copy. Propagation includes copying,
 distribution (with or without modification and with or without charging
 a redistribution fee), making available to the public, and in some
-countries other activities as well.
+countries other timeline as well.
 
 PERMISSION & CONDITIONS
 This licence does not grant any rights under trademark law and all such

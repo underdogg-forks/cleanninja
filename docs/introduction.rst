@@ -5,11 +5,11 @@ Let’s get acquainted with a basic overview of the structure of the Invoice Nin
 
 The Invoice Ninja system is based on two main pillars:
 
-- **List pages** are summary pages of the various activities in your account. These include the Clients list page, Tasks list page, Invoices list page, Payments list page and more. List pages are located in the main sidebar of the Invoice Ninja site. The list pages provide a centralized overview and management station for the particular component of your account. For example, the Clients list page is a list of all your clients, with acplaning information and handy links, so you can manage all your clients on one page.
+- **List pages** are summary pages of the various timeline in your account. These include the Clients list page, Tasks list page, Invoices list page, Payments list page and more. List pages are located in the main sidebar of the Invoice Ninja site. The list pages provide a centralized overview and management station for the particular component of your account. For example, the Clients list page is a list of all your clients, with acplaning information and handy links, so you can manage all your clients on one page.
 
-- **Action pages** are pages dedicated to a specific action you can take in your Invoice Ninja account. Examples include Create New Client, Enter Credit, Create New Invoice, Create Recurring Invoice, Enter Credit, Enter Payment and Create New Task. All actions you take will be recorded in the List pages, updated in real time to reflect your invoicing activity from minute to minute.
+- **Action pages** are pages dedicated to a specific action you can take in your Invoice Ninja account. Examples include Create New Client, Enter Credit, Create New Invoice, Create Recurring Invoice, Enter Credit, Enter Payment and Create New Task. All actions you take will be recorded in the List pages, updated in real time to reflect your invoicing timeline from minute to minute.
 
-So remember the ninja rule: **list pages provide a summary overview**, and **action pages facilitate your invoicing activity**.
+So remember the ninja rule: **list pages provide a summary overview**, and **action pages facilitate your invoicing timeline**.
 
 You’re invited to browse the user guide for more detailed information. We’re always looking to take Invoice Ninja one step ahead, so if you have any comments, queries or suggestions, we’d love to hear from you.
 
@@ -51,22 +51,22 @@ Below the three main data boxes, you'll see a chart presenting your invoicing da
 Filter
 """"""
 
-The Dashboard page gives you a summary overview of your invoicing activity – and the filter option enables you to control exactly what data you are seeing. There are three filter options:
+The Dashboard page gives you a summary overview of your invoicing timeline – and the filter option enables you to control exactly what data you are seeing. There are three filter options:
 
-1. Currency: If you are working in various currencies, you can filter according to each currency to view your invoicing activity in only that currency.
+1. Currency: If you are working in various currencies, you can filter according to each currency to view your invoicing timeline in only that currency.
 2. Day/Week/Month: For an overview of the past day, week or month, select the time period you prefer.
 3. Custom dates: Select any time period you want by filtering according to dates. Click on the custom date field, and you'll see a drop down menu with a range of pre-set options, such as "Last month", "This year", etc. To create a custom time frame, select "Custom range", choose your dates and click Apply.
 
 When you apply the filter, the data presented in the boxes and chart will update automatically.
 
-Below the chart, there are four ‘windows’ summarizing different aspects of your invoicing activity.
+Below the chart, there are four ‘windows’ summarizing different aspects of your invoicing timeline.
 
-Window 1: Activity
+Window 1: Timeline
 """""""""""""""""""""""
 
-The Activity list is incredibly useful as it presents an up-to-date, action-packed summary of what is happening across your entire invoicing account. Every action taken, whether by you or by one of your clients, is listed in chronological order, together with the date the action occurred. The list is updated in real time, with more recent actions showing first, so you get a minute-to-minute understanding of your invoicing activity.
+The Timeline list is incredibly useful as it presents an up-to-date, action-packed summary of what is happening across your entire invoicing account. Every action taken, whether by you or by one of your clients, is listed in chronological order, together with the date the action occurred. The list is updated in real time, with more recent actions showing first, so you get a minute-to-minute understanding of your invoicing timeline.
 
-The Activity list includes all possible actions occurring within your Invoice Ninja account, including:
+The Timeline list includes all possible actions occurring within your Invoice Ninja account, including:
 
 - Creating an invoice
 - Sending an invoice
@@ -77,7 +77,7 @@ The Activity list includes all possible actions occurring within your Invoice Ni
 - Your client sending a payment
 - And many, many more
 
-.. TIP:: You can view a real-time tally of the number of invoices sent, displayed at the top right side of the blue Activity header bar.
+.. TIP:: You can view a real-time tally of the number of invoices sent, displayed at the top right side of the blue Timeline header bar.
 
 Window 2: Recent Payments
 """""""""""""""""""""""""
@@ -137,7 +137,7 @@ The Expired Quotes list provides a summary of all quotes that have already passe
 - **Due Date**: The valid until date
 - **Balance Due**: The amount of the quote
 
-.. TIP:: In addition to displaying a helpful overview of your invoicing activity, the Dashboard page is rich in clickable links, providing you with a shortcut to relevant pages you may wish to view. For example, all invoice numbers are clickable, taking you directly to the specific invoice page, and all client names are clickable, taking you directly to the specific client summary page.
+.. TIP:: In addition to displaying a helpful overview of your invoicing timeline, the Dashboard page is rich in clickable links, providing you with a shortcut to relevant pages you may wish to view. For example, all invoice numbers are clickable, taking you directly to the specific invoice page, and all client names are clickable, taking you directly to the specific client summary page.
 
 History Sidebar
 """""""""""""""

@@ -55,7 +55,7 @@ class StartupCheck
             return $next($request);
         }
 
-        // Check to prevent headless browsers from triggering activity
+        // Check to prevent headless browsers from triggering timeline
         if (Utils::isNinja() && ! $request->phantomjs && strpos($request->header('User-Agent'), 'Headless') !== false) {
             abort(403);
         }

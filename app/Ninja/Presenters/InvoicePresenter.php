@@ -3,7 +3,7 @@
 namespace App\Ninja\Presenters;
 
 use App\Libraries\Skype\InvoiceCard;
-use App\Models\Activity;
+use App\Models\Timeline;
 use Carbon;
 use DropdownButton;
 use stdClass;

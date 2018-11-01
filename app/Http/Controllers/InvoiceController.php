@@ -7,7 +7,7 @@ use App\Http\Requests\InvoiceRequest;
 use App\Http\Requests\UpdateInvoiceRequest;
 use App\Jobs\SendInvoiceEmail;
 use App\Models\Account;
-use App\Models\Activity;
+use App\Models\Timeline;
 use App\Models\Client;
 use App\Models\Expense;
 use App\Models\Invoice;
@@ -566,23 +566,23 @@ class InvoiceController extends BaseController
         ];
         $invoice->invoice_type_id = intval($invoice->invoice_type_id);
 
-        $activities = Activity::scope(false, $invoice->account_id);
+        $timeline = Timeline::scope(false, $invoice->account_id);
         if ($paymentId) {
-            $activities->whereIn('activity_type_id', [ACTIVITY_TYPE_CREATE_PAYMENT])
+            $timeline->whereIn('timeline_type_id', [TIMELINE_TYPE_CREATE_PAYMENT])
                        ->where('payment_id', '=', $paymentId);
         } else {
-            $activities->whereIn('activity_type_id', [ACTIVITY_TYPE_UPDATE_INVOICE, ACTIVITY_TYPE_UPDATE_QUOTE])
+            $timeline->whereIn('timeline_type_id', [TIMELINE_TYPE_UPDATE_INVOICE, TIMELINE_TYPE_UPDATE_QUOTE])
                        ->where('invoice_id', '=', $invoice->id);
         }
-        $activities = $activities->orderBy('id', 'desc')
-                                 ->get(['id', 'created_at', 'user_id', 'json_backup', 'activity_type_id', 'payment_id']);
+        $timeline = $timeline->orderBy('id', 'desc')
+                                 ->get(['id', 'created_at', 'user_id', 'json_backup', 'timeline_type_id', 'payment_id']);
 
         $versionsJson = [];
         $versionsSelect = [];
         $lastId = false;
 
-        foreach ($activities as $activity) {
-            if ($backup = json_decode($activity->json_backup)) {
+        foreach ($timeline as $timeline) {
+            if ($backup = json_decode($timeline->json_backup)) {
                 $backup->invoice_date = Utils::fromSqlDate($backup->invoice_date);
                 $backup->due_date = Utils::fromSqlDate($backup->due_date);
                 $backup->features = [
@@ -593,10 +593,10 @@ class InvoiceController extends BaseController
                 $backup->invoice_type_id = isset($backup->invoice_type_id) && intval($backup->invoice_type_id) == INVOICE_TYPE_QUOTE;
                 $backup->account = $invoice->account->toArray();
 
-                $versionsJson[$paymentId ? 0 : $activity->id] = $backup;
-                $key = Utils::timestampToDateTimeString(strtotime($activity->created_at)) . ' - ' . $activity->user->getDisplayName();
+                $versionsJson[$paymentId ? 0 : $timeline->id] = $backup;
+                $key = Utils::timestampToDateTimeString(strtotime($timeline->created_at)) . ' - ' . $timeline->user->getDisplayName();
                 $versionsSelect[$lastId ?: 0] = $key;
-                $lastId = $activity->id;
+                $lastId = $timeline->id;
             } else {
                 Utils::logError('Failed to parse invoice backup');
             }

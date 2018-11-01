@@ -2,7 +2,7 @@
 
 namespace App\Ninja\Repositories;
 
-use App\Models\Activity;
+use App\Models\Timeline;
 use App\Models\Invoice;
 use App\Models\Task;
 use DateInterval;
@@ -336,16 +336,16 @@ class DashboardRepository
         return $balances->get();
     }
 
-    public function activities($accountId, $userId, $viewAll)
+    public function timeline($accountId, $userId, $viewAll)
     {
-        $activities = Activity::where('activities.account_id', '=', $accountId)
-                ->where('activities.activity_type_id', '>', 0);
+        $timeline = Timeline::where('core__timeline.account_id', '=', $accountId)
+                ->where('core__timeline.timeline_type_id', '>', 0);
 
         if (! $viewAll) {
-            $activities = $activities->where('activities.user_id', '=', $userId);
+            $timeline = $timeline->where('core__timeline.user_id', '=', $userId);
         }
 
-        return $activities->orderBy('activities.created_at', 'desc')
+        return $timeline->orderBy('core__timeline.created_at', 'desc')
                 ->with('client.contacts', 'user', 'invoice', 'payment', 'credit', 'account', 'task', 'expense', 'contact')
                 ->take(50)
                 ->get();

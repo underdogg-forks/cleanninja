@@ -13,12 +13,12 @@ class AddSlackNotifications extends Migration
      */
     public function up()
     {
-        Schema::table('activities', function ($table) {
+        Schema::table('core__timeline', function ($table) {
             $table->integer('task_id')->unsigned()->change();
             $table->integer('client_id')->unsigned()->nullable()->change();
         });
 
-        DB::statement('UPDATE activities SET client_id = NULL WHERE client_id = 0');
+        DB::statement('UPDATE timeline SET client_id = NULL WHERE client_id = 0');
 
         if (! Schema::hasColumn('users', 'slack_webhook_url')) {
             Schema::table('users', function ($table) {
@@ -43,7 +43,7 @@ class AddSlackNotifications extends Migration
                 $table->foreign('client_id')->references('id')->on('clients')->onDelete('cascade');
             });
 
-            Schema::table('activities', function ($table) {
+            Schema::table('core__timeline', function ($table) {
                 $table->foreign('client_id')->references('id')->on('clients')->onDelete('cascade');
                 $table->index('payment_id');
             });

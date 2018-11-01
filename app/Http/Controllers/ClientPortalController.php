@@ -10,7 +10,7 @@ use App\Models\Document;
 use App\Models\Gateway;
 use App\Models\Invitation;
 use App\Models\PaymentMethod;
-use App\Ninja\Repositories\ActivityRepository;
+use App\Ninja\Repositories\TimelineRepository;
 use App\Ninja\Repositories\CreditRepository;
 use App\Ninja\Repositories\DocumentRepository;
 use App\Ninja\Repositories\InvoiceRepository;
@@ -42,7 +42,7 @@ class ClientPortalController extends BaseController
     public function __construct(
         InvoiceRepository $invoiceRepo,
         PaymentRepository $paymentRepo,
-        ActivityRepository $activityRepo,
+        TimelineRepository $timelineRepo,
         DocumentRepository $documentRepo,
         PaymentService $paymentService,
         CreditRepository $creditRepo,
@@ -50,7 +50,7 @@ class ClientPortalController extends BaseController
     {
         $this->invoiceRepo = $invoiceRepo;
         $this->paymentRepo = $paymentRepo;
-        $this->activityRepo = $activityRepo;
+        $this->timelineRepo = $timelineRepo;
         $this->documentRepo = $documentRepo;
         $this->paymentService = $paymentService;
         $this->creditRepo = $creditRepo;
@@ -283,7 +283,7 @@ class ClientPortalController extends BaseController
         return response()->view('invited.dashboard', $data);
     }
 
-    public function activityDatatable()
+    public function timelineDatatable()
     {
         if (! $contact = $this->getContact()) {
             return $this->returnError();
@@ -291,14 +291,14 @@ class ClientPortalController extends BaseController
 
         $client = $contact->client;
 
-        $query = $this->activityRepo->findByClientId($client->id);
-        $query->where('activities.adjustment', '!=', 0);
+        $query = $this->timelineRepo->findByClientId($client->id);
+        $query->where('core__timeline.adjustment', '!=', 0);
 
         return Datatable::query($query)
-            ->addColumn('activities.id', function ($model) {
+            ->addColumn('core__timeline.id', function ($model) {
                 return Utils::timestampToDateTimeString(strtotime($model->created_at));
             })
-            ->addColumn('activity_type_id', function ($model) {
+            ->addColumn('timeline_type_id', function ($model) {
                 $data = [
                     'client' => Utils::getClientDisplayName($model),
                     'user' => $model->is_system ? ('<i>' . trans('texts.system') . '</i>') : ($model->account_name),
@@ -310,7 +310,7 @@ class ClientPortalController extends BaseController
                     'adjustment' => $model->adjustment ? Utils::formatMoney($model->adjustment, $model->currency_id, $model->country_id) : null,
                 ];
 
-                return trans("texts.activity_{$model->activity_type_id}", $data);
+                return trans("texts.timeline_{$model->timeline_type_id}", $data);
             })
             ->addColumn('balance', function ($model) {
                 return Utils::formatMoney($model->balance, $model->currency_id, $model->country_id);

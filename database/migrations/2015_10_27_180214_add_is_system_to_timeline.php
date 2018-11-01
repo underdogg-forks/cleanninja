@@ -1,9 +1,9 @@
 <?php
 
-use App\Models\Activity;
+use App\Models\Timeline;
 use Illuminate\Database\Migrations\Migration;
 
-class AddIsSystemToActivities extends Migration
+class AddIsSystemToTimeline extends Migration
 {
     /**
      * Run the migrations.
@@ -12,17 +12,17 @@ class AddIsSystemToActivities extends Migration
      */
     public function up()
     {
-        Schema::table('activities', function ($table) {
+        Schema::table('core__timeline', function ($table) {
             $table->boolean('is_system')->default(0);
         });
 
-        $activities = Activity::where('message', 'like', '%<i>System</i>%')->get();
-        foreach ($activities as $activity) {
-            $activity->is_system = true;
-            $activity->save();
+        $timeline = Timeline::where('message', 'like', '%<i>System</i>%')->get();
+        foreach ($timeline as $timeline) {
+            $timeline->is_system = true;
+            $timeline->save();
         }
 
-        Schema::table('activities', function ($table) {
+        Schema::table('core__timeline', function ($table) {
             $table->dropColumn('message');
         });
     }
@@ -34,11 +34,11 @@ class AddIsSystemToActivities extends Migration
      */
     public function down()
     {
-        Schema::table('activities', function ($table) {
+        Schema::table('core__timeline', function ($table) {
             $table->dropColumn('is_system');
         });
 
-        Schema::table('activities', function ($table) {
+        Schema::table('core__timeline', function ($table) {
             $table->text('message')->nullable();
         });
     }

@@ -35,4 +35,4 @@ Need some extra help? Click on the gray Documentation button directly above the 
 Zapier
 """"""
 
-Invoice Ninja proudly partners with https://zapier.com/ to provide seamless app connections for your Invoice Ninja activity. Check out various Zaps that deliver integrated functionality between Invoice Ninja and other apps to help you streamline your accounting. Click on the gray Zapier button, just to the right of the Documentation button, to find out more.
+Invoice Ninja proudly partners with https://zapier.com/ to provide seamless app connections for your Invoice Ninja timeline. Check out various Zaps that deliver integrated functionality between Invoice Ninja and other apps to help you streamline your accounting. Click on the gray Zapier button, just to the right of the Documentation button, to find out more.

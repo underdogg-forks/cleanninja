@@ -2,10 +2,10 @@
 
 namespace App\Ninja\Reports;
 
-use App\Models\Activity;
+use App\Models\Timeline;
 use Auth;
 
-class ActivityReport extends AbstractReport
+class TimelineReport extends AbstractReport
 {
     public function getColumns()
     {
@@ -13,7 +13,7 @@ class ActivityReport extends AbstractReport
             'date' => [],
             'client' => [],
             'user' => [],
-            'activity' => [],
+            'timeline' => [],
         ];
     }
 
@@ -25,27 +25,27 @@ class ActivityReport extends AbstractReport
         $endDate = $this->endDate;
         $subgroup = $this->options['subgroup'];
 
-        $activities = Activity::scope()
+        $timeline = Timeline::scope()
             ->with('client.contacts', 'user', 'invoice', 'payment', 'credit', 'task', 'expense', 'account')
             ->whereRaw("DATE(created_at) >= \"{$startDate}\" and DATE(created_at) <= \"$endDate\"")
             ->orderBy('id', 'desc');
 
-        foreach ($activities->get() as $activity) {
-            $client = $activity->client;
+        foreach ($timeline->get() as $timeline) {
+            $client = $timeline->client;
             $this->data[] = [
-                $activity->present()->createdAt,
+                $timeline->present()->createdAt,
                 $client ? ($this->isExport ? $client->getDisplayName() : $client->present()->link) : '',
-                $activity->present()->user,
-                $this->isExport ? strip_tags($activity->getMessage()) : $activity->getMessage(),
+                $timeline->present()->user,
+                $this->isExport ? strip_tags($timeline->getMessage()) : $timeline->getMessage(),
             ];
 
             if ($subgroup == 'category') {
-                $dimension = trans('texts.' . $activity->relatedEntityType());
+                $dimension = trans('texts.' . $timeline->relatedEntityType());
             } else {
-                $dimension = $this->getDimension($activity);
+                $dimension = $this->getDimension($timeline);
             }
 
-            $this->addChartData($dimension, $activity->created_at, 1);
+            $this->addChartData($dimension, $timeline->created_at, 1);
         }
 
         //dd($this->getChartData());

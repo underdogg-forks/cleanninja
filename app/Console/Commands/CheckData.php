@@ -23,7 +23,7 @@ WARNING: Please backup your database before running this script
 
 Since the application was released a number of bugs have inevitably been found.
 Although the bugs have always been fixed in some cases they've caused the client's
-balance, paid to date and/or activity records to become inaccurate. This script will
+balance, paid to date and/or timeline records to become inaccurate. This script will
 check for errors and correct the data.
 
 If you have any questions please email us at contact@invoiceninja.com
@@ -436,8 +436,8 @@ class CheckData extends Command
 
     private function checkBlankInvoiceHistory()
     {
-        $count = DB::table('activities')
-                    ->where('activity_type_id', '=', 5)
+        $count = DB::table('core__timeline')
+                    ->where('timeline_type_id', '=', 5)
                     ->where('json_backup', '=', '')
                     ->where('id', '>', 858720)
                     ->count();
@@ -446,7 +446,7 @@ class CheckData extends Command
             $this->isValid = false;
         }
 
-        $this->logMessage($count . ' activities with blank invoice backup');
+        $this->logMessage($count . ' timeline with blank invoice backup');
     }
 
     private function checkInvitations()
@@ -483,7 +483,7 @@ class CheckData extends Command
     private function checkAccountData()
     {
         $tables = [
-            'activities' => [
+            'core__timeline' => [
                 ENTITY_INVOICE,
                 ENTITY_CLIENT,
                 ENTITY_CONTACT,
@@ -668,7 +668,7 @@ class CheckData extends Command
         $clients = $clients->groupBy('clients.id', 'clients.balance')
                 ->orderBy('accounts.plan_id', 'DESC')
                 ->get(['accounts.plan_id', 'clients.account_id', 'clients.id', 'clients.balance', 'clients.paid_to_date', DB::raw('sum(invoices.balance) actual_balance')]);
-        $this->logMessage($clients->count() . ' clients with incorrect balance/activities');
+        $this->logMessage($clients->count() . ' clients with incorrect balance/timeline');
 
         if ($clients->count() > 0) {
             $this->isValid = false;
@@ -681,23 +681,23 @@ class CheckData extends Command
             $lastAdjustment = 0;
             $lastCreatedAt = null;
             $clientFix = false;
-            $activities = DB::table('activities')
+            $timeline = DB::table('core__timeline')
                         ->where('client_id', '=', $client->id)
-                        ->orderBy('activities.id')
-                        ->get(['activities.id', 'activities.created_at', 'activities.activity_type_id', 'activities.adjustment', 'activities.balance', 'activities.invoice_id']);
-            //$this->logMessage(var_dump($activities));
+                        ->orderBy('core__timeline.id')
+                        ->get(['core__timeline.id', 'core__timeline.created_at', 'core__timeline.timeline_type_id', 'core__timeline.adjustment', 'core__timeline.balance', 'core__timeline.invoice_id']);
+            //$this->logMessage(var_dump($timeline));
 
-            foreach ($activities as $activity) {
-                $activityFix = false;
+            foreach ($timeline as $timeline) {
+                $timelineFix = false;
 
-                if ($activity->invoice_id) {
+                if ($timeline->invoice_id) {
                     $invoice = DB::table('invoices')
-                                ->where('id', '=', $activity->invoice_id)
+                                ->where('id', '=', $timeline->invoice_id)
                                 ->first(['invoices.amount', 'invoices.is_recurring', 'invoices.invoice_type_id', 'invoices.deleted_at', 'invoices.id', 'invoices.is_deleted']);
 
                     // Check if this invoice was once set as recurring invoice
                     if ($invoice && ! $invoice->is_recurring && DB::table('invoices')
-                            ->where('recurring_invoice_id', '=', $activity->invoice_id)
+                            ->where('recurring_invoice_id', '=', $timeline->invoice_id)
                             ->first(['invoices.id'])) {
                         $invoice->is_recurring = 1;
 
@@ -710,13 +710,13 @@ class CheckData extends Command
                     }
                 }
 
-                if ($activity->activity_type_id == ACTIVITY_TYPE_CREATE_INVOICE
-                    || $activity->activity_type_id == ACTIVITY_TYPE_CREATE_QUOTE) {
+                if ($timeline->timeline_type_id == TIMELINE_TYPE_CREATE_INVOICE
+                    || $timeline->timeline_type_id == TIMELINE_TYPE_CREATE_QUOTE) {
 
                     // Get original invoice amount
-                    $update = DB::table('activities')
-                                ->where('invoice_id', '=', $activity->invoice_id)
-                                ->where('activity_type_id', '=', ACTIVITY_TYPE_UPDATE_INVOICE)
+                    $update = DB::table('core__timeline')
+                                ->where('invoice_id', '=', $timeline->invoice_id)
+                                ->where('timeline_type_id', '=', TIMELINE_TYPE_UPDATE_INVOICE)
                                 ->orderBy('id')
                                 ->first(['json_backup']);
                     if ($update) {
@@ -724,8 +724,8 @@ class CheckData extends Command
                         $invoice->amount = floatval($backup->amount);
                     }
 
-                    $noAdjustment = $activity->activity_type_id == ACTIVITY_TYPE_CREATE_INVOICE
-                        && $activity->adjustment == 0
+                    $noAdjustment = $timeline->timeline_type_id == TIMELINE_TYPE_CREATE_INVOICE
+                        && $timeline->adjustment == 0
                         && $invoice->amount > 0;
 
                     // **Fix for ninja invoices which didn't have the invoice_type_id value set
@@ -733,99 +733,99 @@ class CheckData extends Command
                         $this->logMessage('No adjustment for ninja invoice');
                         $foundProblem = true;
                         $clientFix += $invoice->amount;
-                        $activityFix = $invoice->amount;
+                        $timelineFix = $invoice->amount;
                     // **Fix for allowing converting a recurring invoice to a normal one without updating the balance**
                     } elseif ($noAdjustment && $invoice->invoice_type_id == INVOICE_TYPE_STANDARD && ! $invoice->is_recurring) {
-                        $this->logMessage("No adjustment for new invoice:{$activity->invoice_id} amount:{$invoice->amount} invoiceTypeId:{$invoice->invoice_type_id} isRecurring:{$invoice->is_recurring}");
+                        $this->logMessage("No adjustment for new invoice:{$timeline->invoice_id} amount:{$invoice->amount} invoiceTypeId:{$invoice->invoice_type_id} isRecurring:{$invoice->is_recurring}");
                         $foundProblem = true;
                         $clientFix += $invoice->amount;
-                        $activityFix = $invoice->amount;
+                        $timelineFix = $invoice->amount;
                     // **Fix for updating balance when creating a quote or recurring invoice**
-                    } elseif ($activity->adjustment != 0 && ($invoice->invoice_type_id == INVOICE_TYPE_QUOTE || $invoice->is_recurring)) {
-                        $this->logMessage("Incorrect adjustment for new invoice:{$activity->invoice_id} adjustment:{$activity->adjustment} invoiceTypeId:{$invoice->invoice_type_id} isRecurring:{$invoice->is_recurring}");
+                    } elseif ($timeline->adjustment != 0 && ($invoice->invoice_type_id == INVOICE_TYPE_QUOTE || $invoice->is_recurring)) {
+                        $this->logMessage("Incorrect adjustment for new invoice:{$timeline->invoice_id} adjustment:{$timeline->adjustment} invoiceTypeId:{$invoice->invoice_type_id} isRecurring:{$invoice->is_recurring}");
                         $foundProblem = true;
-                        $clientFix -= $activity->adjustment;
-                        $activityFix = 0;
+                        $clientFix -= $timeline->adjustment;
+                        $timelineFix = 0;
                     }
-                } elseif ($activity->activity_type_id == ACTIVITY_TYPE_DELETE_INVOICE) {
+                } elseif ($timeline->timeline_type_id == TIMELINE_TYPE_DELETE_INVOICE) {
                     // **Fix for updating balance when deleting a recurring invoice**
-                    if ($activity->adjustment != 0 && $invoice->is_recurring) {
-                        $this->logMessage("Incorrect adjustment for deleted invoice adjustment:{$activity->adjustment}");
+                    if ($timeline->adjustment != 0 && $invoice->is_recurring) {
+                        $this->logMessage("Incorrect adjustment for deleted invoice adjustment:{$timeline->adjustment}");
                         $foundProblem = true;
-                        if ($activity->balance != $lastBalance) {
-                            $clientFix -= $activity->adjustment;
+                        if ($timeline->balance != $lastBalance) {
+                            $clientFix -= $timeline->adjustment;
                         }
-                        $activityFix = 0;
+                        $timelineFix = 0;
                     }
-                } elseif ($activity->activity_type_id == ACTIVITY_TYPE_ARCHIVE_INVOICE) {
+                } elseif ($timeline->timeline_type_id == TIMELINE_TYPE_ARCHIVE_INVOICE) {
                     // **Fix for updating balance when archiving an invoice**
-                    if ($activity->adjustment != 0 && ! $invoice->is_recurring) {
-                        $this->logMessage("Incorrect adjustment for archiving invoice adjustment:{$activity->adjustment}");
+                    if ($timeline->adjustment != 0 && ! $invoice->is_recurring) {
+                        $this->logMessage("Incorrect adjustment for archiving invoice adjustment:{$timeline->adjustment}");
                         $foundProblem = true;
-                        $activityFix = 0;
-                        $clientFix += $activity->adjustment;
+                        $timelineFix = 0;
+                        $clientFix += $timeline->adjustment;
                     }
-                } elseif ($activity->activity_type_id == ACTIVITY_TYPE_UPDATE_INVOICE) {
+                } elseif ($timeline->timeline_type_id == TIMELINE_TYPE_UPDATE_INVOICE) {
                     // **Fix for updating balance when updating recurring invoice**
-                    if ($activity->adjustment != 0 && $invoice->is_recurring) {
-                        $this->logMessage("Incorrect adjustment for updated recurring invoice adjustment:{$activity->adjustment}");
+                    if ($timeline->adjustment != 0 && $invoice->is_recurring) {
+                        $this->logMessage("Incorrect adjustment for updated recurring invoice adjustment:{$timeline->adjustment}");
                         $foundProblem = true;
-                        $clientFix -= $activity->adjustment;
-                        $activityFix = 0;
-                    } elseif ((strtotime($activity->created_at) - strtotime($lastCreatedAt) <= 1) && $activity->adjustment > 0 && $activity->adjustment == $lastAdjustment) {
-                        $this->logMessage("Duplicate adjustment for updated invoice adjustment:{$activity->adjustment}");
+                        $clientFix -= $timeline->adjustment;
+                        $timelineFix = 0;
+                    } elseif ((strtotime($timeline->created_at) - strtotime($lastCreatedAt) <= 1) && $timeline->adjustment > 0 && $timeline->adjustment == $lastAdjustment) {
+                        $this->logMessage("Duplicate adjustment for updated invoice adjustment:{$timeline->adjustment}");
                         $foundProblem = true;
-                        $clientFix -= $activity->adjustment;
-                        $activityFix = 0;
+                        $clientFix -= $timeline->adjustment;
+                        $timelineFix = 0;
                     }
-                } elseif ($activity->activity_type_id == ACTIVITY_TYPE_UPDATE_QUOTE) {
+                } elseif ($timeline->timeline_type_id == TIMELINE_TYPE_UPDATE_QUOTE) {
                     // **Fix for updating balance when updating a quote**
-                    if ($activity->balance != $lastBalance) {
-                        $this->logMessage("Incorrect adjustment for updated quote adjustment:{$activity->adjustment}");
+                    if ($timeline->balance != $lastBalance) {
+                        $this->logMessage("Incorrect adjustment for updated quote adjustment:{$timeline->adjustment}");
                         $foundProblem = true;
-                        $clientFix += $lastBalance - $activity->balance;
-                        $activityFix = 0;
+                        $clientFix += $lastBalance - $timeline->balance;
+                        $timelineFix = 0;
                     }
-                } elseif ($activity->activity_type_id == ACTIVITY_TYPE_DELETE_PAYMENT) {
+                } elseif ($timeline->timeline_type_id == TIMELINE_TYPE_DELETE_PAYMENT) {
                     // **Fix for deleting payment after deleting invoice**
-                    if ($activity->adjustment != 0 && $invoice->is_deleted && $activity->created_at > $invoice->deleted_at) {
-                        $this->logMessage("Incorrect adjustment for deleted payment adjustment:{$activity->adjustment}");
+                    if ($timeline->adjustment != 0 && $invoice->is_deleted && $timeline->created_at > $invoice->deleted_at) {
+                        $this->logMessage("Incorrect adjustment for deleted payment adjustment:{$timeline->adjustment}");
                         $foundProblem = true;
-                        $activityFix = 0;
-                        $clientFix -= $activity->adjustment;
+                        $timelineFix = 0;
+                        $clientFix -= $timeline->adjustment;
                     }
                 }
 
-                if ($activityFix !== false || $clientFix !== false) {
+                if ($timelineFix !== false || $clientFix !== false) {
                     $data = [
-                        'balance' => $activity->balance + $clientFix,
+                        'balance' => $timeline->balance + $clientFix,
                     ];
 
-                    if ($activityFix !== false) {
-                        $data['adjustment'] = $activityFix;
+                    if ($timelineFix !== false) {
+                        $data['adjustment'] = $timelineFix;
                     }
 
                     if ($this->option('fix') == 'true') {
-                        DB::table('activities')
-                            ->where('id', $activity->id)
+                        DB::table('core__timeline')
+                            ->where('id', $timeline->id)
                             ->update($data);
                     }
                 }
 
-                $lastBalance = $activity->balance;
-                $lastAdjustment = $activity->adjustment;
-                $lastCreatedAt = $activity->created_at;
+                $lastBalance = $timeline->balance;
+                $lastAdjustment = $timeline->adjustment;
+                $lastCreatedAt = $timeline->created_at;
             }
 
-            if ($activity->balance + $clientFix != $client->actual_balance) {
-                $this->logMessage("** Creating 'recovered update' activity **");
+            if ($timeline->balance + $clientFix != $client->actual_balance) {
+                $this->logMessage("** Creating 'recovered update' timeline **");
                 if ($this->option('fix') == 'true') {
-                    DB::table('activities')->insert([
+                    DB::table('core__timeline')->insert([
                             'created_at' => new Carbon(),
                             'updated_at' => new Carbon(),
                             'account_id' => $client->account_id,
                             'client_id' => $client->id,
-                            'adjustment' => $client->actual_balance - $activity->balance,
+                            'adjustment' => $client->actual_balance - $timeline->balance,
                             'balance' => $client->actual_balance,
                     ]);
                 }

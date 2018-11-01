@@ -37,7 +37,7 @@ class DashboardController extends BaseController
         $paidToDate = $dashboardRepo->paidToDate($account, $userId, $viewAll);
         $averageInvoice = $dashboardRepo->averages($account, $userId, $viewAll);
         $balances = $dashboardRepo->balances($account, $userId, $viewAll);
-        $activities = $dashboardRepo->activities($accountId, $userId, $viewAll);
+        $timeline = $dashboardRepo->timeline($accountId, $userId, $viewAll);
         $pastDue = $dashboardRepo->pastDue($accountId, $userId, $viewAll);
         $upcoming = $dashboardRepo->upcoming($accountId, $userId, $viewAll);
         $payments = $dashboardRepo->payments($accountId, $userId, $viewAll);
@@ -131,7 +131,7 @@ class DashboardController extends BaseController
             'invoicesSent' => $metrics ? $metrics->invoices_sent : 0,
             'activeClients' => $metrics ? $metrics->active_clients : 0,
             'invoiceExchangeRateMissing' => $account->getInvoiceExchangeRateCustomFieldIndex() ? false : true,
-            'activities' => $activities,
+            'core__timeline' => $timeline,
             'pastDue' => $pastDue,
             'upcoming' => $upcoming,
             'payments' => $payments,

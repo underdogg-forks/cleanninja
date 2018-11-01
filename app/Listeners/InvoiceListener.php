@@ -13,7 +13,7 @@ use App\Events\PaymentWasDeleted;
 use App\Events\PaymentWasRefunded;
 use App\Events\PaymentWasRestored;
 use App\Events\PaymentWasVoided;
-use App\Models\Activity;
+use App\Models\Timeline;
 use Auth;
 use Utils;
 
@@ -85,11 +85,11 @@ class InvoiceListener
         $invoice->updatePaidStatus(true);
 
         // store a backup of the invoice
-        $activity = Activity::wherePaymentId($payment->id)
-                        ->whereActivityTypeId(ACTIVITY_TYPE_CREATE_PAYMENT)
+        $timeline = Timeline::wherePaymentId($payment->id)
+                        ->whereTimelineTypeId(TIMELINE_TYPE_CREATE_PAYMENT)
                         ->first();
-        $activity->json_backup = $invoice->hidePrivateFields()->toJSON();
-        $activity->save();
+        $timeline->json_backup = $invoice->hidePrivateFields()->toJSON();
+        $timeline->save();
 
         if ($invoice->balance == 0 && $payment->account->auto_archive_invoice) {
             $invoiceRepo = app('App\Ninja\Repositories\InvoiceRepository');

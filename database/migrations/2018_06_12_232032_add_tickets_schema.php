@@ -110,7 +110,7 @@ class AddTicketsSchema extends Migration
         });
 
 
-        Schema::table('activities', function ($table) {
+        Schema::table('core__timeline', function ($table) {
             $table->unsignedInteger('ticket_id')->nullable();
 
             $table->index(['ticket_id', 'account_id']);
@@ -206,7 +206,7 @@ class AddTicketsSchema extends Migration
 
         if(!Utils::isNinja()) {
 
-            Schema::table('activities', function ($table) {
+            Schema::table('core__timeline', function ($table) {
                 $table->index(['contact_id', 'account_id']);
                 $table->index(['payment_id', 'account_id']);
                 $table->index(['invitation_id', 'account_id']);
@@ -282,7 +282,7 @@ class AddTicketsSchema extends Migration
         Schema::dropIfExists('tickets');
 
         if(!Utils::isNinja()) {
-            Schema::table('activities', function ($table) {
+            Schema::table('core__timeline', function ($table) {
                 $table->dropIndex(['contact_id', 'account_id']);
                 $table->dropIndex(['payment_id', 'account_id']);
                 $table->dropIndex(['invitation_id', 'account_id']);
@@ -302,8 +302,8 @@ class AddTicketsSchema extends Migration
             });
         }
 
-        if(Schema::hasColumn('activities', 'ticket_id')) {
-            Schema::table('activities', function ($table) {
+        if(Schema::hasColumn('core__timeline', 'ticket_id')) {
+            Schema::table('core__timeline', function ($table) {
                 $table->dropColumn('ticket_id');
                 $table->dropIndex(['ticket_id', 'account_id']);
             });

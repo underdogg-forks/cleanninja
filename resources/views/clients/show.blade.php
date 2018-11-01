@@ -238,7 +238,7 @@
     @endif
 
 	<ul class="nav nav-tabs nav-justified">
-		{!! Form::tab_link('#activity', trans('texts.activity'), true) !!}
+		{!! Form::tab_link('#timeline', trans('texts.timeline'), true) !!}
         @if ($hasTasks)
             {!! Form::tab_link('#tasks', trans('texts.tasks')) !!}
         @endif
@@ -263,15 +263,15 @@
 
 	<div class="tab-content">
 
-        <div class="tab-pane active" id="activity">
+        <div class="tab-pane active" id="timeline">
 			{!! Datatable::table()
 		    	->addColumn(
 		    		trans('texts.date'),
 		    		trans('texts.message'),
 		    		trans('texts.balance'),
 		    		trans('texts.adjustment'))
-		    	->setUrl(url('api/activities/'. $client->public_id))
-                ->setCustomValues('entityType', 'activity')
+		    	->setUrl(url('api/timeline/'. $client->public_id))
+                ->setCustomValues('entityType', 'timeline')
                 ->setCustomValues('clientId', $client->public_id)
                 ->setCustomValues('rightAlign', [2, 3])
 		    	->setOptions('sPaginationType', 'bootstrap')
@@ -419,10 +419,10 @@
         tab = tab.replace('#', '');
         var selector = '.nav-tabs a[href="#' + tab + '"]';
 
-        if (tab && tab != 'activity' && $(selector).length && window['load_' + tab]) {
+        if (tab && tab != 'timeline' && $(selector).length && window['load_' + tab]) {
             $(selector).tab('show');
         } else {
-            window['load_activity']();
+            window['load_timeline']();
         }
 	});
 

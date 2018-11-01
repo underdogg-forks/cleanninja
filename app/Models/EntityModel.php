@@ -131,7 +131,7 @@ class EntityModel extends Eloquent
     /**
      * @return string
      */
-    public function getActivityKey()
+    public function getTimelineKey()
     {
         return '[' . $this->getEntityType().':'.$this->public_id.':'.$this->getDisplayName() . ']';
     }

@@ -4,27 +4,27 @@ namespace App\Ninja\Datatables;
 
 use Utils;
 
-class ActivityDatatable extends EntityDatatable
+class TimelineDatatable extends EntityDatatable
 {
-    public $entityType = ENTITY_ACTIVITY;
+    public $entityType = ENTITY_TIMELINE;
 
     public function columns()
     {
         return [
             [
-                'activities.id',
+                'core__timeline.id',
                 function ($model) {
                     $str = Utils::timestampToDateTimeString(strtotime($model->created_at));
-                    $activityTypes = [
-                        ACTIVITY_TYPE_VIEW_INVOICE,
-                        ACTIVITY_TYPE_VIEW_QUOTE,
-                        ACTIVITY_TYPE_CREATE_PAYMENT,
-                        ACTIVITY_TYPE_APPROVE_QUOTE,
+                    $timelineTypes = [
+                        TIMELINE_TYPE_VIEW_INVOICE,
+                        TIMELINE_TYPE_VIEW_QUOTE,
+                        TIMELINE_TYPE_CREATE_PAYMENT,
+                        TIMELINE_TYPE_APPROVE_QUOTE,
                     ];
 
                     if ($model->contact_id
                         && ! $model->is_system
-                        && in_array($model->activity_type_id, $activityTypes)
+                        && in_array($model->timeline_type_id, $timelineTypes)
                         && ! in_array($model->ip, ['127.0.0.1', '192.168.255.33'])) {
                         $ipLookUpLink = IP_LOOKUP_URL . $model->ip;
                         $str .= sprintf(' &nbsp; <i class="fa fa-globe" style="cursor:pointer" title="%s" onclick="openUrl(\'%s\', \'IP Lookup\')"></i>', $model->ip, $ipLookUpLink);
@@ -34,7 +34,7 @@ class ActivityDatatable extends EntityDatatable
                 },
             ],
             [
-                'activity_type_id',
+                'timeline_type_id',
                 function ($model) {
                     $data = [
                         'client' => link_to('/clients/' . $model->client_public_id, Utils::getClientDisplayName($model))->toHtml(),
@@ -51,7 +51,7 @@ class ActivityDatatable extends EntityDatatable
                         'ticket' => $model->ticket_public_id ? link_to('/tickets/' . $model->ticket_public_id, '') : null,
                     ];
 
-                    $str = trans("texts.activity_{$model->activity_type_id}", $data);
+                    $str = trans("texts.timeline_{$model->timeline_type_id}", $data);
 
                     if ($model->notes) {
                         $str .= ' - ' . trans("texts.notes_{$model->notes}");

@@ -14,7 +14,7 @@ class ConfideSetupUsersTable extends Migration
         Schema::dropIfExists('payment_terms');
         Schema::dropIfExists('themes');
         Schema::dropIfExists('credits');
-        Schema::dropIfExists('activities');
+        Schema::dropIfExists('core__timeline');
         Schema::dropIfExists('invitations');
         Schema::dropIfExists('payments');
         Schema::dropIfExists('account_gateways');
@@ -503,7 +503,7 @@ class ConfideSetupUsersTable extends Migration
 
         });
 
-        Schema::create('activities', function ($t) {
+        Schema::create('core__timeline', function ($t) {
             $t->increments('id');
 
             $t->unsignedInteger('account_id');
@@ -517,7 +517,7 @@ class ConfideSetupUsersTable extends Migration
 
             $t->text('message')->nullable();
             $t->text('json_backup')->nullable();
-            $t->integer('activity_type_id');
+            $t->integer('timeline_type_id');
             $t->decimal('adjustment', 13, 2)->nullable();
             $t->decimal('balance', 13, 2)->nullable();
 
@@ -539,7 +539,7 @@ class ConfideSetupUsersTable extends Migration
         Schema::dropIfExists('payment_terms');
         Schema::dropIfExists('themes');
         Schema::dropIfExists('credits');
-        Schema::dropIfExists('activities');
+        Schema::dropIfExists('core__timeline');
         Schema::dropIfExists('invitations');
         Schema::dropIfExists('payments');
         Schema::dropIfExists('account_gateways');

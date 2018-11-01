@@ -3,12 +3,12 @@ Clients
 
 They come in all shapes and sizes. They’re the reason you go to work in the morning. There are new ones coming up, and old ones coming back. What you need is a well-maintained, up-to-date, comprehensive client list to keep your invoicing in order.
 
-Your clients are the core of your freelance business, and your Clients page is the core of your activity on Invoice Ninja.
+Your clients are the core of your freelance business, and your Clients page is the core of your timeline on Invoice Ninja.
 
 List Clients
 """"""""""""
 
-The Clients page is a list page that presents a summary of all your clients in a user-friendly table. Think of your Clients page as the “central station” of your client activity. Most of your day-to-day invoicing actions can be taken from the various links and buttons that appear on the Clients list page. And you can use the Clients list page as your starting point to explore more in-depth client information, edit client information, view current client statements, and more. Now, we’ll take a closer look at the setup of the Clients page, and the range of actions available to you on the Clients page.
+The Clients page is a list page that presents a summary of all your clients in a user-friendly table. Think of your Clients page as the “central station” of your client timeline. Most of your day-to-day invoicing actions can be taken from the various links and buttons that appear on the Clients list page. And you can use the Clients list page as your starting point to explore more in-depth client information, edit client information, view current client statements, and more. Now, we’ll take a closer look at the setup of the Clients page, and the range of actions available to you on the Clients page.
 
 To view your client list page, go to the main sidebar and click the Clients tab.
 
@@ -23,7 +23,7 @@ The Clients page presents a list summary of all your current clients in a table 
 - **Date Created:** The date the client was created
 - **Last Login:** The date the client last logged in to the system
 - **Balance:** The client’s payment balance
-- **Action:** A range of actions you can take to manage activity relating to the selected client
+- **Action:** A range of actions you can take to manage timeline relating to the selected client
 
 Actions
 ^^^^^^^
@@ -76,9 +76,9 @@ Create Client
 
 So, you’ve taken on a new client? Congratulations!
 
-Your Clients list is at the heart of your invoicing activity, so it's really important to maintain current information on all your clients. When you start working with a new client, the first thing you’ll need to do is to add the new client by entering their contact information and business details.
+Your Clients list is at the heart of your invoicing timeline, so it's really important to maintain current information on all your clients. When you start working with a new client, the first thing you’ll need to do is to add the new client by entering their contact information and business details.
 
-When creating and saving a new client to your Clients list, make sure to have the relevant, up-to-date information at hand. You are only required to enter the information one time. Invoice Ninja automatically tracks all invoicing activity for each client.
+When creating and saving a new client to your Clients list, make sure to have the relevant, up-to-date information at hand. You are only required to enter the information one time. Invoice Ninja automatically tracks all invoicing timeline for each client.
 
 
 **Let’s Begin**
@@ -103,7 +103,7 @@ Once you have filled in the page, click Save to save the new client information.
 Client Overview Page
 """"""""""""""""""""
 
-Each client has its own Client Overview page. The overview page provides a complete summary of all your client details and activity in one page. From here, you can access everything you need about the specific client, including the client's general contact information, total standing payments and balance, and a detailed list of the client Activity, Invoices, Payments and Credits. You can also Edit, Archive or Delete the client, view the Client Statement and view the Client Portal, all directly from the Client Overview page. Let's explore:
+Each client has its own Client Overview page. The overview page provides a complete summary of all your client details and timeline in one page. From here, you can access everything you need about the specific client, including the client's general contact information, total standing payments and balance, and a detailed list of the client Timeline, Invoices, Payments and Credits. You can also Edit, Archive or Delete the client, view the Client Statement and view the Client Portal, all directly from the Client Overview page. Let's explore:
 
 How to view the Client Overview page
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -120,14 +120,14 @@ The top section of the Client Overview page displays general business and contac
 Client Data Table
 ^^^^^^^^^^^^^^^^^
 
-Just below the client information box or Google map, you'll find the client's data table. The table displays a summary of your client's activity, invoices, payments and credits, in a simple accessible table format. It provides a fast summary of the data for the specific client only.
+Just below the client information box or Google map, you'll find the client's data table. The table displays a summary of your client's timeline, invoices, payments and credits, in a simple accessible table format. It provides a fast summary of the data for the specific client only.
 
-To access the various data tables, choose from the menu bar: Activity, Invoices, Payments or Credits.
+To access the various data tables, choose from the menu bar: Timeline, Invoices, Payments or Credits.
 
-Activity Table
+Timeline Table
 **************
 
-The Activity table shows all the past activity with the client, in chronological order, with the most recent actions at the top. The table has 4 columns:
+The Timeline table shows all the past timeline with the client, in chronological order, with the most recent actions at the top. The table has 4 columns:
 
 - **Date**: The date the action was taken
 - **Message**: The action that occurred
@@ -179,7 +179,7 @@ The Credits table shows a list of all the client's credits and acplaning informa
 Clickable Links on the Client Overview Page
 *******************************************
 
-The Client Overview page is rich in clickable links to the client's invoices, payments, credits and any other data pages relating to the client. So you can quickly look up any information with a simple click of an IP link. Take for example the Activity table: if you recently updated the client's invoice, an entry will appear on the Activity table, with a Message of: "You Updated Invoice 53". "Invoice 53" will appear as a clickable link that takes you directly to the invoice. So you have fast access to every relevant invoice, quote, task, expense and more, directly from every listing on the Activity table. This also applies to the Invoices, Payments and Credit tables. TIP: Any invoicing action you need to take for the client can be done from the Client Overview page.
+The Client Overview page is rich in clickable links to the client's invoices, payments, credits and any other data pages relating to the client. So you can quickly look up any information with a simple click of an IP link. Take for example the Timeline table: if you recently updated the client's invoice, an entry will appear on the Timeline table, with a Message of: "You Updated Invoice 53". "Invoice 53" will appear as a clickable link that takes you directly to the invoice. So you have fast access to every relevant invoice, quote, task, expense and more, directly from every listing on the Timeline table. This also applies to the Invoices, Payments and Credit tables. TIP: Any invoicing action you need to take for the client can be done from the Client Overview page.
 
 Note: All the tables on the Client Overview page have Sort and Filter functions. You can filter by entering text into the filter field that appears above and to the right of the table. Also, each column can be sorted highest to lowest, or lowest to highest. Simply click on the small arrow that appears when you hover in the column heading field.
 

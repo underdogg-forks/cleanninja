@@ -44,26 +44,26 @@ use App\Events\TaskWasRestored;
 use App\Events\TaskWasUpdated;
 use App\Events\TicketUserViewed;
 use App\Models\Invoice;
-use App\Ninja\Repositories\ActivityRepository;
+use App\Ninja\Repositories\TimelineRepository;
 
 /**
- * Class ActivityListener.
+ * Class TimelineListener.
  */
-class ActivityListener
+class TimelineListener
 {
     /**
-     * @var ActivityRepository
+     * @var TimelineRepository
      */
-    protected $activityRepo;
+    protected $timelineRepo;
 
     /**
-     * ActivityListener constructor.
+     * TimelineListener constructor.
      *
-     * @param ActivityRepository $activityRepo
+     * @param TimelineRepository $timelineRepo
      */
-    public function __construct(ActivityRepository $activityRepo)
+    public function __construct(TimelineRepository $timelineRepo)
     {
-        $this->activityRepo = $activityRepo;
+        $this->timelineRepo = $timelineRepo;
     }
 
     /**
@@ -71,9 +71,9 @@ class ActivityListener
      */
     public function createdClient(ClientWasCreated $event)
     {
-        $this->activityRepo->create(
+        $this->timelineRepo->create(
             $event->client,
-            ACTIVITY_TYPE_CREATE_CLIENT
+            TIMELINE_TYPE_CREATE_CLIENT
         );
     }
 
@@ -82,9 +82,9 @@ class ActivityListener
      */
     public function deletedClient(ClientWasDeleted $event)
     {
-        $this->activityRepo->create(
+        $this->timelineRepo->create(
             $event->client,
-            ACTIVITY_TYPE_DELETE_CLIENT
+            TIMELINE_TYPE_DELETE_CLIENT
         );
     }
 
@@ -97,9 +97,9 @@ class ActivityListener
             return;
         }
 
-        $this->activityRepo->create(
+        $this->timelineRepo->create(
             $event->client,
-            ACTIVITY_TYPE_ARCHIVE_CLIENT
+            TIMELINE_TYPE_ARCHIVE_CLIENT
         );
     }
 
@@ -108,9 +108,9 @@ class ActivityListener
      */
     public function restoredClient(ClientWasRestored $event)
     {
-        $this->activityRepo->create(
+        $this->timelineRepo->create(
             $event->client,
-            ACTIVITY_TYPE_RESTORE_CLIENT
+            TIMELINE_TYPE_RESTORE_CLIENT
         );
     }
 
@@ -119,9 +119,9 @@ class ActivityListener
      */
     public function createdInvoice(InvoiceWasCreated $event)
     {
-        $this->activityRepo->create(
+        $this->timelineRepo->create(
             $event->invoice,
-            ACTIVITY_TYPE_CREATE_INVOICE,
+            TIMELINE_TYPE_CREATE_INVOICE,
             $event->invoice->getAdjustment()
         );
     }
@@ -139,14 +139,14 @@ class ActivityListener
                             ->withTrashed()
                             ->find($event->invoice->id);
 
-        $activity = $this->activityRepo->create(
+        $timeline = $this->timelineRepo->create(
             $event->invoice,
-            ACTIVITY_TYPE_UPDATE_INVOICE,
+            TIMELINE_TYPE_UPDATE_INVOICE,
             $event->invoice->getAdjustment()
         );
 
-        $activity->json_backup = $backupInvoice->hidePrivateFields()->toJSON();
-        $activity->save();
+        $timeline->json_backup = $backupInvoice->hidePrivateFields()->toJSON();
+        $timeline->save();
     }
 
     /**
@@ -156,9 +156,9 @@ class ActivityListener
     {
         $invoice = $event->invoice;
 
-        $this->activityRepo->create(
+        $this->timelineRepo->create(
             $invoice,
-            ACTIVITY_TYPE_DELETE_INVOICE,
+            TIMELINE_TYPE_DELETE_INVOICE,
             $invoice->affectsBalance() ? $invoice->balance * -1 : 0,
             $invoice->affectsBalance() ? $invoice->getAmountPaid() * -1 : 0
         );
@@ -173,9 +173,9 @@ class ActivityListener
             return;
         }
 
-        $this->activityRepo->create(
+        $this->timelineRepo->create(
             $event->invoice,
-            ACTIVITY_TYPE_ARCHIVE_INVOICE
+            TIMELINE_TYPE_ARCHIVE_INVOICE
         );
     }
 
@@ -186,9 +186,9 @@ class ActivityListener
     {
         $invoice = $event->invoice;
 
-        $this->activityRepo->create(
+        $this->timelineRepo->create(
             $invoice,
-            ACTIVITY_TYPE_RESTORE_INVOICE,
+            TIMELINE_TYPE_RESTORE_INVOICE,
             $invoice->affectsBalance() && $event->fromDeleted ? $invoice->balance : 0,
             $invoice->affectsBalance() && $event->fromDeleted ? $invoice->getAmountPaid() : 0
         );
@@ -199,9 +199,9 @@ class ActivityListener
      */
     public function emailedInvoice(InvoiceInvitationWasEmailed $event)
     {
-        $this->activityRepo->create(
+        $this->timelineRepo->create(
             $event->invitation->invoice,
-            ACTIVITY_TYPE_EMAIL_INVOICE,
+            TIMELINE_TYPE_EMAIL_INVOICE,
             false,
             false,
             $event->invitation,
@@ -214,9 +214,9 @@ class ActivityListener
      */
     public function viewedInvoice(InvoiceInvitationWasViewed $event)
     {
-        $this->activityRepo->create(
+        $this->timelineRepo->create(
             $event->invoice,
-            ACTIVITY_TYPE_VIEW_INVOICE,
+            TIMELINE_TYPE_VIEW_INVOICE,
             false,
             false,
             $event->invitation
@@ -228,9 +228,9 @@ class ActivityListener
      */
     public function createdQuote(QuoteWasCreated $event)
     {
-        $this->activityRepo->create(
+        $this->timelineRepo->create(
             $event->quote,
-            ACTIVITY_TYPE_CREATE_QUOTE
+            TIMELINE_TYPE_CREATE_QUOTE
         );
     }
 
@@ -247,13 +247,13 @@ class ActivityListener
                             ->withTrashed()
                             ->find($event->quote->id);
 
-        $activity = $this->activityRepo->create(
+        $timeline = $this->timelineRepo->create(
             $event->quote,
-            ACTIVITY_TYPE_UPDATE_QUOTE
+            TIMELINE_TYPE_UPDATE_QUOTE
         );
 
-        $activity->json_backup = $backupQuote->hidePrivateFields()->toJSON();
-        $activity->save();
+        $timeline->json_backup = $backupQuote->hidePrivateFields()->toJSON();
+        $timeline->save();
     }
 
     /**
@@ -261,9 +261,9 @@ class ActivityListener
      */
     public function deletedQuote(QuoteWasDeleted $event)
     {
-        $this->activityRepo->create(
+        $this->timelineRepo->create(
             $event->quote,
-            ACTIVITY_TYPE_DELETE_QUOTE
+            TIMELINE_TYPE_DELETE_QUOTE
         );
     }
 
@@ -276,9 +276,9 @@ class ActivityListener
             return;
         }
 
-        $this->activityRepo->create(
+        $this->timelineRepo->create(
             $event->quote,
-            ACTIVITY_TYPE_ARCHIVE_QUOTE
+            TIMELINE_TYPE_ARCHIVE_QUOTE
         );
     }
 
@@ -287,9 +287,9 @@ class ActivityListener
      */
     public function restoredQuote(QuoteWasRestored $event)
     {
-        $this->activityRepo->create(
+        $this->timelineRepo->create(
             $event->quote,
-            ACTIVITY_TYPE_RESTORE_QUOTE
+            TIMELINE_TYPE_RESTORE_QUOTE
         );
     }
 
@@ -298,9 +298,9 @@ class ActivityListener
      */
     public function emailedQuote(QuoteInvitationWasEmailed $event)
     {
-        $this->activityRepo->create(
+        $this->timelineRepo->create(
             $event->invitation->invoice,
-            ACTIVITY_TYPE_EMAIL_QUOTE,
+            TIMELINE_TYPE_EMAIL_QUOTE,
             false,
             false,
             $event->invitation,
@@ -313,9 +313,9 @@ class ActivityListener
      */
     public function viewedQuote(QuoteInvitationWasViewed $event)
     {
-        $this->activityRepo->create(
+        $this->timelineRepo->create(
             $event->quote,
-            ACTIVITY_TYPE_VIEW_QUOTE,
+            TIMELINE_TYPE_VIEW_QUOTE,
             false,
             false,
             $event->invitation
@@ -327,9 +327,9 @@ class ActivityListener
      */
     public function approvedQuote(QuoteInvitationWasApproved $event)
     {
-        $this->activityRepo->create(
+        $this->timelineRepo->create(
             $event->quote,
-            ACTIVITY_TYPE_APPROVE_QUOTE,
+            TIMELINE_TYPE_APPROVE_QUOTE,
             false,
             false,
             $event->invitation
@@ -341,9 +341,9 @@ class ActivityListener
      */
     public function createdCredit(CreditWasCreated $event)
     {
-        $this->activityRepo->create(
+        $this->timelineRepo->create(
             $event->credit,
-            ACTIVITY_TYPE_CREATE_CREDIT
+            TIMELINE_TYPE_CREATE_CREDIT
         );
     }
 
@@ -352,9 +352,9 @@ class ActivityListener
      */
     public function deletedCredit(CreditWasDeleted $event)
     {
-        $this->activityRepo->create(
+        $this->timelineRepo->create(
             $event->credit,
-            ACTIVITY_TYPE_DELETE_CREDIT
+            TIMELINE_TYPE_DELETE_CREDIT
         );
     }
 
@@ -367,9 +367,9 @@ class ActivityListener
             return;
         }
 
-        $this->activityRepo->create(
+        $this->timelineRepo->create(
             $event->credit,
-            ACTIVITY_TYPE_ARCHIVE_CREDIT
+            TIMELINE_TYPE_ARCHIVE_CREDIT
         );
     }
 
@@ -378,9 +378,9 @@ class ActivityListener
      */
     public function restoredCredit(CreditWasRestored $event)
     {
-        $this->activityRepo->create(
+        $this->timelineRepo->create(
             $event->credit,
-            ACTIVITY_TYPE_RESTORE_CREDIT
+            TIMELINE_TYPE_RESTORE_CREDIT
         );
     }
 
@@ -389,9 +389,9 @@ class ActivityListener
      */
     public function createdPayment(PaymentWasCreated $event)
     {
-        $this->activityRepo->create(
+        $this->timelineRepo->create(
             $event->payment,
-            ACTIVITY_TYPE_CREATE_PAYMENT,
+            TIMELINE_TYPE_CREATE_PAYMENT,
             $event->payment->amount * -1,
             $event->payment->amount,
             false,
@@ -406,9 +406,9 @@ class ActivityListener
     {
         $payment = $event->payment;
 
-        $this->activityRepo->create(
+        $this->timelineRepo->create(
             $payment,
-            ACTIVITY_TYPE_DELETE_PAYMENT,
+            TIMELINE_TYPE_DELETE_PAYMENT,
             $payment->isFailedOrVoided() ? 0 : $payment->getCompletedAmount(),
             $payment->isFailedOrVoided() ? 0 : $payment->getCompletedAmount() * -1
         );
@@ -421,9 +421,9 @@ class ActivityListener
     {
         $payment = $event->payment;
 
-        $this->activityRepo->create(
+        $this->timelineRepo->create(
             $payment,
-            ACTIVITY_TYPE_REFUNDED_PAYMENT,
+            TIMELINE_TYPE_REFUNDED_PAYMENT,
             $event->refundAmount,
             $event->refundAmount * -1
         );
@@ -436,9 +436,9 @@ class ActivityListener
     {
         $payment = $event->payment;
 
-        $this->activityRepo->create(
+        $this->timelineRepo->create(
             $payment,
-            ACTIVITY_TYPE_VOIDED_PAYMENT,
+            TIMELINE_TYPE_VOIDED_PAYMENT,
             $payment->is_deleted ? 0 : $payment->getCompletedAmount(),
             $payment->is_deleted ? 0 : $payment->getCompletedAmount() * -1
         );
@@ -451,9 +451,9 @@ class ActivityListener
     {
         $payment = $event->payment;
 
-        $this->activityRepo->create(
+        $this->timelineRepo->create(
             $payment,
-            ACTIVITY_TYPE_FAILED_PAYMENT,
+            TIMELINE_TYPE_FAILED_PAYMENT,
             $payment->is_deleted ? 0 : $payment->getCompletedAmount(),
             $payment->is_deleted ? 0 : $payment->getCompletedAmount() * -1
         );
@@ -468,9 +468,9 @@ class ActivityListener
             return;
         }
 
-        $this->activityRepo->create(
+        $this->timelineRepo->create(
             $event->payment,
-            ACTIVITY_TYPE_ARCHIVE_PAYMENT
+            TIMELINE_TYPE_ARCHIVE_PAYMENT
         );
     }
 
@@ -481,29 +481,29 @@ class ActivityListener
     {
         $payment = $event->payment;
 
-        $this->activityRepo->create(
+        $this->timelineRepo->create(
             $payment,
-            ACTIVITY_TYPE_RESTORE_PAYMENT,
+            TIMELINE_TYPE_RESTORE_PAYMENT,
             $event->fromDeleted && ! $payment->isFailedOrVoided() ? $payment->getCompletedAmount() * -1 : 0,
             $event->fromDeleted && ! $payment->isFailedOrVoided() ? $payment->getCompletedAmount() : 0
         );
     }
 
     /**
-     * Creates an activity when a task was created.
+     * Creates an timeline when a task was created.
      *
      * @param TaskWasCreated $event
      */
     public function createdTask(TaskWasCreated $event)
     {
-        $this->activityRepo->create(
+        $this->timelineRepo->create(
             $event->task,
-            ACTIVITY_TYPE_CREATE_TASK
+            TIMELINE_TYPE_CREATE_TASK
         );
     }
 
     /**
-     * Creates an activity when a task was updated.
+     * Creates an timeline when a task was updated.
      *
      * @param TaskWasUpdated $event
      */
@@ -513,9 +513,9 @@ class ActivityListener
             return;
         }
 
-        $this->activityRepo->create(
+        $this->timelineRepo->create(
             $event->task,
-            ACTIVITY_TYPE_UPDATE_TASK
+            TIMELINE_TYPE_UPDATE_TASK
         );
     }
 
@@ -525,33 +525,33 @@ class ActivityListener
             return;
         }
 
-        $this->activityRepo->create(
+        $this->timelineRepo->create(
             $event->task,
-            ACTIVITY_TYPE_ARCHIVE_TASK
+            TIMELINE_TYPE_ARCHIVE_TASK
         );
     }
 
     public function deletedTask(TaskWasDeleted $event)
     {
-        $this->activityRepo->create(
+        $this->timelineRepo->create(
             $event->task,
-            ACTIVITY_TYPE_DELETE_TASK
+            TIMELINE_TYPE_DELETE_TASK
         );
     }
 
     public function restoredTask(TaskWasRestored $event)
     {
-        $this->activityRepo->create(
+        $this->timelineRepo->create(
             $event->task,
-            ACTIVITY_TYPE_RESTORE_TASK
+            TIMELINE_TYPE_RESTORE_TASK
         );
     }
 
     public function createdExpense(ExpenseWasCreated $event)
     {
-        $this->activityRepo->create(
+        $this->timelineRepo->create(
             $event->expense,
-            ACTIVITY_TYPE_CREATE_EXPENSE
+            TIMELINE_TYPE_CREATE_EXPENSE
         );
     }
 
@@ -561,9 +561,9 @@ class ActivityListener
             return;
         }
 
-        $this->activityRepo->create(
+        $this->timelineRepo->create(
             $event->expense,
-            ACTIVITY_TYPE_UPDATE_EXPENSE
+            TIMELINE_TYPE_UPDATE_EXPENSE
         );
     }
 
@@ -573,25 +573,25 @@ class ActivityListener
             return;
         }
 
-        $this->activityRepo->create(
+        $this->timelineRepo->create(
             $event->expense,
-            ACTIVITY_TYPE_ARCHIVE_EXPENSE
+            TIMELINE_TYPE_ARCHIVE_EXPENSE
         );
     }
 
     public function deletedExpense(ExpenseWasDeleted $event)
     {
-        $this->activityRepo->create(
+        $this->timelineRepo->create(
             $event->expense,
-            ACTIVITY_TYPE_DELETE_EXPENSE
+            TIMELINE_TYPE_DELETE_EXPENSE
         );
     }
 
     public function restoredExpense(ExpenseWasRestored $event)
     {
-        $this->activityRepo->create(
+        $this->timelineRepo->create(
             $event->expense,
-            ACTIVITY_TYPE_RESTORE_EXPENSE
+            TIMELINE_TYPE_RESTORE_EXPENSE
         );
     }
 
@@ -600,9 +600,9 @@ class ActivityListener
      */
     public function userViewedTicket(TicketUserViewed $event)
     {
-        $this->activityRepo->create(
+        $this->timelineRepo->create(
             $event->ticket,
-            ACTIVITY_TYPE_USER_VIEW_TICKET
+            TIMELINE_TYPE_USER_VIEW_TICKET
         );
     }
 }

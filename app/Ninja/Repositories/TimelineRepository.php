@@ -2,7 +2,7 @@
 
 namespace App\Ninja\Repositories;
 
-use App\Models\Activity;
+use App\Models\Timeline;
 use App\Models\Client;
 use App\Models\Invitation;
 use Auth;
@@ -11,9 +11,9 @@ use Request;
 use Utils;
 use App;
 
-class ActivityRepository
+class TimelineRepository
 {
-    public function create($entity, $activityTypeId, $balanceChange = 0, $paidToDateChange = 0, $altEntity = null, $notes = false)
+    public function create($entity, $timelineTypeId, $balanceChange = 0, $paidToDateChange = 0, $altEntity = null, $notes = false)
     {
         if ($entity instanceof Client) {
             $client = $entity;
@@ -23,76 +23,76 @@ class ActivityRepository
             $client = $entity->client;
         }
 
-        // init activity and copy over context
-        $activity = self::getBlank($altEntity ?: ($client ?: $entity));
-        $activity = Utils::copyContext($activity, $entity);
-        $activity = Utils::copyContext($activity, $altEntity);
+        // init timeline and copy over context
+        $timeline = self::getBlank($altEntity ?: ($client ?: $entity));
+        $timeline = Utils::copyContext($timeline, $entity);
+        $timeline = Utils::copyContext($timeline, $altEntity);
 
-        $activity->activity_type_id = $activityTypeId;
-        $activity->adjustment = $balanceChange;
-        $activity->client_id = $client ? $client->id : null;
-        $activity->balance = $client ? ($client->balance + $balanceChange) : 0;
-        $activity->notes = $notes ?: '';
+        $timeline->timeline_type_id = $timelineTypeId;
+        $timeline->adjustment = $balanceChange;
+        $timeline->client_id = $client ? $client->id : null;
+        $timeline->balance = $client ? ($client->balance + $balanceChange) : 0;
+        $timeline->notes = $notes ?: '';
 
         $keyField = $entity->getKeyField();
-        $activity->$keyField = $entity->id;
+        $timeline->$keyField = $entity->id;
 
-        $activity->ip = Request::getClientIp();
-        $activity->save();
+        $timeline->ip = Request::getClientIp();
+        $timeline->save();
 
         if ($client) {
             $client->updateBalances($balanceChange, $paidToDateChange);
         }
 
-        return $activity;
+        return $timeline;
     }
 
     private function getBlank($entity)
     {
-        $activity = new Activity();
+        $timeline = new Timeline();
 
         if (Auth::check() && Auth::user()->account_id == $entity->account_id) {
-            $activity->user_id = Auth::user()->id;
-            $activity->account_id = Auth::user()->account_id;
+            $timeline->user_id = Auth::user()->id;
+            $timeline->account_id = Auth::user()->account_id;
         } else {
-            $activity->user_id = $entity->user_id;
-            $activity->account_id = $entity->account_id;
+            $timeline->user_id = $entity->user_id;
+            $timeline->account_id = $entity->account_id;
         }
 
-        $activity->is_system = App::runningInConsole();
-        $activity->token_id = session('token_id');
+        $timeline->is_system = App::runningInConsole();
+        $timeline->token_id = session('token_id');
 
-        return $activity;
+        return $timeline;
     }
 
     public function findByClientId($clientId)
     {
-        return DB::table('activities')
-                    ->join('accounts', 'accounts.id', '=', 'activities.account_id')
-                    ->join('users', 'users.id', '=', 'activities.user_id')
-                    ->join('clients', 'clients.id', '=', 'activities.client_id')
+        return DB::table('core__timeline')
+                    ->join('accounts', 'accounts.id', '=', 'core__timeline.account_id')
+                    ->join('users', 'users.id', '=', 'core__timeline.user_id')
+                    ->join('clients', 'clients.id', '=', 'core__timeline.client_id')
                     ->leftJoin('contacts', 'contacts.client_id', '=', 'clients.id')
-                    ->leftJoin('invoices', 'invoices.id', '=', 'activities.invoice_id')
-                    ->leftJoin('payments', 'payments.id', '=', 'activities.payment_id')
-                    ->leftJoin('credits', 'credits.id', '=', 'activities.credit_id')
-                    ->leftJoin('tasks', 'tasks.id', '=', 'activities.task_id')
-                    ->leftJoin('expenses', 'expenses.id', '=', 'activities.expense_id')
-                    ->leftJoin('tickets', 'tickets.id', '=', 'activities.ticket_id')
+                    ->leftJoin('invoices', 'invoices.id', '=', 'core__timeline.invoice_id')
+                    ->leftJoin('payments', 'payments.id', '=', 'core__timeline.payment_id')
+                    ->leftJoin('credits', 'credits.id', '=', 'core__timeline.credit_id')
+                    ->leftJoin('tasks', 'tasks.id', '=', 'core__timeline.task_id')
+                    ->leftJoin('expenses', 'expenses.id', '=', 'core__timeline.expense_id')
+                    ->leftJoin('tickets', 'tickets.id', '=', 'core__timeline.ticket_id')
                     ->where('clients.id', '=', $clientId)
                     ->where('contacts.is_primary', '=', 1)
                     ->whereNull('contacts.deleted_at')
                     ->select(
                         DB::raw('COALESCE(clients.currency_id, accounts.currency_id) currency_id'),
                         DB::raw('COALESCE(clients.country_id, accounts.country_id) country_id'),
-                        'activities.id',
-                        'activities.created_at',
-                        'activities.contact_id',
-                        'activities.activity_type_id',
-                        'activities.balance',
-                        'activities.adjustment',
-                        'activities.notes',
-                        'activities.ip',
-                        'activities.is_system',
+                        'core__timeline.id',
+                        'core__timeline.created_at',
+                        'core__timeline.contact_id',
+                        'core__timeline.timeline_type_id',
+                        'core__timeline.balance',
+                        'core__timeline.adjustment',
+                        'core__timeline.notes',
+                        'core__timeline.ip',
+                        'core__timeline.is_system',
                         'users.first_name as user_first_name',
                         'users.last_name as user_last_name',
                         'users.email as user_email',

@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 
-class AddIpToActivity extends Migration
+class AddIpToTimeline extends Migration
 {
     /**
      * Run the migrations.
@@ -11,7 +11,7 @@ class AddIpToActivity extends Migration
      */
     public function up()
     {
-        Schema::table('activities', function ($table) {
+        Schema::table('core__timeline', function ($table) {
             $table->string('ip')->nullable();
         });
     }
@@ -23,7 +23,7 @@ class AddIpToActivity extends Migration
      */
     public function down()
     {
-        Schema::table('activities', function ($table) {
+        Schema::table('core__timeline', function ($table) {
             $table->dropColumn('ip');
         });
     }

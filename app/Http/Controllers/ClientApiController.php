@@ -84,8 +84,8 @@ class ClientApiController extends BaseAPIController
     {
         $client = $request->entity();
 
-        if (strpos(request()->include, 'activities') !== false) {
-            $client->load('activities.client.contacts', 'activities.user', 'activities.invoice', 'activities.payment', 'activities.credit', 'activities.account', 'activities.task', 'activities.expense', 'activities.contact');
+        if (strpos(request()->include, 'core__timeline') !== false) {
+            $client->load('core__timeline.client.contacts', 'core__timeline.user', 'core__timeline.invoice', 'core__timeline.payment', 'core__timeline.credit', 'core__timeline.account', 'core__timeline.task', 'core__timeline.expense', 'core__timeline.contact');
         }
 
         return $this->itemResponse($client);

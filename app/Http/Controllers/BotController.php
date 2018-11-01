@@ -188,7 +188,7 @@ class BotController extends Controller
 
     private function sendResponse($token, $to, $message)
     {
-        $url = sprintf('%s/conversations/%s/activities/', SKYPE_API_URL, $to);
+        $url = sprintf('%s/conversations/%s/timeline/', SKYPE_API_URL, $to);
 
         $headers = [
             'Authorization: Bearer ' . $token,

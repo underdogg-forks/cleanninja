@@ -440,7 +440,7 @@
         <div class="panel panel-default dashboard" style="height:320px">
             <div class="panel-heading">
                 <h3 class="panel-title in-bold-white">
-                    <i class="glyphicon glyphicon-exclamation-sign"></i> {{ trans('texts.activity') }}
+                    <i class="glyphicon glyphicon-exclamation-sign"></i> {{ trans('texts.timeline') }}
                     @if ($invoicesSent)
                         <div class="pull-right" style="font-size:14px;padding-top:4px">
 							@if ($invoicesSent == 1)
@@ -453,10 +453,10 @@
                 </h3>
             </div>
             <ul class="panel-body list-group" style="height:276px;overflow-y:auto;">
-                @foreach ($activities as $activity)
+                @foreach ($timeline as $timeline)
                 <li class="list-group-item">
-                    <span style="color:#888;font-style:italic">{{ Utils::timestampToDateString(strtotime($activity->created_at)) }}:</span>
-                    {!! $activity->getMessage() !!}
+                    <span style="color:#888;font-style:italic">{{ Utils::timestampToDateString(strtotime($timeline->created_at)) }}:</span>
+                    {!! $timeline->getMessage() !!}
                 </li>
                 @endforeach
             </ul>

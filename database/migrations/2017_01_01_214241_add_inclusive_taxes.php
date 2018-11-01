@@ -35,7 +35,7 @@ class AddInclusiveTaxes extends Migration
             $table->tinyInteger('payment_terms')->nullable();
         });
 
-        Schema::table('activities', function ($table) {
+        Schema::table('core__timeline', function ($table) {
             $table->text('notes')->nullable();
         });
 
@@ -71,7 +71,7 @@ class AddInclusiveTaxes extends Migration
             $table->dropColumn('payment_terms');
         });
 
-        Schema::table('activities', function ($table) {
+        Schema::table('core__timeline', function ($table) {
             $table->dropColumn('notes');
         });
 

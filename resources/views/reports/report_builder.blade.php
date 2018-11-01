@@ -545,7 +545,7 @@
 
 				options.push(new SubgroupModel('user', "{{ trans('texts.user') }}"));
 
-				if (reportType == 'activity') {
+				if (reportType == 'timeline') {
 					options.push(new SubgroupModel('category', "{{ trans('texts.category') }}"));
 				} else if (reportType == 'aging') {
 					options.push(new SubgroupModel('age', "{{ trans('texts.age') }}"));

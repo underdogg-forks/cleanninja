@@ -75,32 +75,32 @@
                         @include('partials/quill_toolbar', ['name' => 'template'])
                     </div>
                     <div role="tabpanel" class="tab-pane" id="history">
-                        @if (count($activities = $invoice->emailHistory()))
+                        @if (count($timeline = $invoice->emailHistory()))
                         <table class="table table-striped data-table">
                             <tr>
                                 <th>{{ trans('texts.template')}}</th>
                                 <th>{{ trans('texts.contact')}}</th>
                                 <th>{{ trans('texts.date')}}</th>
                             </tr>
-                            @foreach ($activities as $activity)
+                            @foreach ($timeline as $timeline)
                             <tr>
-                                <td>{{ $activity->present()->notes }}</td>
+                                <td>{{ $timeline->present()->notes }}</td>
                                 <td>
-                                    <span title="{{ trans('texts.sent_by', ['user' => $activity->present()->user]) }}">
-                                        {{ $activity->contact->getDisplayName() }}
+                                    <span title="{{ trans('texts.sent_by', ['user' => $timeline->present()->user]) }}">
+                                        {{ $timeline->contact->getDisplayName() }}
                                     </span>
                                 </td>
                                 <td>
-                                    <span title="{{ $activity->present()->createdAt }}">
-                                        {{ $activity->present()->createdAtDate }} - {{ $activity->created_at->diffForHumans() }}
+                                    <span title="{{ $timeline->present()->createdAt }}">
+                                        {{ $timeline->present()->createdAtDate }} - {{ $timeline->created_at->diffForHumans() }}
                                     </span>
                                 </td>
                                 <script type="text/javascript">
-                                    @if ($activity->notes == 'reminder3')
+                                    @if ($timeline->notes == 'reminder3')
                                         if (!window.defaultTemplate) window.defaultTemplate = 'reminder3';
-                                    @elseif ($activity->notes == 'reminder2')
+                                    @elseif ($timeline->notes == 'reminder2')
                                         if (!window.defaultTemplate) window.defaultTemplate = 'reminder3';
-                                    @elseif ($activity->notes == 'reminder1')
+                                    @elseif ($timeline->notes == 'reminder1')
                                         if (!window.defaultTemplate) window.defaultTemplate = 'reminder2';
                                     @else
                                         if (!window.defaultTemplate) window.defaultTemplate = 'reminder1';

@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 
-class AddExpenseToActivities extends Migration
+class AddExpenseToTimeline extends Migration
 {
     /**
      * Run the migrations.
@@ -11,7 +11,7 @@ class AddExpenseToActivities extends Migration
      */
     public function up()
     {
-        Schema::table('activities', function ($table) {
+        Schema::table('core__timeline', function ($table) {
             $table->unsignedInteger('expense_id')->nullable();
         });
 
@@ -37,7 +37,7 @@ class AddExpenseToActivities extends Migration
      */
     public function down()
     {
-        Schema::table('activities', function ($table) {
+        Schema::table('core__timeline', function ($table) {
             $table->dropColumn('expense_id');
         });
 

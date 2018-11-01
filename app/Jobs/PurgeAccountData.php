@@ -32,7 +32,7 @@ class PurgeAccountData extends Job
         });
 
         $tables = [
-            'activities',
+            'core__timeline',
             'invitations',
             'account_gateway_tokens',
             'payment_methods',

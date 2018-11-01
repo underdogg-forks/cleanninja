@@ -74,7 +74,7 @@ class ReportController extends BaseController
         }
 
         $reportTypes = [
-            'activity',
+            'timeline',
             'aging',
             'client',
             'credit',

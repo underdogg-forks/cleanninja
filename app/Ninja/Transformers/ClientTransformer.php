@@ -62,7 +62,7 @@ class ClientTransformer extends EntityTransformer
     protected $availableIncludes = [
         'invoices',
         'credits',
-        'activities',
+        'core__timeline',
     ];
 
     /**
@@ -70,11 +70,11 @@ class ClientTransformer extends EntityTransformer
      *
      * @return \League\Fractal\Resource\Collection
      */
-    public function includeActivities(Client $client)
+    public function includeTimeline(Client $client)
     {
-        $transformer = new ActivityTransformer($this->account, $this->serializer);
+        $transformer = new TimelineTransformer($this->account, $this->serializer);
 
-        return $this->includeCollection($client->activities, $transformer, ENTITY_ACTIVITY);
+        return $this->includeCollection($client->timeline, $transformer, ENTITY_TIMELINE);
     }
 
     /**

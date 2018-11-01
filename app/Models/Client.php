@@ -271,9 +271,9 @@ class Client extends EntityModel
     /**
      * @return mixed
      */
-    public function activities()
+    public function timeline()
     {
-        return $this->hasMany('App\Models\Activity', 'client_id', 'id')->orderBy('id', 'desc');
+        return $this->hasMany('App\Models\Timeline', 'client_id', 'id')->orderBy('id', 'desc');
     }
 
     /**

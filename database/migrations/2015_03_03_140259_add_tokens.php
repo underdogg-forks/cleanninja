@@ -31,7 +31,7 @@ class AddTokens extends Migration
 
         });
 
-        Schema::table('activities', function ($table) {
+        Schema::table('core__timeline', function ($table) {
             $table->unsignedInteger('token_id')->nullable();
         });
     }
@@ -45,7 +45,7 @@ class AddTokens extends Migration
     {
         Schema::drop('account_tokens');
 
-        Schema::table('activities', function ($table) {
+        Schema::table('core__timeline', function ($table) {
             $table->dropColumn('token_id');
         });
     }

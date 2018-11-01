@@ -84,7 +84,7 @@ Route::group(['middleware' => ['lookup:contact', 'auth:client']], function () {
     Route::get('api/client.payments', ['as' => 'api.client.payments', 'uses' => 'ClientPortalController@paymentDatatable']);
     Route::get('api/client.tickets', ['as' => 'api.client.tickets', 'uses' => 'ClientPortalTicketController@ticketDatatable']);
     Route::get('api/client.tasks', ['as' => 'api.client.tasks', 'uses' => 'ClientPortalController@taskDatatable']);
-    Route::get('api/client.activity', ['as' => 'api.client.activity', 'uses' => 'ClientPortalController@activityDatatable']);
+    Route::get('api/client.timeline', ['as' => 'api.client.timeline', 'uses' => 'ClientPortalController@timelineDatatable']);
 });
 
 Route::group(['middleware' => 'lookup:license'], function () {
@@ -170,7 +170,7 @@ Route::group(['middleware' => ['lookup:user', 'auth:user']], function () {
 
     Route::resource('clients', 'ClientController');
     Route::get('api/clients', 'ClientController@getDatatable');
-    Route::get('api/activities/{client_id?}', 'ActivityController@getDatatable');
+    Route::get('api/timeline/{client_id?}', 'TimelineController@getDatatable');
     Route::post('clients/bulk', 'ClientController@bulk');
     Route::get('clients/statement/{client_id}', 'ClientController@statement');
     Route::post('email_history', 'ClientController@getEmailHistory');

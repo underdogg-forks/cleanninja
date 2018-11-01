@@ -3,7 +3,7 @@
 namespace App\Services;
 
 use App\Models\Account;
-use App\Models\Activity;
+use App\Models\Timeline;
 use App\Models\Client;
 use App\Models\Credit;
 use App\Models\Invoice;
@@ -116,8 +116,8 @@ class PaymentService extends BaseService
                 return false;
             }
 
-            $firstUpdate = Activity::where('invoice_id', '=', $invoice->id)
-                ->where('activity_type_id', '=', ACTIVITY_TYPE_UPDATE_INVOICE)
+            $firstUpdate = Timeline::where('invoice_id', '=', $invoice->id)
+                ->where('timeline_type_id', '=', TIMELINE_TYPE_UPDATE_INVOICE)
                 ->first();
 
             if ($firstUpdate) {

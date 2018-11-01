@@ -1,7 +1,7 @@
 Quotes
 ======
 
-For Pro Plan users, the Quotes function streamlines your invoicing activity, from the moment you create and send a price quote for a particular job, until the quote is accepted, you invoice the job, receive payment and provide a receipt. With the Quotes function, you can automatically convert accepted quotes into invoices in a swift one-click action. Keeping track of your projected work schedule and potential income, the Quotes feature gives you even greater control of your freelance activity.
+For Pro Plan users, the Quotes function streamlines your invoicing timeline, from the moment you create and send a price quote for a particular job, until the quote is accepted, you invoice the job, receive payment and provide a receipt. With the Quotes function, you can automatically convert accepted quotes into invoices in a swift one-click action. Keeping track of your projected work schedule and potential income, the Quotes feature gives you even greater control of your freelance timeline.
 
 List Quotes
 """""""""""
@@ -10,7 +10,7 @@ List Quotes
 
 As a freelancer, many jobs – whether big or small – will begin as a quote. How so? Well, a client expresses interest in your skills or product, but wants to know how much it’s going to cost, in advance. With the Quotes feature of Invoice Ninja, available to Pro Plan users only, you can easily create a price quote and send it to the client up front, helping them make the decision to commit, and helping you keep track of your projected work schedule and income.
 
-Once the price quote is accepted by the client, the Invoice Ninja system enables automatic creation of an invoice that imports all the quote data, so your quotes and invoices are linked, organized and easily traceable. An advanced Invoice Ninja feature, Quotes is truly the cherry on top, giving you maximum functionality from A to Z in your invoicing activity.
+Once the price quote is accepted by the client, the Invoice Ninja system enables automatic creation of an invoice that imports all the quote data, so your quotes and invoices are linked, organized and easily traceable. An advanced Invoice Ninja feature, Quotes is truly the cherry on top, giving you maximum functionality from A to Z in your invoicing timeline.
 
 To view your Quotes list page, click the Invoices tab on the main taskbar, and select Quotes from the drop-down menu. This will open the Quotes list page.
 

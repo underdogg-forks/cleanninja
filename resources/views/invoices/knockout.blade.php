@@ -86,7 +86,7 @@ function ViewModel(data) {
     });
 
     self.showClientForm = function() {
-        trackEvent('/activity', '/view_client_form');
+        trackEvent('/timeline', '/view_client_form');
         self.clientBackup = ko.mapping.toJS(self.invoice().client);
 
         $('#emailError').css( "display", "none" );
@@ -94,7 +94,7 @@ function ViewModel(data) {
     }
 
     self.clientFormComplete = function() {
-        trackEvent('/activity', '/save_client_form');
+        trackEvent('/timeline', '/save_client_form');
 
         var email = $("[name='client[contacts][0][email]']").val();
         var firstName = $("[name='client[contacts][0][first_name]']").val();

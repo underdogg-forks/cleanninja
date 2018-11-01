@@ -27,17 +27,17 @@ class SupportNewPricing extends Migration
         DB::table('core__plans')->where('plan', 'enterprise')->update(['num_users' => 5]);
 
         // https://github.com/invoiceninja/invoiceninja/pull/955
-        Schema::table('activities', function (Blueprint $table) {
+        Schema::table('core__timeline', function (Blueprint $table) {
             $table->integer('task_id')->after('invitation_id')->nullable();
-            if (Schema::hasColumn('activities', 'client_id')) {
+            if (Schema::hasColumn('core__timeline', 'client_id')) {
                 $table->unsignedInteger('client_id')->nullable()->change();
             }
         });
 
         // This may fail if the table was created as MyISAM
         try {
-            Schema::table('activities', function (Blueprint $table) {
-                $table->dropForeign('activities_client_id_foreign');
+            Schema::table('core__timeline', function (Blueprint $table) {
+                $table->dropForeign('timeline_client_id_foreign');
             });
         } catch (Exception $e) {
             // do nothing
@@ -84,7 +84,7 @@ class SupportNewPricing extends Migration
             $table->dropColumn('pending_num_users');
         });
 
-        Schema::table('activities', function (Blueprint $table) {
+        Schema::table('core__timeline', function (Blueprint $table) {
             $table->dropColumn('task_id');
         });
 

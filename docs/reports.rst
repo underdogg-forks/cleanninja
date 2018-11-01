@@ -33,7 +33,7 @@ After the report has been scheduled, you'll see a gray Cancel Schedule button on
 Calendar
 """"""""
 
-Want a calendar style visualization of your Invoice Ninja activity? Click the gray Calendar button that appears at the top right of the Reports page. You can view details of Invoices, Payments, Quotes, Projects, Tasks and Expenses on the dates they occurred on the calendar.
+Want a calendar style visualization of your Invoice Ninja timeline? Click the gray Calendar button that appears at the top right of the Reports page. You can view details of Invoices, Payments, Quotes, Projects, Tasks and Expenses on the dates they occurred on the calendar.
 
 The calendar will include details of all transactions by default. To filter the calendar so it only displays some of your invoicing data, click inside the Filter field at the top right of the page. Select your desired filters from the drop-down menu.
 

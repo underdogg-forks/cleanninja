@@ -13,7 +13,7 @@ To view your Vendors list page, go to the main taskbar and click the Expenses ta
 Overview
 ^^^^^^^^
 
-The Vendors page shows a list in table format of all plans, service providers or suppliers that you have entered to the Invoice Ninja system as part of your business activities. The table features the following data columns:
+The Vendors page shows a list in table format of all plans, service providers or suppliers that you have entered to the Invoice Ninja system as part of your business timeline. The table features the following data columns:
 
 - **Vendor:** The plan name of the vendor
 - **City:** The city where the vendor is located

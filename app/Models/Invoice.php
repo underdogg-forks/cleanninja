@@ -9,7 +9,7 @@ use App\Events\QuoteWasUpdated;
 use App\Events\InvoiceInvitationWasEmailed;
 use App\Events\QuoteInvitationWasEmailed;
 use App\Libraries\CurlUtils;
-use App\Models\Activity;
+use App\Models\Timeline;
 use App\Models\Credit;
 use App\Models\Traits\ChargesFees;
 use App\Models\Traits\HasRecurrence;
@@ -658,7 +658,7 @@ class Invoice extends EntityModel implements BalanceAffecting
         $invitation->markSent($messageId);
 
         // if the user marks it as sent rather than acually sending it
-        // then we won't track it in the activity log
+        // then we won't track it in the timeline log
         if (! $notify) {
             return;
         }
@@ -1585,10 +1585,10 @@ class Invoice extends EntityModel implements BalanceAffecting
 
     public function emailHistory()
     {
-        return Activity::scope()
+        return Timeline::scope()
                 ->with(['contact'])
                 ->whereInvoiceId($this->id)
-                ->whereIn('activity_type_id', [ACTIVITY_TYPE_EMAIL_INVOICE, ACTIVITY_TYPE_EMAIL_QUOTE])
+                ->whereIn('timeline_type_id', [TIMELINE_TYPE_EMAIL_INVOICE, TIMELINE_TYPE_EMAIL_QUOTE])
                 ->orderBy('id', 'desc')
                 ->get();
     }

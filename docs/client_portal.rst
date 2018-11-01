@@ -26,7 +26,7 @@ Navigation
 
 - **Client Portal**: You can choose whether or not you want to provide a portal for your clients. To show the portal, check Enable. To hide the portal from your clients' view, uncheck Enable.
 
-- **Dashboard**: The Dashboard is a summary page of the client portal that displays all the client's invoicing activity with you. You can choose to show or hide the dashboard. Check the Enable box to show the dashboard. Uncheck to hide the dashboard.
+- **Dashboard**: The Dashboard is a summary page of the client portal that displays all the client's invoicing timeline with you. You can choose to show or hide the dashboard. Check the Enable box to show the dashboard. Uncheck to hide the dashboard.
 
 Custom CSS
 ^^^^^^^^^^
