@@ -9,6 +9,8 @@ use Eloquent;
  */
 class Size extends Eloquent
 {
+	protected $table = 'core__sizes';
+
     /**
      * @var bool
      */

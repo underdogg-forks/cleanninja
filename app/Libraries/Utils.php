@@ -525,7 +525,7 @@ class Utils
                 return $industry->name;
             })->values();
 
-            $data['countries'] = Cache::get('countries')->each(function ($country) {
+            $data['core__countries'] = Cache::get('countries')->each(function ($country) {
                 $country->name = trans('texts.country_'.$country->name);
             })->sortBy(function ($country) {
                 return $country->name;
@@ -609,7 +609,7 @@ class Utils
         $swapSymbol = $currency->swap_currency_symbol;
 
         if ($countryId && $currencyId == CURRENCY_EURO) {
-            $country = self::getFromCache($countryId, 'countries');
+            $country = self::getFromCache($countryId, 'core__countries');
             $swapSymbol = $country->swap_currency_symbol;
             if ($country->thousand_separator) {
                 $thousand = $country->thousand_separator;
@@ -1366,7 +1366,7 @@ class Utils
         } elseif ($first == 'expense_categories') {
             $page = '/expenses.html#expense-categories';
         } elseif ($first == 'settings') {
-            if ($second == 'bank_accounts') {
+            if ($second == 'banking__bankaccounts') {
                 $page = ''; // TODO write docs
             } elseif (in_array($second, \App\Models\Account::$basicSettings)) {
                 if ($second == 'products') {

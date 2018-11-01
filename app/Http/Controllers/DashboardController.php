@@ -131,7 +131,7 @@ class DashboardController extends BaseController
             'invoicesSent' => $metrics ? $metrics->invoices_sent : 0,
             'activeClients' => $metrics ? $metrics->active_clients : 0,
             'invoiceExchangeRateMissing' => $account->getInvoiceExchangeRateCustomFieldIndex() ? false : true,
-            'core__timeline' => $timeline,
+            'timeline' => $timeline,
             'pastDue' => $pastDue,
             'upcoming' => $upcoming,
             'payments' => $payments,

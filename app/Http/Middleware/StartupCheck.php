@@ -220,7 +220,7 @@ class StartupCheck
                     $orderBy = 'num_days';
                 } elseif ($name == 'fonts') {
                     $orderBy = 'sort_order';
-                } elseif (in_array($name, ['currencies', 'industries', 'languages', 'countries', 'banks'])) {
+                } elseif (in_array($name, ['currencies', 'industries', 'languages', 'core__countries', 'banks'])) {
                     $orderBy = 'name';
                 } else {
                     $orderBy = 'id';

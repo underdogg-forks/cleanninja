@@ -23,7 +23,7 @@ class AddBankSubaccounts extends Migration
 
             $table->foreign('account_id')->references('id')->on('accounts')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('bank_account_id')->references('id')->on('bank_accounts')->onDelete('cascade');
+            $table->foreign('bank_account_id')->references('id')->on('banking__bankaccounts')->onDelete('cascade');
 
             $table->unsignedInteger('public_id')->index();
             $table->unique(['account_id', 'public_id']);

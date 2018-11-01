@@ -11,10 +11,10 @@
 @if (Auth::user()->hasFeature(FEATURE_EXPENSES))
     <div class="pull-right">
         {!! Button::normal(trans('texts.import_ofx'))
-            ->asLinkTo(URL::to('/bank_accounts/import_ofx'))
+            ->asLinkTo(URL::to('/bankaccounts/import_ofx'))
             ->appendIcon(Icon::create('open')) !!}
         {!! Button::primary(trans('texts.add_bank_account'))
-            ->asLinkTo(URL::to('/bank_accounts/create'))
+            ->asLinkTo(URL::to('/bankaccounts/create'))
             ->appendIcon(Icon::create('plus-sign')) !!}
     </div>
 @endif
@@ -26,7 +26,7 @@
         trans('texts.name'),
         trans('texts.integration_type'),
         trans('texts.action'))
-    ->setUrl(url('api/bank_accounts/'))
+    ->setUrl(url('api/banking__bankaccounts/'))
     ->setOptions('sPaginationType', 'bootstrap')
     ->setOptions('bFilter', false)
     ->setOptions('bAutoWidth', false)

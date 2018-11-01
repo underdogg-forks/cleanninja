@@ -10,6 +10,8 @@ use Str;
  */
 class InvoiceStatus extends Eloquent
 {
+	protected $table = 'core__invoicestatuses';
+
     /**
      * @var bool
      */

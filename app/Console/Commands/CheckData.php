@@ -483,7 +483,7 @@ class CheckData extends Command
     private function checkAccountData()
     {
         $tables = [
-            'core__timeline' => [
+            'timeline' => [
                 ENTITY_INVOICE,
                 ENTITY_CLIENT,
                 ENTITY_CONTACT,

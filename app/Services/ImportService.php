@@ -874,7 +874,7 @@ class ImportService
             'invoice' => [],
             'invoice_client' => [],
             'product' => [],
-            'countries' => [],
+            'core__countries' => [],
             'countries2' => [],
             'currencies' => [],
             'client_ids' => [],
@@ -912,7 +912,7 @@ class ImportService
 
         $countries = Cache::get('countries');
         foreach ($countries as $country) {
-            $this->maps['countries'][strtolower($country->name)] = $country->id;
+            $this->maps['core__countries'][strtolower($country->name)] = $country->id;
             $this->maps['countries2'][strtolower($country->iso_3166_2)] = $country->id;
         }
 

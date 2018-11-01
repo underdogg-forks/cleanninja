@@ -81,7 +81,7 @@
             {!! Former::text('postal_code')->autocomplete('postal-code') !!}
             {!! Former::select('country_id')
                     ->addOption('','')
-                    ->fromQuery($countries, 'name', 'id') !!}
+                    ->fromQuery($core__countries, 'name', 'id') !!}
 
             </div>
         </div>

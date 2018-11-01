@@ -11,7 +11,7 @@
     </div>
     <div class="panel-body">
 
-        {!! Former::open_for_files('bank_accounts/import_ofx')
+        {!! Former::open_for_files('bankaccounts/import_ofx')
                 ->rules(['ofx_file' => 'required'])
                 ->addClass('warn-on-exit') !!}
 
@@ -21,7 +21,7 @@
     </div>
 
     {!! Former::actions(
-        Button::normal(trans('texts.cancel'))->large()->asLinkTo(URL::to('settings/bank_accounts'))->appendIcon(Icon::create('remove-circle')),
+        Button::normal(trans('texts.cancel'))->large()->asLinkTo(URL::to('settings/bankaccounts'))->appendIcon(Icon::create('remove-circle')),
         Button::success(trans('texts.upload'))->submit()->large()->appendIcon(Icon::create('open'))
     ) !!}
 

@@ -232,7 +232,7 @@
             'g c p' => 'client_portal',
             'g e' => 'email_settings',
             'g t r' => 'templates_and_reminders',
-            'g c c' => 'bank_accounts',
+            'g c c' => 'banking__bankaccounts',
             'g v' => 'data_visualizations',
             'g a t' => 'api_tokens',
             'g u m' => 'user_management',

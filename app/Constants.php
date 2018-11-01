@@ -99,7 +99,7 @@ if (! defined('APP_NAME')) {
     define('ACCOUNT_IMPORT_EXPORT', 'import_export');
     define('ACCOUNT_MANAGEMENT', 'plan_management');
     define('ACCOUNT_PAYMENTS', 'online_payments');
-    define('ACCOUNT_BANKS', 'bank_accounts');
+    define('ACCOUNT_BANKS', 'bankaccounts');
     define('ACCOUNT_IMPORT_EXPENSES', 'import_expenses');
     define('ACCOUNT_MAP', 'import_map');
     define('ACCOUNT_EXPORT', 'export');

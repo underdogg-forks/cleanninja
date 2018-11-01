@@ -473,7 +473,7 @@ class AccountController extends BaseController
         $account = auth()->user()->account;
 
         return View::make('accounts.banks', [
-            'title' => trans('texts.bank_accounts'),
+            'title' => trans('texts.bankaccounts'),
             'advanced' => ! Auth::user()->hasFeature(FEATURE_EXPENSES),
             'warnPaymentGateway' => ! $account->account_gateways->count(),
         ]);

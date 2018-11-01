@@ -12,6 +12,8 @@ class BankAccount extends EntityModel
 {
     use SoftDeletes;
 
+	protected $table = 'banking__bankaccounts';
+
     /**
      * @var array
      */

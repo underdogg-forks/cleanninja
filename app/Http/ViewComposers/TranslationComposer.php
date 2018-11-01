@@ -28,7 +28,7 @@ class TranslationComposer
             return $industry->name;
         }));
 
-        $view->with('countries', Cache::get('countries')->each(function ($country) {
+        $view->with('core__countries', Cache::get('countries')->each(function ($country) {
             $country->name = trans('texts.country_'.$country->name);
         })->sortBy(function ($country) {
             return $country->name;

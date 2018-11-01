@@ -9,6 +9,8 @@ use Eloquent;
  */
 class Industry extends Eloquent
 {
+	protected $table = 'core__industries';
+
     /**
      * @var bool
      */

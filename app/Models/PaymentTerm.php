@@ -12,6 +12,8 @@ class PaymentTerm extends EntityModel
 {
     use SoftDeletes;
 
+    protected $table = 'core__paymentterms';
+
     /**
      * @var bool
      */

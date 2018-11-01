@@ -14,7 +14,7 @@ class BankAccountDatatable extends EntityDatatable
             [
                 'bank_name',
                 function ($model) {
-                    return link_to("bank_accounts/{$model->public_id}/edit", $model->bank_name)->toHtml();
+                    return link_to("banking__bankaccounts/{$model->public_id}/edit", $model->bank_name)->toHtml();
                 },
             ],
             [
@@ -32,7 +32,7 @@ class BankAccountDatatable extends EntityDatatable
             [
                 uctrans('texts.edit_bank_account'),
                 function ($model) {
-                    return URL::to("bank_accounts/{$model->public_id}/edit");
+                    return URL::to("banking__bankaccounts/{$model->public_id}/edit");
                 },
             ],
         ];

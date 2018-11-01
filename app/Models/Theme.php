@@ -9,6 +9,8 @@ use Eloquent;
  */
 class Theme extends Eloquent
 {
+	protected $table = 'core__themes';
+
     /**
      * @var bool
      */

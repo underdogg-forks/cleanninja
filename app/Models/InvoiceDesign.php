@@ -11,6 +11,8 @@ use Eloquent;
  */
 class InvoiceDesign extends Eloquent
 {
+	protected $table = 'core__invoicedesigns';
+
     /**
      * @var bool
      */

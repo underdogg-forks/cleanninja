@@ -16,14 +16,14 @@ class BankAccountRepository extends BaseRepository
 
     public function find($accountId)
     {
-        return DB::table('bank_accounts')
-                    ->join('banks', 'banks.id', '=', 'bank_accounts.bank_id')
-                    ->where('bank_accounts.deleted_at', '=', null)
-                    ->where('bank_accounts.account_id', '=', $accountId)
+        return DB::table('banking__bankaccounts')
+                    ->join('banking__banks', 'banks.id', '=', 'banking__bankaccounts.bank_id')
+                    ->where('banking__bankaccounts.deleted_at', '=', null)
+                    ->where('banking__bankaccounts.account_id', '=', $accountId)
                     ->select(
-                        'bank_accounts.public_id',
+                        'banking__bankaccounts.public_id',
                         'banks.name as bank_name',
-                        'bank_accounts.deleted_at',
+                        'banking__bankaccounts.deleted_at',
                         'banks.bank_library_id'
                     );
     }
@@ -35,9 +35,9 @@ class BankAccountRepository extends BaseRepository
         $bankAccount->fill($input);
 
         $account = \Auth::user()->account;
-        $account->bank_accounts()->save($bankAccount);
+        $account->banking__bankaccounts()->save($bankAccount);
 
-        foreach ($input['bank_accounts'] as $data) {
+        foreach ($input['banking__bankaccounts'] as $data) {
             if (! isset($data['include']) || ! filter_var($data['include'], FILTER_VALIDATE_BOOLEAN)) {
                 continue;
             }

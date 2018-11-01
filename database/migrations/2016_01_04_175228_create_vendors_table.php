@@ -36,7 +36,7 @@ class CreateVendorsTable extends Migration
 
             $table->foreign('account_id')->references('id')->on('accounts')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('country_id')->references('id')->on('countries');
+            $table->foreign('country_id')->references('id')->on('core__countries');
             $table->foreign('currency_id')->references('id')->on('currencies');
 
 

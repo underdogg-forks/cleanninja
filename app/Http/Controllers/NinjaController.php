@@ -134,7 +134,7 @@ class NinjaController extends BaseController
             'account' => $account,
             'accountGateway' => $accountGateway,
             'acceptedCreditCardTypes' => $acceptedCreditCardTypes,
-            'countries' => Cache::get('countries'),
+            'core__countries' => Cache::get('countries'),
             'currencyId' => 1,
             'currencyCode' => 'USD',
             'paymentTitle' => $affiliate->payment_title,

@@ -148,7 +148,7 @@ class BankAccountController extends BaseController
         }
 
         $data = [
-            'banks' => null,
+            'banking__banks' => null,
             'bankAccount' => null,
             'transactions' => json_encode([$data]),
         ];

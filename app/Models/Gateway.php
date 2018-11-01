@@ -11,6 +11,8 @@ use Utils;
  */
 class Gateway extends Eloquent
 {
+	protected $table = 'core__gateways';
+
     /**
      * @var bool
      */

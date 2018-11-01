@@ -9,6 +9,9 @@ use Eloquent;
  */
 class Country extends Eloquent
 {
+
+	protected $table = 'core__countries';
+
     /**
      * @var bool
      */

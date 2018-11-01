@@ -168,7 +168,7 @@ class BaseTransformer extends TransformerAbstract
     {
         $name = strtolower(trim($name));
 
-        return isset($this->maps['countries'][$name]) ? $this->maps['countries'][$name] : null;
+        return isset($this->maps['core__countries'][$name]) ? $this->maps['core__countries'][$name] : null;
     }
 
     /**

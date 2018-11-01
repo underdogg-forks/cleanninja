@@ -9,6 +9,8 @@ use Eloquent;
  */
 class Font extends Eloquent
 {
+	protected $table = 'core__fonts';
+
     /**
      * @var bool
      */

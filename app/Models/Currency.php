@@ -10,6 +10,9 @@ use Str;
  */
 class Currency extends Eloquent
 {
+
+	protected $table = 'core__currencies';
+
     /**
      * @var bool
      */

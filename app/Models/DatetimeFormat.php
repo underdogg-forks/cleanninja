@@ -9,6 +9,8 @@ use Eloquent;
  */
 class DatetimeFormat extends Eloquent
 {
+	protected $table = 'core__datetimeformats';
+
     /**
      * @var bool
      */

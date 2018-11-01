@@ -108,7 +108,7 @@ class BankAccountService extends BaseService
                                 $query->where('bank_id', '=', $bankId);
                             })
                             ->get();
-        $bank = Utils::getFromCache($bankId, 'banks');
+        $bank = Utils::getFromCache($bankId, 'banking__banks');
         $data = [];
 
         // load OFX trnansactions

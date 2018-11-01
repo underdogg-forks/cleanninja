@@ -86,17 +86,17 @@
                         <th class="header">{{ trans('texts.include') }}</th>
                     </tr>
                 </thead>
-                <tbody data-bind="foreach: bank_accounts">
+                <tbody data-bind="foreach: banking__bankaccounts">
                     <tr>
                         <td>
-                            <input type="text" class="form-control" data-bind="value: account_name, valueUpdate: 'afterkeydown', attr: {name: 'bank_accounts[' + $index() + '][account_name]'}"/>
-                            <input type="text" style="display:none" data-bind="value: hashed_account_number, attr: {name: 'bank_accounts[' + $index() + '][hashed_account_number]'}"/>
+                            <input type="text" class="form-control" data-bind="value: account_name, valueUpdate: 'afterkeydown', attr: {name: 'banking__bankaccounts[' + $index() + '][account_name]'}"/>
+                            <input type="text" style="display:none" data-bind="value: hashed_account_number, attr: {name: 'banking__bankaccounts[' + $index() + '][hashed_account_number]'}"/>
                         </td>
                         <td data-bind="text: masked_account_number"></td>
                         <td data-bind="text: balance"></td>
                         <td style="text-align:center">
                             <input type="checkbox" value="1"
-                                data-bind="checked: includeAccount, attr: {name: 'bank_accounts[' + $index() + '][include]'}"/>
+                                data-bind="checked: includeAccount, attr: {name: 'banking__bankaccounts[' + $index() + '][include]'}"/>
                         </td>
                     </tr>
                 </tbody>
@@ -115,7 +115,7 @@
                 </div>
             </div>
 
-            <div data-bind="foreach: bank_accounts">
+            <div data-bind="foreach: banking__bankaccounts">
 
                 <h4 data-bind="text: account_name"></h4><br/>
 
@@ -136,7 +136,7 @@
                         <tr>
                             <td style="text-align:center">
                                 <input type="checkbox" value="1"
-                                    data-bind="checked: includeTransaction, attr: {name: 'bank_accounts[' + $index() + '][include]'}"/>
+                                    data-bind="checked: includeTransaction, attr: {name: 'banking__bankaccounts[' + $index() + '][include]'}"/>
                             </td>
                             <td>
                                 <input type="text" class="form-control"
@@ -192,7 +192,7 @@
                         'data-bind' => 'visible: !importResults()',
                     ])
                     ->large()
-                    ->asLinkTo(URL::to('/settings/bank_accounts'))
+                    ->asLinkTo(URL::to('/settings/bankaccounts'))
                     ->appendIcon(Icon::create('remove-circle')) : false !!}
             {!! Button::success(trans('texts.validate'))
                 ->withAttributes([
@@ -225,9 +225,9 @@
     <script type="text/javascript">
 
     function validate() {
-        model.errorStr(false);
+        //model.errorStr(false);
         model.isLoading(true);
-        $.post('{{ URL::to('/bank_accounts/validate') }}', $('.main-form').serialize())
+        $.post('{{ URL::to('/bankaccounts/validate') }}', $('.main-form').serialize())
             .done(function(data) {
                 data = JSON.parse(data);
                 if (!data || !data.length) {
@@ -250,7 +250,7 @@
     function save() {
         model.errorStr(false);
         model.isLoading(true);
-        $.post('{{ URL::to('/bank_accounts') }}', $('.main-form').serialize())
+        $.post('{{ URL::to('/bankaccounts') }}', $('.main-form').serialize())
             .done(function(data) {
                 data = JSON.parse(data);
                 if (!data || !data.length) {
@@ -267,7 +267,7 @@
     }
 
     function loadTransactions(data) {
-        model.bank_accounts.removeAll();
+        model.banking__bankaccounts.removeAll();
         for (var i=0; i<data.length; i++) {
             var row = data[i];
             var account = new BankAccountModel(row);
@@ -279,7 +279,7 @@
                 }
                 account.transactions.valueHasMutated();
             }
-            model.bank_accounts.push(account);
+            model.banking__bankaccounts.push(account);
         }
     }
 
@@ -288,7 +288,7 @@
         model.isLoading(true);
 
         $.ajax({
-            url: '{{ URL::to('/bank_accounts/import_expenses') }}' + '/' + model.bank_id(),
+            url: '{{ URL::to('/bankaccounts/import_expenses') }}' + '/' + model.bank_id(),
             type: 'POST',
             data: ko.toJSON(model.includedTransactions()),
             datatype: 'json',
@@ -344,8 +344,8 @@
             },
             write: function (value) {
                 this.vendor(value);
-                for (var i=0; i<model.bank_accounts().length; i++) {
-                    var account = model.bank_accounts()[i];
+                for (var i=0; i<model.banking__bankaccounts().length; i++) {
+                    var account = model.banking__bankaccounts()[i];
                     var transactions = account.transactions();
                     for (var j=0; j<transactions.length; j++) {
                         var transaction = transactions[j];
@@ -425,7 +425,7 @@
         self.bank_id = ko.observable({{ $bankAccount ? $bankAccount->bank_id : 0 }});
         self.bank_username = ko.observable('{{ $bankAccount ? $bankAccount->username : false }}');
         self.bank_password = ko.observable();
-        self.bank_accounts = ko.observableArray();
+        self.banking__bankaccounts = ko.observableArray();
 
         self.page = ko.observable();
         self.title = ko.observable();
@@ -453,8 +453,8 @@
 
         self.includedTransactions = ko.computed(function() {
             var data = [];
-            for (var i=0; i<self.bank_accounts().length; i++) {
-                var account = self.bank_accounts()[i];
+            for (var i=0; i<self.banking__bankaccounts().length; i++) {
+                var account = self.banking__bankaccounts()[i];
                 var transactions = ko.utils.arrayFilter(account.transactions(), function(transaction) {
                     return transaction.includeTransaction();
                 });
@@ -465,8 +465,8 @@
 
         self.countExpenses = ko.computed(function() {
             var count = 0;
-            for (var i=0; i<self.bank_accounts().length; i++) {
-                var account = self.bank_accounts()[i];
+            for (var i=0; i<self.banking__bankaccounts().length; i++) {
+                var account = self.banking__bankaccounts()[i];
                 var transactions = ko.utils.arrayFilter(account.transactions(), function(transaction) {
                     return transaction.includeTransaction();
                 });
@@ -478,8 +478,8 @@
         self.statusLabel = ko.computed(function() {
             var count = 0;
             var total = 0;
-            for (var i=0; i<self.bank_accounts().length; i++) {
-                var account = self.bank_accounts()[i];
+            for (var i=0; i<self.banking__bankaccounts().length; i++) {
+                var account = self.banking__bankaccounts()[i];
                 var transactions = ko.utils.arrayFilter(account.transactions(), function(transaction) {
                     return transaction.includeTransaction();
                 });
@@ -504,8 +504,8 @@
                 return true;
             }
             var hasAccount = false;
-            for (var i=0; i<self.bank_accounts().length; i++) {
-                var account = self.bank_accounts()[i];
+            for (var i=0; i<self.banking__bankaccounts().length; i++) {
+                var account = self.banking__bankaccounts()[i];
                 if (account.includeAccount()) {
                     if (account.isValid()) {
                         hasAccount = true;

@@ -965,7 +965,7 @@ Ne morete najti računa? Potrebujete dodatno pomoč? Z veseljem bomo pomagali. P
     'quote_message_button' => 'Za ogled vašega predračuna v znesku :amount, kliknite na gumb spodaj.',
     'payment_message_button' => 'Zahvaljujemo se vam za plačilo v znesku :amount.',
     'payment_type_direct_debit' => 'Neposredena bremenitev',
-    'bank_accounts' => 'Kreditne kartice in banke',
+    'bankaccounts' => 'Kreditne kartice in banke',
     'add_bank_account' => 'Dodaj bančni račun',
     'setup_account' => 'Nastavi račun',
     'import_expenses' => 'Uvozi stroške',

@@ -9,6 +9,7 @@ use Eloquent;
  */
 class Timezone extends Eloquent
 {
+	protected $table = 'core__timezones';
     /**
      * @var bool
      */

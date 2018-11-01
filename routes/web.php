@@ -402,13 +402,13 @@ Route::group([
     Route::get('payment_terms/{payment_terms}/edit', 'PaymentTermController@edit');
     Route::post('payment_terms/bulk', 'PaymentTermController@bulk');
 
-    Route::get('bank_accounts/import_ofx', 'BankAccountController@showImportOFX');
-    Route::post('bank_accounts/import_ofx', 'BankAccountController@doImportOFX');
-    Route::resource('bank_accounts', 'BankAccountController');
-    Route::get('api/bank_accounts', 'BankAccountController@getDatatable');
-    Route::post('bank_accounts/bulk', 'BankAccountController@bulk');
-    Route::post('bank_accounts/validate', 'BankAccountController@validateAccount');
-    Route::post('bank_accounts/import_expenses/{bank_id}', 'BankAccountController@importExpenses');
+    Route::get('bankaccounts/import_ofx', 'BankAccountController@showImportOFX');
+    Route::post('bankaccounts/import_ofx', 'BankAccountController@doImportOFX');
+    Route::resource('bankaccounts', 'BankAccountController');
+    Route::get('api/bankaccounts', 'BankAccountController@getDatatable');
+    Route::post('bankaccounts/bulk', 'BankAccountController@bulk');
+    Route::post('bankaccounts/validate', 'BankAccountController@validateAccount');
+    Route::post('bankaccounts/import_expenses/{bank_id}', 'BankAccountController@importExpenses');
 
     //Route::get('self-update', 'SelfUpdateController@index');
     //Route::post('self-update', 'SelfUpdateController@update');

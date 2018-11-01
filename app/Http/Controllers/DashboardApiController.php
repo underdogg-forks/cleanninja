@@ -30,7 +30,7 @@ class DashboardApiController extends BaseAPIController
         if (request()->only_timeline) {
             return $this->response([
                 'id' => 1,
-                'core__timeline' => $this->createCollection($timeline, new TimelineTransformer(), ENTITY_TIMELINE),
+                'timeline' => $this->createCollection($timeline, new TimelineTransformer(), ENTITY_TIMELINE),
             ]);
         }
 
@@ -52,7 +52,7 @@ class DashboardApiController extends BaseAPIController
             'averageInvoiceCurrency' => (int) ($averageInvoice->count() && $averageInvoice[0]->currency_id ? $averageInvoice[0]->currency_id : $defaultCurrency),
             'invoicesSent' => (int) ($metrics ? $metrics->invoices_sent : 0),
             'activeClients' => (int) ($metrics ? $metrics->active_clients : 0),
-            'core__timeline' => $this->createCollection($timeline, new TimelineTransformer(), ENTITY_TIMELINE),
+            'timeline' => $this->createCollection($timeline, new TimelineTransformer(), ENTITY_TIMELINE),
         ];
 
         return $this->response($data);

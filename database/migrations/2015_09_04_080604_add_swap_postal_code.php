@@ -11,7 +11,7 @@ class AddSwapPostalCode extends Migration
      */
     public function up()
     {
-        Schema::table('countries', function ($table) {
+        Schema::table('core__countries', function ($table) {
             $table->boolean('swap_postal_code')->default(0);
         });
 
@@ -27,7 +27,7 @@ class AddSwapPostalCode extends Migration
      */
     public function down()
     {
-        Schema::table('countries', function ($table) {
+        Schema::table('core__countries', function ($table) {
             $table->dropColumn('swap_postal_code');
         });
 

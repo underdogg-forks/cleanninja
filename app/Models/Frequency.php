@@ -11,6 +11,8 @@ use Str;
  */
 class Frequency extends Eloquent
 {
+	protected $table = 'core__frequencies';
+
     /**
      * @var bool
      */

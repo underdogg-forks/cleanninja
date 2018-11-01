@@ -260,7 +260,7 @@ return [
         'Omnipay'         => 'Omnipay\Omnipay',
         'CreditCard'      => 'Omnipay\Common\CreditCard',
         'Image'           => 'Intervention\Image\Facades\Image',
-        'Countries'       => 'Webpatser\Countries\CountriesFacade',
+        'core__countries'       => 'Webpatser\Countries\CountriesFacade',
         'Carbon'          => 'Carbon\Carbon',
         'Rocketeer'       => 'Rocketeer\Facades\Rocketeer',
         'Socialite'       => 'Laravel\Socialite\Facades\Socialite',

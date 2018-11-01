@@ -9,6 +9,8 @@ use Eloquent;
  */
 class PaymentType extends Eloquent
 {
+	protected $table = 'core__paymenttypes';
+
     /**
      * @var bool
      */

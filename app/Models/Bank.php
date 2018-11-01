@@ -9,6 +9,9 @@ use Eloquent;
  */
 class Bank extends Eloquent
 {
+
+    protected $table = 'banking__banks';
+
     /**
      * @var bool
      */

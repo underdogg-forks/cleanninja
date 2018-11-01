@@ -29,7 +29,7 @@ class ConfideSetupUsersTable extends Migration
         Schema::dropIfExists('accounts');
         Schema::dropIfExists('currencies');
         Schema::dropIfExists('invoice_statuses');
-        Schema::dropIfExists('countries');
+        Schema::dropIfExists('core__countries');
         Schema::dropIfExists('timezones');
         Schema::dropIfExists('frequencies');
         Schema::dropIfExists('date_formats');
@@ -39,7 +39,7 @@ class ConfideSetupUsersTable extends Migration
         Schema::dropIfExists('gateways');
         Schema::dropIfExists('payment_types');
 
-        Schema::create('countries', function ($table) {
+        Schema::create('core__countries', function ($table) {
             $table->increments('id');
             $table->string('capital', 255)->nullable();
             $table->string('citizenship', 255)->nullable();
@@ -142,7 +142,7 @@ class ConfideSetupUsersTable extends Migration
             $t->foreign('timezone_id')->references('id')->on('timezones');
             $t->foreign('date_format_id')->references('id')->on('date_formats');
             $t->foreign('datetime_format_id')->references('id')->on('datetime_formats');
-            $t->foreign('country_id')->references('id')->on('countries');
+            $t->foreign('country_id')->references('id')->on('core__countries');
             $t->foreign('currency_id')->references('id')->on('currencies');
             $t->foreign('industry_id')->references('id')->on('industries');
             $t->foreign('size_id')->references('id')->on('sizes');
@@ -246,7 +246,7 @@ class ConfideSetupUsersTable extends Migration
 
             $t->foreign('account_id')->references('id')->on('accounts')->onDelete('cascade');
             $t->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $t->foreign('country_id')->references('id')->on('countries');
+            $t->foreign('country_id')->references('id')->on('core__countries');
             $t->foreign('industry_id')->references('id')->on('industries');
             $t->foreign('size_id')->references('id')->on('sizes');
             $t->foreign('currency_id')->references('id')->on('currencies');
@@ -554,7 +554,7 @@ class ConfideSetupUsersTable extends Migration
         Schema::dropIfExists('accounts');
         Schema::dropIfExists('currencies');
         Schema::dropIfExists('invoice_statuses');
-        Schema::dropIfExists('countries');
+        Schema::dropIfExists('core__countries');
         Schema::dropIfExists('timezones');
         Schema::dropIfExists('frequencies');
         Schema::dropIfExists('date_formats');

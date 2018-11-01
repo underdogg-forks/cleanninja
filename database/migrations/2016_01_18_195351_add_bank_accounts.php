@@ -11,7 +11,7 @@ class AddBankAccounts extends Migration
      */
     public function up()
     {
-        Schema::create('banks', function ($table) {
+        Schema::create('banking__banks', function ($table) {
             $table->increments('id');
             $table->string('name');
             $table->string('remote_id');
@@ -19,7 +19,7 @@ class AddBankAccounts extends Migration
             $table->text('config');
         });
 
-        Schema::create('bank_accounts', function ($table) {
+        Schema::create('banking__bankaccounts', function ($table) {
             $table->increments('id');
             $table->unsignedInteger('account_id');
             $table->unsignedInteger('bank_id');
@@ -28,7 +28,7 @@ class AddBankAccounts extends Migration
 
             $table->foreign('account_id')->references('id')->on('accounts')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('bank_id')->references('id')->on('banks');
+            $table->foreign('bank_id')->references('id')->on('banking__banks');
 
             $table->unsignedInteger('public_id')->index();
             $table->unique(['account_id', 'public_id']);
@@ -47,7 +47,7 @@ class AddBankAccounts extends Migration
      */
     public function down()
     {
-        Schema::drop('bank_accounts');
-        Schema::drop('banks');
+        Schema::drop('banking__bankaccounts');
+        Schema::drop('banking__banks');
     }
 }

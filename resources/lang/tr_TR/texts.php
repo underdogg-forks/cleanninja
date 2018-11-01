@@ -968,7 +968,7 @@ adresine gönderildi. Müthiş tüm özelliklerin kilidini açmak için lütfen 
     'quote_message_button' => 'To view your quote for :amount, click the button below.',
     'payment_message_button' => 'Thank you for your payment of :amount.',
     'payment_type_direct_debit' => 'Direct Debit',
-    'bank_accounts' => 'Credit Cards & Banks',
+    'bankaccounts' => 'Credit Cards & Banks',
     'add_bank_account' => 'Add Bank Account',
     'setup_account' => 'Hesap Kurulumu',
     'import_expenses' => 'Import Expenses',

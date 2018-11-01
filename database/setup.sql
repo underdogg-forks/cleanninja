@@ -486,12 +486,12 @@ LOCK TABLES `affiliates` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `bank_accounts`
+-- Table structure for table `banking__bankaccounts`
 --
 
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `bank_accounts` (
+CREATE TABLE `banking__bankaccounts` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `account_id` int(10) unsigned NOT NULL,
   `bank_id` int(10) unsigned NOT NULL,
@@ -515,12 +515,12 @@ CREATE TABLE `bank_accounts` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `bank_accounts`
+-- Dumping data for table `banking__bankaccounts`
 --
 
-LOCK TABLES `bank_accounts` WRITE;
-/*!40000 ALTER TABLE `bank_accounts` DISABLE KEYS */;
-/*!40000 ALTER TABLE `bank_accounts` ENABLE KEYS */;
+LOCK TABLES `banking__bankaccounts` WRITE;
+/*!40000 ALTER TABLE `banking__bankaccounts` DISABLE KEYS */;
+/*!40000 ALTER TABLE `banking__bankaccounts` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -546,7 +546,7 @@ CREATE TABLE `bank_subaccounts` (
   KEY `bank_subaccounts_bank_account_id_foreign` (`bank_account_id`),
   KEY `bank_subaccounts_public_id_index` (`public_id`),
   CONSTRAINT `bank_subaccounts_account_id_foreign` FOREIGN KEY (`account_id`) REFERENCES `accounts` (`id`) ON DELETE CASCADE,
-  CONSTRAINT `bank_subaccounts_bank_account_id_foreign` FOREIGN KEY (`bank_account_id`) REFERENCES `bank_accounts` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `bank_subaccounts_bank_account_id_foreign` FOREIGN KEY (`bank_account_id`) REFERENCES `banking__bankaccounts` (`id`) ON DELETE CASCADE,
   CONSTRAINT `bank_subaccounts_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;

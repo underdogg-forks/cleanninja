@@ -497,8 +497,8 @@ class BasePaymentDriver
 
         if (isset($input['address1'])) {
             $hasShippingAddress = $this->accountGateway->show_shipping_address;
-            $country = Utils::getFromCache($input['country_id'], 'countries');
-            $shippingCountry = $hasShippingAddress ? Utils::getFromCache($input['shipping_country_id'], 'countries') : $country;
+            $country = Utils::getFromCache($input['country_id'], 'core__countries');
+            $shippingCountry = $hasShippingAddress ? Utils::getFromCache($input['shipping_country_id'], 'core__countries') : $country;
 
             $data = array_merge($data, [
                 'billingAddress1' => trim($input['address1']),

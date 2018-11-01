@@ -10,6 +10,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class BankSubaccount extends EntityModel
 {
     use SoftDeletes;
+
+    protected $table = 'banking__banksubaccounts';
+
     /**
      * @var array
      */

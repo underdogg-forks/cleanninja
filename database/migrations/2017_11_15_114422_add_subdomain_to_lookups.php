@@ -39,7 +39,7 @@ class AddSubdomainToLookups extends Migration
         });
 
         Schema::table('clients', function ($table) {
-            $table->foreign('shipping_country_id')->references('id')->on('countries');
+            $table->foreign('shipping_country_id')->references('id')->on('core__countries');
         });
 
         Schema::table('account_gateways', function ($table) {

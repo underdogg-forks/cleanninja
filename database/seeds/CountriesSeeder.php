@@ -20,7 +20,7 @@ class CountriesSeeder extends Seeder
                 $record->full_name = ((isset($country['full_name'])) ? $country['full_name'] : null);
                 $record->save();
             } else {
-                DB::table('countries')->insert([
+                DB::table('core__countries')->insert([
                     'id' => $countryId,
                     'capital' => ((isset($country['capital'])) ? $country['capital'] : null),
                     'citizenship' => ((isset($country['citizenship'])) ? $country['citizenship'] : null),

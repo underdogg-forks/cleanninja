@@ -355,7 +355,7 @@ class Account extends Eloquent
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function bank_accounts()
+    public function banking__bankaccounts()
     {
         return $this->hasMany('App\Models\BankAccount');
     }

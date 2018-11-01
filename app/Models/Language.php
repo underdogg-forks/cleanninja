@@ -9,6 +9,8 @@ use Eloquent;
  */
 class Language extends Eloquent
 {
+	protected $table = 'core__languages';
+
     /**
      * @var bool
      */
