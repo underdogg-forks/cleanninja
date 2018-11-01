@@ -424,14 +424,14 @@ class User extends Authenticatable
         }
 
         $account = $this->account;
-        $company = $account->company;
+        $plan = $account->plan;
 
         $numUsers = 1;
-        foreach ($company->accounts as $account) {
+        foreach ($plan->accounts as $account) {
             $numUsers += $account->users->count() - 1;
         }
 
-        return $numUsers < $company->num_users;
+        return $numUsers < $plan->num_users;
     }
 
     /**
@@ -454,7 +454,7 @@ class User extends Authenticatable
      */
     public function primaryAccount()
     {
-        return $this->account->company->accounts->sortBy('id')->first();
+        return $this->account->plan->accounts->sortBy('id')->first();
     }
 
     /**

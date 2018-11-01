@@ -36,7 +36,7 @@ Create both ``lang`` and ``lang/en`` folders inside of your installations storag
 
    <?php
    return $LANG = [
-      'organization' => 'Company',
+      'organization' => 'Plan',
    ];
 
 Database

@@ -190,7 +190,7 @@ class SendReminders extends Command
     private function sendScheduledReports()
     {
         $scheduledReports = ScheduledReport::where('send_date', '<=', date('Y-m-d'))
-            ->with('user', 'account.company')
+            ->with('user', 'account.plan')
             ->get();
         $this->info(date('r ') . $scheduledReports->count() . ' scheduled reports');
 

@@ -267,7 +267,7 @@ class CheckData extends Command
         $tables = [
             'account_tokens',
             'accounts',
-            'companies',
+            'core__plans',
             'contacts',
             'invitations',
             'users',
@@ -297,11 +297,11 @@ class CheckData extends Command
                         ->leftJoin('accounts as a5', 'a5.id', '=', 'u5.account_id')
                         ->get([
                             'user_accounts.id',
-                            'a1.company_id as a1_company_id',
-                            'a2.company_id as a2_company_id',
-                            'a3.company_id as a3_company_id',
-                            'a4.company_id as a4_company_id',
-                            'a5.company_id as a5_company_id',
+                            'a1.plan_id as a1_plan_id',
+                            'a2.plan_id as a2_plan_id',
+                            'a3.plan_id as a3_plan_id',
+                            'a4.plan_id as a4_plan_id',
+                            'a5.plan_id as a5_plan_id',
                         ]);
 
         $countInvalid = 0;
@@ -309,20 +309,20 @@ class CheckData extends Command
         foreach ($userAccounts as $userAccount) {
             $ids = [];
 
-            if ($companyId1 = $userAccount->a1_company_id) {
-                $ids[$companyId1] = true;
+            if ($planId1 = $userAccount->a1_plan_id) {
+                $ids[$planId1] = true;
             }
-            if ($companyId2 = $userAccount->a2_company_id) {
-                $ids[$companyId2] = true;
+            if ($planId2 = $userAccount->a2_plan_id) {
+                $ids[$planId2] = true;
             }
-            if ($companyId3 = $userAccount->a3_company_id) {
-                $ids[$companyId3] = true;
+            if ($planId3 = $userAccount->a3_plan_id) {
+                $ids[$planId3] = true;
             }
-            if ($companyId4 = $userAccount->a4_company_id) {
-                $ids[$companyId4] = true;
+            if ($planId4 = $userAccount->a4_plan_id) {
+                $ids[$planId4] = true;
             }
-            if ($companyId5 = $userAccount->a5_company_id) {
-                $ids[$companyId5] = true;
+            if ($planId5 = $userAccount->a5_plan_id) {
+                $ids[$planId5] = true;
             }
 
             if (count($ids) > 1) {
@@ -331,7 +331,7 @@ class CheckData extends Command
             }
         }
 
-        $this->logMessage($countInvalid . ' user accounts with multiple companies');
+        $this->logMessage($countInvalid . ' user accounts with multiple plans');
 
         if ($countInvalid > 0) {
             $this->isValid = false;
@@ -666,8 +666,8 @@ class CheckData extends Command
         }
 
         $clients = $clients->groupBy('clients.id', 'clients.balance')
-                ->orderBy('accounts.company_id', 'DESC')
-                ->get(['accounts.company_id', 'clients.account_id', 'clients.id', 'clients.balance', 'clients.paid_to_date', DB::raw('sum(invoices.balance) actual_balance')]);
+                ->orderBy('accounts.plan_id', 'DESC')
+                ->get(['accounts.plan_id', 'clients.account_id', 'clients.id', 'clients.balance', 'clients.paid_to_date', DB::raw('sum(invoices.balance) actual_balance')]);
         $this->logMessage($clients->count() . ' clients with incorrect balance/activities');
 
         if ($clients->count() > 0) {
@@ -675,7 +675,7 @@ class CheckData extends Command
         }
 
         foreach ($clients as $client) {
-            $this->logMessage("=== Company: {$client->company_id} Account:{$client->account_id} Client:{$client->id} Balance:{$client->balance} Actual Balance:{$client->actual_balance} ===");
+            $this->logMessage("=== Plan: {$client->plan_id} Account:{$client->account_id} Client:{$client->id} Balance:{$client->balance} Actual Balance:{$client->actual_balance} ===");
             $foundProblem = false;
             $lastBalance = 0;
             $lastAdjustment = 0;

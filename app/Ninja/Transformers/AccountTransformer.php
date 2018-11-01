@@ -35,7 +35,7 @@ class AccountTransformer extends EntityTransformer
      * @SWG\Property(property="quote_design_id", type="integer", example=1)
      * @SWG\Property(property="client_view_css", type="string", example="CSS")
      * @SWG\Property(property="work_phone", type="string", example="(212) 555-1212")
-     * @SWG\Property(property="work_email", type="string", example="john.doe@company.com")
+     * @SWG\Property(property="work_email", type="string", example="john.doe@plan.com")
      * @SWG\Property(property="language_id", type="integer", example=1)
      * @SWG\Property(property="fill_products", type="boolean", example=false)
      * @SWG\Property(property="update_products", type="boolean", example=false)

@@ -2,7 +2,7 @@
 
 namespace App\Ninja\Repositories;
 
-use App\Models\Company;
+use App\Models\Plan;
 use App\Models\DbServer;
 
 class ReferralRepository
@@ -24,7 +24,7 @@ class ReferralRepository
 
         foreach ($databases as $database) {
             config(['database.default' => $database]);
-            $accounts = Company::whereReferralCode($referralCode)->get();
+            $accounts = Plan::whereReferralCode($referralCode)->get();
 
             foreach ($accounts as $account) {
                 $counts['free']++;

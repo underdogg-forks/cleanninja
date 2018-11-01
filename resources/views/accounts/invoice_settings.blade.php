@@ -243,7 +243,7 @@
                         <a href="#expense_fields" aria-controls="task_fields" role="tab" data-toggle="tab">{{ trans('texts.expenses') }}</a>
                     </li>
                     <li role="presentation">
-                        <a href="#company_fields" aria-controls="company_fields" role="tab" data-toggle="tab">{{ trans('texts.company') }}</a>
+                        <a href="#plan_fields" aria-controls="plan_fields" role="tab" data-toggle="tab">{{ trans('texts.plan') }}</a>
                     </li>
                 </ul>
             </div>
@@ -353,16 +353,16 @@
 
                     </div>
                 </div>
-                <div role="tabpanel" class="tab-pane" id="company_fields">
+                <div role="tabpanel" class="tab-pane" id="plan_fields">
                     <div class="panel-body">
 
                         {!! Former::text('custom_fields[account1]')
-                                ->label(trans('texts.company_field')) !!}
+                                ->label(trans('texts.plan_field')) !!}
                         {!! Former::text('custom_value1')
                                 ->label(trans('texts.field_value')) !!}
                         <p>&nbsp;</p>
                         {!! Former::text('custom_fields[account2]')
-                                ->label(trans('texts.company_field')) !!}
+                                ->label(trans('texts.plan_field')) !!}
                         {!! Former::text('custom_value2')
                                 ->label(trans('texts.field_value'))
                                 ->help(trans('texts.custom_account_fields_helps')) !!}

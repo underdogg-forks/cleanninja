@@ -13,17 +13,17 @@ class LookupAccount extends LookupModel
      * @var array
      */
     protected $fillable = [
-        'lookup_company_id',
+        'lookup_plan_id',
         'account_key',
         'support_email_local_part',
     ];
 
-    public function lookupCompany()
+    public function lookupPlan()
     {
-        return $this->belongsTo('App\Models\LookupCompany');
+        return $this->belongsTo('App\Models\LookupPlan');
     }
 
-    public static function createAccount($accountKey, $companyId)
+    public static function createAccount($accountKey, $planId)
     {
         if (! config('ninja.multi_db_enabled'))
             return;
@@ -33,18 +33,18 @@ class LookupAccount extends LookupModel
         config(['database.default' => DB_NINJA_LOOKUP]);
 
         $server = DbServer::whereName($current)->firstOrFail();
-        $lookupCompany = LookupCompany::whereDbServerId($server->id)
-                            ->whereCompanyId($companyId)->first();
+        $lookupPlan = LookupPlan::whereDbServerId($server->id)
+                            ->wherePlanId($planId)->first();
 
-        if (! $lookupCompany) {
-            $lookupCompany = LookupCompany::create([
+        if (! $lookupPlan) {
+            $lookupPlan = LookupPlan::create([
                 'db_server_id' => $server->id,
-                'company_id' => $companyId,
+                'plan_id' => $planId,
             ]);
         }
 
         LookupAccount::create([
-            'lookup_company_id' => $lookupCompany->id,
+            'lookup_plan_id' => $lookupPlan->id,
             'account_key' => $accountKey,
         ]);
 
@@ -53,7 +53,7 @@ class LookupAccount extends LookupModel
 
     public function getDbServer()
     {
-        return $this->lookupCompany->dbServer->name;
+        return $this->lookupPlan->dbServer->name;
     }
 
     public static function updateAccount($accountKey, $account)

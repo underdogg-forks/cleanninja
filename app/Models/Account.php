@@ -167,7 +167,7 @@ class Account extends Eloquent
      * @var array
      */
     public static $basicSettings = [
-        ACCOUNT_COMPANY_DETAILS,
+        ACCOUNT_PLAN_DETAILS,
         ACCOUNT_USER_DETAILS,
         ACCOUNT_LOCALIZATION,
         ACCOUNT_PAYMENTS,
@@ -480,9 +480,9 @@ class Account extends Eloquent
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function company()
+    public function plan()
     {
-        return $this->belongsTo('App\Models\Company');
+        return $this->belongsTo('App\Models\Plan');
     }
 
     /**
@@ -1161,13 +1161,13 @@ class Account extends Eloquent
             return;
         }
 
-        if ($this->company->trial_started && $this->company->trial_started != '0000-00-00') {
+        if ($this->plan->trial_started && $this->plan->trial_started != '0000-00-00') {
             return;
         }
 
-        $this->company->trial_plan = $plan;
-        $this->company->trial_started = date_create()->format('Y-m-d');
-        $this->company->save();
+        $this->plan->trial_plan = $plan;
+        $this->plan->trial_started = date_create()->format('Y-m-d');
+        $this->plan->save();
     }
 
     public function hasReminders()
@@ -1286,7 +1286,7 @@ class Account extends Eloquent
      */
     public function hasActivePromo()
     {
-        return $this->company->hasActivePromo();
+        return $this->plan->hasActivePromo();
     }
 
     /**
@@ -1317,13 +1317,13 @@ class Account extends Eloquent
      */
     public function getPlanDetails($include_inactive = false, $include_trial = true)
     {
-        if (! $this->company) {
+        if (! $this->plan) {
             return null;
         }
 
-        $plan = $this->company->plan;
-        $price = $this->company->plan_price;
-        $trial_plan = $this->company->trial_plan;
+        $plan = $this->plan->plan;
+        $price = $this->plan->plan_price;
+        $trial_plan = $this->plan->trial_plan;
 
         if ((! $plan || $plan == PLAN_FREE) && (! $trial_plan || ! $include_trial)) {
             return null;
@@ -1331,7 +1331,7 @@ class Account extends Eloquent
 
         $trial_active = false;
         if ($trial_plan && $include_trial) {
-            $trial_started = DateTime::createFromFormat('Y-m-d', $this->company->trial_started);
+            $trial_started = DateTime::createFromFormat('Y-m-d', $this->plan->trial_started);
             $trial_expires = clone $trial_started;
             $trial_expires->modify('+2 weeks');
 
@@ -1342,11 +1342,11 @@ class Account extends Eloquent
 
         $plan_active = false;
         if ($plan) {
-            if ($this->company->plan_expires == null) {
+            if ($this->plan->plan_expires == null) {
                 $plan_active = true;
                 $plan_expires = false;
             } else {
-                $plan_expires = DateTime::createFromFormat('Y-m-d', $this->company->plan_expires);
+                $plan_expires = DateTime::createFromFormat('Y-m-d', $this->plan->plan_expires);
                 if ($plan_expires >= date_create()) {
                     $plan_active = true;
                 }
@@ -1386,20 +1386,20 @@ class Account extends Eloquent
 
         if ($use_plan) {
             return [
-                'company_id' => $this->company->id,
-                'num_users' => $this->company->num_users,
+                'plan_id' => $this->plan->id,
+                'num_users' => $this->plan->num_users,
                 'plan_price' => $price,
                 'trial' => false,
                 'plan' => $plan,
-                'started' => DateTime::createFromFormat('Y-m-d', $this->company->plan_started),
+                'started' => DateTime::createFromFormat('Y-m-d', $this->plan->plan_started),
                 'expires' => $plan_expires,
-                'paid' => DateTime::createFromFormat('Y-m-d', $this->company->plan_paid),
-                'term' => $this->company->plan_term,
+                'paid' => DateTime::createFromFormat('Y-m-d', $this->plan->plan_paid),
+                'term' => $this->plan->plan_term,
                 'active' => $plan_active,
             ];
         } else {
             return [
-                'company_id' => $this->company->id,
+                'plan_id' => $this->plan->id,
                 'num_users' => 1,
                 'plan_price' => 0,
                 'trial' => true,
@@ -1881,7 +1881,7 @@ class Account extends Eloquent
 
     public function hasMultipleAccounts()
     {
-        return $this->company->accounts->count() > 1;
+        return $this->plan->accounts->count() > 1;
     }
 
     public function hasMultipleUsers()
@@ -1891,7 +1891,7 @@ class Account extends Eloquent
 
     public function getPrimaryAccount()
     {
-        return $this->company->accounts()->orderBy('id')->first();
+        return $this->plan->accounts()->orderBy('id')->first();
     }
 
     public function financialYearStartMonth()
@@ -1957,7 +1957,7 @@ class Account extends Eloquent
 
 Account::creating(function ($account)
 {
-    LookupAccount::createAccount($account->account_key, $account->company_id);
+    LookupAccount::createAccount($account->account_key, $account->plan_id);
 });
 
 Account::updating(function ($account) {

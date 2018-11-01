@@ -5,7 +5,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use App\Models\DbServer;
 use App\Models\User;
-use App\Models\Company;
+use App\Models\Plan;
 use App\Libraries\CurlUtils;
 
 class MobileLocalization extends Command

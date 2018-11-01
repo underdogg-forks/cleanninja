@@ -51,6 +51,6 @@ The admin view displays all ticket listings and to whom the are delegated. New t
 
 The Invoice Ninja ticket system has the concept of a 'Ticket Master' This is a super-admin user who has total oversight of the ticketing system and is also the primary point of contact for internal and external users.
 
-By default the company owner will be assigned as the Ticket Master, however the Ticket Master can be set to any user in the system by toggling the Ticket Master in the settings.
+By default the plan owner will be assigned as the Ticket Master, however the Ticket Master can be set to any user in the system by toggling the Ticket Master in the settings.
 
 

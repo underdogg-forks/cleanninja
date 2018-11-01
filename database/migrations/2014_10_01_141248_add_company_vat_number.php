@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 
-class AddCompanyVatNumber extends Migration
+class AddPlanVatNumber extends Migration
 {
     /**
      * Run the migrations.

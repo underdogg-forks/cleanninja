@@ -84,12 +84,12 @@ class ChargeRenewalInvoices extends Command
                 continue;
             }
 
-            $company = $account->company;
-            if (! $company->plan || $company->plan == PLAN_FREE) {
+            $plan = $account->plan;
+            if (! $plan->plan || $plan->plan == PLAN_FREE) {
                 continue;
             }
 
-            if (Carbon::parse($company->plan_expires)->isFuture()) {
+            if (Carbon::parse($plan->plan_expires)->isFuture()) {
                 $this->info('Skipping invoice ' . $invoice->invoice_number . ' [plan not expired]');
                 continue;
             }

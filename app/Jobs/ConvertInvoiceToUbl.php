@@ -84,19 +84,19 @@ class ConvertInvoiceToUbl extends Job
         }
     }
 
-    private function createParty($company, $user)
+    private function createParty($plan, $user)
     {
         $party = new Party();
-        $party->setName($company->name);
+        $party->setName($plan->name);
         $address = (new Address())
-            ->setCityName($company->city)
-            ->setStreetName($company->address1)
-            ->setBuildingNumber($company->address2)
-            ->setPostalZone($company->postal_code);
+            ->setCityName($plan->city)
+            ->setStreetName($plan->address1)
+            ->setBuildingNumber($plan->address2)
+            ->setPostalZone($plan->postal_code);
 
-        if ($company->country_id) {
+        if ($plan->country_id) {
             $country = new Country();
-            $country->setIdentificationCode($company->country->iso_3166_2);
+            $country->setIdentificationCode($plan->country->iso_3166_2);
             $address->setCountry($country);
         }
 

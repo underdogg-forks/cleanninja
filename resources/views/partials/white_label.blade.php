@@ -6,9 +6,9 @@
 
 @if (Auth::user()->account->hasFeature(FEATURE_WHITE_LABEL))
   {{ trans('texts.white_labeled') }}
-  @if (! Utils::isNinja() && $company->hasActivePlan() && $company->daysUntilPlanExpires() <= 10 && $company->daysUntilPlanExpires() > 0)
+  @if (! Utils::isNinja() && $plan->hasActivePlan() && $plan->daysUntilPlanExpires() <= 10 && $plan->daysUntilPlanExpires() > 0)
     <br/><b>{!! trans('texts.license_expiring', [
-        'count' => $company->daysUntilPlanExpires(),
+        'count' => $plan->daysUntilPlanExpires(),
         'link' => '<a href="#" onclick="showWhiteLabelModal()">' . trans('texts.click_here') . '</a>',
     ]) !!}</b>
   @endif

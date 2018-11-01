@@ -127,7 +127,7 @@
                         </ul>
                     </div>
                     <div class="col-md-6">
-                        <p>{{ trans('texts.company_variables') }}</p>
+                        <p>{{ trans('texts.plan_variables') }}</p>
                         <ul>
                             @foreach([
                                 'account',

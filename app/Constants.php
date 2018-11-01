@@ -92,12 +92,12 @@ if (! defined('APP_NAME')) {
     define('BASIC_SETTINGS', 'basic_settings');
     define('ADVANCED_SETTINGS', 'advanced_settings');
 
-    define('ACCOUNT_COMPANY_DETAILS', 'company_details');
+    define('ACCOUNT_PLAN_DETAILS', 'plan_details');
     define('ACCOUNT_USER_DETAILS', 'user_details');
     define('ACCOUNT_LOCALIZATION', 'localization');
     define('ACCOUNT_NOTIFICATIONS', 'notifications');
     define('ACCOUNT_IMPORT_EXPORT', 'import_export');
-    define('ACCOUNT_MANAGEMENT', 'account_management');
+    define('ACCOUNT_MANAGEMENT', 'plan_management');
     define('ACCOUNT_PAYMENTS', 'online_payments');
     define('ACCOUNT_BANKS', 'bank_accounts');
     define('ACCOUNT_IMPORT_EXPENSES', 'import_expenses');
@@ -617,7 +617,7 @@ if (! defined('APP_NAME')) {
 
     // Pro users who started paying on or before this date will be able to manage users
     define('PRO_USERS_GRANDFATHER_DEADLINE', '2016-06-04');
-    define('EXTRAS_GRANDFATHER_COMPANY_ID', 35089);
+    define('EXTRAS_GRANDFATHER_PLAN_ID', 35089);
 
     // WePay
     define('WEPAY_PRODUCTION', 'production');

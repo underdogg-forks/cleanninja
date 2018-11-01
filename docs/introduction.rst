@@ -5,7 +5,7 @@ Let’s get acquainted with a basic overview of the structure of the Invoice Nin
 
 The Invoice Ninja system is based on two main pillars:
 
-- **List pages** are summary pages of the various activities in your account. These include the Clients list page, Tasks list page, Invoices list page, Payments list page and more. List pages are located in the main sidebar of the Invoice Ninja site. The list pages provide a centralized overview and management station for the particular component of your account. For example, the Clients list page is a list of all your clients, with accompanying information and handy links, so you can manage all your clients on one page.
+- **List pages** are summary pages of the various activities in your account. These include the Clients list page, Tasks list page, Invoices list page, Payments list page and more. List pages are located in the main sidebar of the Invoice Ninja site. The list pages provide a centralized overview and management station for the particular component of your account. For example, the Clients list page is a list of all your clients, with acplaning information and handy links, so you can manage all your clients on one page.
 
 - **Action pages** are pages dedicated to a specific action you can take in your Invoice Ninja account. Examples include Create New Client, Enter Credit, Create New Invoice, Create Recurring Invoice, Enter Credit, Enter Payment and Create New Task. All actions you take will be recorded in the List pages, updated in real time to reflect your invoicing activity from minute to minute.
 

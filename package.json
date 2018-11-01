@@ -1,13 +1,13 @@
 {
   "private": true,
   "devDependencies": {
-    "grunt": "~0.4.4",
+    "grunt": "^1.0.3",
     "grunt-contrib-concat": "~0.4.0",
-    "grunt-contrib-jshint": "~0.6.3",
+    "grunt-contrib-jshint": "^2.0.0",
     "grunt-contrib-nodeunit": "~0.2.0",
-    "grunt-contrib-uglify": "~0.2.2",
+    "grunt-contrib-uglify": "^4.0.0",
     "grunt-dump-dir": "^0.1.2",
-    "gulp": "^3.8.8",
+    "gulp": "^4.0.0",
     "laravel-elixir": "^6.0.0-10"
   },
   "scripts": {

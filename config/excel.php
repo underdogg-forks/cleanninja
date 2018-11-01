@@ -84,7 +84,7 @@ return array(
         'keywords'       => 'maatwebsite, excel, export',
         'category'       => 'Excel',
         'manager'        => 'Maatwebsite',
-        'company'        => 'Maatwebsite',
+        'plan'        => 'Maatwebsite',
     ),
 
     /*

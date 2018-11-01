@@ -5,7 +5,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use App\Models\DbServer;
 use App\Models\User;
-use App\Models\Company;
+use App\Models\Plan;
 use App\Libraries\CurlUtils;
 
 class CalculatePayouts extends Command
@@ -72,17 +72,17 @@ class CalculatePayouts extends Command
         }
 
         foreach ($servers as $server) {
-            $this->info('Processing companies: ' . $server->name);
+            $this->info('Processing plans: ' . $server->name);
             config(['database.default' => $server->name]);
 
-            $companies = Company::where('referral_code', '!=', '')
+            $plans = Plan::where('referral_code', '!=', '')
                 ->with('payment.client.payments')
                 ->whereNotNull('payment_id')
                 ->get();
 
-            foreach ($companies as $company) {
-                $user = $userMap[$company->referral_code];
-                $payment = $company->payment;
+            foreach ($plans as $plan) {
+                $user = $userMap[$plan->referral_code];
+                $payment = $plan->payment;
 
                 if ($payment) {
                     $client = $payment->client;

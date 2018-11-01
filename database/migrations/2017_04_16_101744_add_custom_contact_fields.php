@@ -74,10 +74,10 @@ class AddCustomContactFields extends Migration
 
         Schema::create('lookup_accounts', function ($table) {
             $table->increments('id');
-            $table->unsignedInteger('lookup_company_id')->index();
+            $table->unsignedInteger('lookup_plan_id')->index();
             $table->string('account_key');
 
-            $table->foreign('lookup_company_id')->references('id')->on('lookup_companies')->onDelete('cascade');
+            $table->foreign('lookup_plan_id')->references('id')->on('lookup_companies')->onDelete('cascade');
         });
 
         Schema::create('lookup_users', function ($table) {

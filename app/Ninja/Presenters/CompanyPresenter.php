@@ -2,7 +2,7 @@
 
 namespace App\Ninja\Presenters;
 
-class CompanyPresenter extends EntityPresenter
+class PlanPresenter extends EntityPresenter
 {
     public function promoMessage()
     {

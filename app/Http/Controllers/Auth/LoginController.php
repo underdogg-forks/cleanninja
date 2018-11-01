@@ -218,7 +218,7 @@ class LoginController extends Controller
                 app('App\Ninja\Repositories\AccountRepository')->unlinkAccount($account);
 
                 if (! $account->hasMultipleAccounts()) {
-                    $account->company->forceDelete();
+                    $account->plan->forceDelete();
                 }
                 $account->forceDelete();
             } else {

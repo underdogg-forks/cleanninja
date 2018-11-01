@@ -116,6 +116,6 @@ class LookupModel extends Eloquent
 
     public function getDbServer()
     {
-        return $this->lookupAccount->lookupCompany->dbServer->name;
+        return $this->lookupAccount->lookupPlan->dbServer->name;
     }
 }

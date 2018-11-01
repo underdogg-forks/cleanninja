@@ -23,12 +23,12 @@
                 'first_name' => 'required',
                 'last_name' => 'required',
                 'email' => 'required',
-                'company_name' => 'required',
+                'plan_name' => 'required',
                 'tos_agree' => 'required',
                 'country' => 'required',
             ))->addClass('warn-on-exit') !!}
 
-    {!! Former::populateField('company_name', $account->getDisplayName()) !!}
+    {!! Former::populateField('plan_name', $account->getDisplayName()) !!}
 
     @if ($account->country)
         {!! Former::populateField('country', $account->country->iso_3166_2) !!}
@@ -49,7 +49,7 @@
             {!! Former::text('first_name') !!}
             {!! Former::text('last_name') !!}
             {!! Former::text('email') !!}
-            {!! Former::text('company_name')->help('wepay_company_name_help')->maxlength(255) !!}
+            {!! Former::text('plan_name')->help('wepay_plan_name_help')->maxlength(255) !!}
 
             <div id="wepay-country">
                 {!! Former::radios('country')

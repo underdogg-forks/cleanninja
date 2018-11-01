@@ -13,11 +13,11 @@ class AddMultipleDatabaseSupport extends Migration
     public function up()
     {
         Schema::table('lookup_companies', function ($table) {
-            $table->unsignedInteger('company_id')->index();
+            $table->unsignedInteger('plan_id')->index();
         });
 
         Schema::table('lookup_companies', function ($table) {
-            $table->unique(['db_server_id', 'company_id']);
+            $table->unique(['db_server_id', 'plan_id']);
         });
 
         Schema::table('lookup_accounts', function ($table) {
@@ -59,7 +59,7 @@ class AddMultipleDatabaseSupport extends Migration
     public function down()
     {
         Schema::table('lookup_companies', function ($table) {
-            $table->dropColumn('company_id');
+            $table->dropColumn('plan_id');
         });
 
         Schema::table('lookup_users', function ($table) {

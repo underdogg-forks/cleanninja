@@ -33,14 +33,14 @@ class ClientCest
         //Contacts
         $I->fillField(['name' => 'contacts[0][first_name]'], $this->faker->firstName);
         $I->fillField(['name' => 'contacts[0][last_name]'], $this->faker->lastName);
-        $I->fillField(['name' => 'contacts[0][email]'], $this->faker->companyEmail);
+        $I->fillField(['name' => 'contacts[0][email]'], $this->faker->planEmail);
         $I->fillField(['name' => 'contacts[0][phone]'], $this->faker->phoneNumber);
 
         //Additional Contact
         //$I->click('Add contact +');
         //$I->fillField('.form-group:nth-child(6) #first_name', $this->faker->firstName);
         //$I->fillField('.form-group:nth-child(7) #last_name', $this->faker->lastName);
-        //$I->fillField('.form-group:nth-child(8) #email1', $this->faker->companyEmail);
+        //$I->fillField('.form-group:nth-child(8) #email1', $this->faker->planEmail);
         //$I->fillField('.form-group:nth-child(9) #phone', $this->faker->phoneNumber);
 
         //Address

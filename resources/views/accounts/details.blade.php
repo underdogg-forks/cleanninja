@@ -21,7 +21,7 @@
 	{{ Former::populate($account) }}
 	{{ Former::populateField('task_rate', floatval($account->task_rate) ? Utils::roundSignificant($account->task_rate) : '') }}
 
-    @include('accounts.nav', ['selected' => ACCOUNT_COMPANY_DETAILS])
+    @include('accounts.nav', ['selected' => ACCOUNT_PLAN_DETAILS])
 
 	<div class="row">
 		<div class="col-md-12">

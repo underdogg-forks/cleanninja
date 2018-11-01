@@ -7,7 +7,7 @@ use DB;
 use Mail;
 use Exception;
 use App\Models\DbServer;
-use App\Models\LookupCompany;
+use App\Models\LookupPlan;
 use App\Models\LookupAccount;
 use App\Models\LookupUser;
 use App\Models\LookupContact;
@@ -21,7 +21,7 @@ class InitLookup extends Command
      *
      * @var string
      */
-    protected $signature = 'ninja:init-lookup {--truncate=} {--subdomain} {--validate=} {--update=} {--company_id=} {--page_size=100} {--database=db-ninja-1}';
+    protected $signature = 'ninja:init-lookup {--truncate=} {--subdomain} {--validate=} {--update=} {--plan_id=} {--page_size=100} {--database=db-ninja-1}';
 
     /**
      * The console command description.
@@ -66,8 +66,8 @@ class InitLookup extends Command
         } else {
             config(['database.default' => $this->option('database')]);
 
-            $count = DB::table('companies')
-                        ->where('id', '>=', $this->option('company_id') ?: 1)
+            $count = DB::table('core__plans')
+                        ->where('id', '>=', $this->option('plan_id') ?: 1)
                         ->count();
 
             for ($i=0; $i<$count; $i += (int) $this->option('page_size')) {
@@ -120,14 +120,14 @@ class InitLookup extends Command
 
         config(['database.default' => $this->option('database')]);
 
-        $companies = DB::table('companies')
+        $plans = DB::table('core__plans')
                         ->offset($offset)
                         ->limit((int) $this->option('page_size'))
                         ->orderBy('id')
-                        ->where('id', '>=', $this->option('company_id') ?: 1)
+                        ->where('id', '>=', $this->option('plan_id') ?: 1)
                         ->get(['id']);
-        foreach ($companies as $company) {
-            $data[$company->id] = $this->parseCompany($company->id);
+        foreach ($plans as $plan) {
+            $data[$plan->id] = $this->parsePlan($plan->id);
         }
 
         config(['database.default' => DB_NINJA_LOOKUP]);
@@ -135,36 +135,36 @@ class InitLookup extends Command
         $validate = $this->option('validate');
         $update = $this->option('update');
 
-        foreach ($data as $companyId => $company) {
+        foreach ($data as $planId => $plan) {
 
-            $lookupCompany = false;
+            $lookupPlan = false;
             if ($validate || $update) {
-                $lookupCompany = LookupCompany::whereDbServerId($dbServerId)->whereCompanyId($companyId)->first();
+                $lookupPlan = LookupPlan::whereDbServerId($dbServerId)->wherePlanId($planId)->first();
             }
-            if ($validate && ! $lookupCompany) {
-                $this->logError("LookupCompany - dbServerId: {$dbServerId}, companyId: {$companyId} | Not found!");
+            if ($validate && ! $lookupPlan) {
+                $this->logError("LookupPlan - dbServerId: {$dbServerId}, planId: {$planId} | Not found!");
                 continue;
             }
-            if (! $lookupCompany) {
-                $lookupCompany = LookupCompany::create([
+            if (! $lookupPlan) {
+                $lookupPlan = LookupPlan::create([
                     'db_server_id' => $dbServerId,
-                    'company_id' => $companyId,
+                    'plan_id' => $planId,
                 ]);
             }
 
-            foreach ($company as $accountKey => $account) {
+            foreach ($plan as $accountKey => $account) {
 
                 $lookupAccount = false;
                 if ($validate || $update) {
-                    $lookupAccount = LookupAccount::whereLookupCompanyId($lookupCompany->id)->whereAccountKey($accountKey)->first();
+                    $lookupAccount = LookupAccount::whereLookupPlanId($lookupPlan->id)->whereAccountKey($accountKey)->first();
                 }
                 if ($validate && ! $lookupAccount) {
-                    $this->logError("LookupAccount - lookupCompanyId: {$lookupCompany->id}, accountKey {$accountKey} | Not found!");
+                    $this->logError("LookupAccount - lookupPlanId: {$lookupPlan->id}, accountKey {$accountKey} | Not found!");
                     continue;
                 }
                 if (! $lookupAccount) {
                     $lookupAccount = LookupAccount::create([
-                        'lookup_company_id' => $lookupCompany->id,
+                        'lookup_plan_id' => $lookupPlan->id,
                         'account_key' => $accountKey
                     ]);
                 }
@@ -266,13 +266,13 @@ class InitLookup extends Command
         }
     }
 
-    private function parseCompany($companyId)
+    private function parsePlan($planId)
     {
         $data = [];
 
         config(['database.default' => $this->option('database')]);
 
-        $accounts = DB::table('accounts')->whereCompanyId($companyId)->orderBy('id')->get([
+        $accounts = DB::table('accounts')->wherePlanId($planId)->orderBy('id')->get([
             'id', 'account_key'
         ]);
         foreach ($accounts as $account) {
@@ -371,7 +371,7 @@ class InitLookup extends Command
         return [
             ['subdomain', null, InputOption::VALUE_OPTIONAL, 'Subdomain', null],
             ['truncate', null, InputOption::VALUE_OPTIONAL, 'Truncate', null],
-            ['company_id', null, InputOption::VALUE_OPTIONAL, 'Company Id', null],
+            ['plan_id', null, InputOption::VALUE_OPTIONAL, 'Plan Id', null],
             ['page_size', null, InputOption::VALUE_OPTIONAL, 'Page Size', null],
             ['database', null, InputOption::VALUE_OPTIONAL, 'Database', null],
             ['validate', null, InputOption::VALUE_OPTIONAL, 'Validate', null],

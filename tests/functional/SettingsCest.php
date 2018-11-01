@@ -15,12 +15,12 @@ class SettingsCest
     }
 
     /*
-    public function companyDetails(FunctionalTester $I)
+    public function planDetails(FunctionalTester $I)
     {
-        $I->wantTo('update the company details');
-        $I->amOnPage('/settings/company_details');
+        $I->wantTo('update the plan details');
+        $I->amOnPage('/settings/plan_details');
 
-        $name = $this->faker->company;
+        $name = $this->faker->plan;
 
         $I->fillField(['name' => 'name'], $name);
         $I->fillField(['name' => 'work_email'], $this->faker->safeEmail);
@@ -59,7 +59,7 @@ class SettingsCest
         $I->wantTo('update the localization');
         $I->amOnPage('/settings/localization');
 
-        $name = $this->faker->company;
+        $name = $this->faker->plan;
 
         $I->fillField(['name' => 'name'], $name);
         $I->click('Save');

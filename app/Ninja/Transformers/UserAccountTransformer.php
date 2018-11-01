@@ -154,7 +154,7 @@ class UserAccountTransformer extends EntityTransformer
             'name' => $account->present()->name ?: '',
             'token' => $account->getToken($user->id, $this->tokenName),
             'default_url' => SITE_URL,
-            'plan' => $account->company->plan ?: '',
+            'plan' => $account->plan->plan ?: '',
             'logo' => $account->logo ?: '',
             'logo_url' => $account->getLogoURL() ?: '',
             'currency_id' => (int) $account->currency_id,

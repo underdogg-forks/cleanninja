@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands;
 
-use App\Models\Company;
+use App\Models\Plan;
 use App\Ninja\Mailers\ContactMailer as Mailer;
 use App\Ninja\Repositories\AccountRepository;
 use Illuminate\Console\Command;
@@ -57,22 +57,22 @@ class SendRenewalInvoices extends Command
         }
 
         // get all accounts with plans expiring in 10 days
-        $companies = Company::whereRaw("datediff(plan_expires, curdate()) = 10 and (plan = 'pro' or plan = 'enterprise')")
+        $plans = Plan::whereRaw("datediff(plan_expires, curdate()) = 10 and (plan = 'pro' or plan = 'enterprise')")
                         ->orderBy('id')
                         ->get();
-        $this->info($companies->count() . ' companies found renewing in 10 days');
+        $this->info($plans->count() . ' plans found renewing in 10 days');
 
-        foreach ($companies as $company) {
-            if (! $company->accounts->count()) {
+        foreach ($plans as $plan) {
+            if (! $plan->accounts->count()) {
                 continue;
             }
 
-            $account = $company->accounts->sortBy('id')->first();
+            $account = $plan->accounts->sortBy('id')->first();
             $plan = [];
-            $plan['plan'] = $company->plan;
-            $plan['term'] = $company->plan_term;
-            $plan['num_users'] = $company->num_users;
-            $plan['price'] = min($company->plan_price, Utils::getPlanPrice($plan));
+            $plan['plan'] = $plan->plan;
+            $plan['term'] = $plan->plan_term;
+            $plan['num_users'] = $plan->num_users;
+            $plan['price'] = min($plan->plan_price, Utils::getPlanPrice($plan));
 
             if ($plan['plan'] == PLAN_FREE || ! $plan['plan'] || ! $plan['term'] || ! $plan['price']) {
                 continue;

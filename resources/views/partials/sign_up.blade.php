@@ -166,7 +166,7 @@ function handleSignedUp() {
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title" id="myModalLabel">{{ Auth::user()->registered ? trans('texts.add_company') : trans('texts.sign_up') }}</h4>
+        <h4 class="modal-title" id="myModalLabel">{{ Auth::user()->registered ? trans('texts.add_plan') : trans('texts.sign_up') }}</h4>
       </div>
 
       <div class="container" style="width: 100%; padding-bottom: 0px !important">

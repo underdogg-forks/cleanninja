@@ -481,7 +481,7 @@ class BasePaymentDriver
         $client = $this->client();
 
         $data = [
-            'company' => $client->getDisplayName(),
+            'plan' => $client->getDisplayName(),
             'firstName' => isset($input['first_name']) ? $input['first_name'] : null,
             'lastName' => isset($input['last_name']) ? $input['last_name'] : null,
             'email' => isset($input['email']) ? $input['email'] : null,
@@ -528,7 +528,7 @@ class BasePaymentDriver
 
         return [
             'email' => $contact->email,
-            'company' => $client->getDisplayName(),
+            'plan' => $client->getDisplayName(),
             'firstName' => $contact->first_name,
             'lastName' => $contact->last_name,
             'billingAddress1' => $client->address1,
@@ -753,42 +753,42 @@ class BasePaymentDriver
 
             if (! empty($plan)) {
                 $account = Account::with('users')->find($invoice->client->public_id);
-                $company = $account->company;
+                $plan = $account->plan;
 
                 if (
-                    $company->plan != $plan
-                    || DateTime::createFromFormat('Y-m-d', $account->company->plan_expires) <= date_create('-7 days')
+                    $plan->plan != $plan
+                    || DateTime::createFromFormat('Y-m-d', $account->plan->plan_expires) <= date_create('-7 days')
                 ) {
                     // Either this is a different plan, or the subscription expired more than a week ago
                     // Reset any grandfathering
-                    $company->plan_started = date_create()->format('Y-m-d');
+                    $plan->plan_started = date_create()->format('Y-m-d');
                 }
 
                 if (
-                    $company->plan == $plan
-                    && $company->plan_term == $term
-                    && DateTime::createFromFormat('Y-m-d', $company->plan_expires) >= date_create()
+                    $plan->plan == $plan
+                    && $plan->plan_term == $term
+                    && DateTime::createFromFormat('Y-m-d', $plan->plan_expires) >= date_create()
                 ) {
                     // This is a renewal; mark it paid as of when this term expires
-                    $company->plan_paid = $company->plan_expires;
+                    $plan->plan_paid = $plan->plan_expires;
                 } else {
-                    $company->plan_paid = date_create()->format('Y-m-d');
+                    $plan->plan_paid = date_create()->format('Y-m-d');
                 }
 
-                $company->payment_id = $payment->id;
-                $company->plan = $plan;
-                $company->plan_term = $term;
-                $company->plan_price = $price;
-                $company->num_users = $numUsers;
-                $company->plan_expires = DateTime::createFromFormat('Y-m-d', $account->company->plan_paid)
+                $plan->payment_id = $payment->id;
+                $plan->plan = $plan;
+                $plan->plan_term = $term;
+                $plan->plan_price = $price;
+                $plan->num_users = $numUsers;
+                $plan->plan_expires = DateTime::createFromFormat('Y-m-d', $account->plan->plan_paid)
                     ->modify($term == PLAN_TERM_MONTHLY ? '+1 month' : '+1 year')->format('Y-m-d');
 
-                if ($company->hasActivePromo()) {
-                    $company->discount_expires = date_create()->modify('1 year')->format('Y-m-d');
-                    $company->promo_expires = null;
+                if ($plan->hasActivePromo()) {
+                    $plan->discount_expires = date_create()->modify('1 year')->format('Y-m-d');
+                    $plan->promo_expires = null;
                 }
 
-                $company->save();
+                $plan->save();
             }
         }
 

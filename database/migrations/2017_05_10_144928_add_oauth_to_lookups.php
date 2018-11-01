@@ -17,14 +17,14 @@ class AddOauthToLookups extends Migration
             $table->string('referral_code')->nullable()->unique();
         });
 
-        Schema::table('companies', function ($table) {
+        Schema::table('core__plans', function ($table) {
             $table->string('referral_code')->nullable();
         });
 
-        DB::statement('update companies
-            left join accounts on accounts.company_id = companies.id
+        DB::statement('update plans
+            left join accounts on accounts.plan_id = plans.id
             left join users on users.id = accounts.referral_user_id
-            set companies.referral_code = users.referral_code
+            set plans.referral_code = users.referral_code
             where users.id is not null');
 
         Schema::table('accounts', function ($table) {
@@ -46,7 +46,7 @@ class AddOauthToLookups extends Migration
             $table->dropColumn('referral_code');
         });
 
-        Schema::table('companies', function ($table) {
+        Schema::table('core__plans', function ($table) {
             $table->dropColumn('referral_code');
         });
     }

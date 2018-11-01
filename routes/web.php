@@ -372,13 +372,13 @@ Route::group([
     Route::get('settings/email_preview', 'AccountController@previewEmail');
     Route::post('settings/client_portal', 'AccountController@saveClientPortalSettings');
     Route::post('settings/email_settings', 'AccountController@saveEmailSettings');
-    Route::get('company/{section}/{subSection?}', 'AccountController@redirectLegacy');
+    Route::get('plan/{section}/{subSection?}', 'AccountController@redirectLegacy');
     Route::get('settings/data_visualizations', 'ReportController@d3');
 
     Route::post('settings/change_plan', 'AccountController@changePlan');
     Route::post('settings/cancel_account', 'AccountController@cancelAccount');
     Route::post('settings/purge_data', 'AccountController@purgeData');
-    Route::post('settings/company_details', 'AccountController@updateDetails');
+    Route::post('settings/plan_details', 'AccountController@updateDetails');
     Route::post('settings/{section?}', 'AccountController@doSection');
     Route::post('remove_logo', 'AccountController@removeLogo');
     Route::post('remove_avatar', 'AccountController@removeAvatar');

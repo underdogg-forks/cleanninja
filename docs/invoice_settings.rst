@@ -1,7 +1,7 @@
 Invoice Settings
 ================
 
-You can customize your invoice template by pre-defining the various numbering formats, adding new fields for client, contact, company or invoice information, and adding default text to invoice terms, invoice footer, and more. Any changes you make to the Invoice Settings will apply to all your invoices.
+You can customize your invoice template by pre-defining the various numbering formats, adding new fields for client, contact, plan or invoice information, and adding default text to invoice terms, invoice footer, and more. Any changes you make to the Invoice Settings will apply to all your invoices.
 
 The Invoice Settings page has four sections:
 
@@ -24,7 +24,7 @@ To customize your invoice numbering system, click on the Invoice Number tab.
 
 There are two ways to customize the invoice number: by adding a prefix or creating a pattern.
 
-To add a prefix, select the Prefix button. In the field immediately below, add your chosen prefix. For example, you may choose to add your company initials, such as M&D. The current invoice number appears in the Counter field.
+To add a prefix, select the Prefix button. In the field immediately below, add your chosen prefix. For example, you may choose to add your plan initials, such as M&D. The current invoice number appears in the Counter field.
 
 All your invoices will automatically include the numbering change. So if you chose the prefix M&D, your invoice numbers will appear as M&D001, and so on.
 
@@ -96,10 +96,10 @@ To add fields to your contact entries, click on the Contact Fields tab.
 
 You have the option of adding up to two new fields for contact information about your client. These will appear on the Client/Create and Client/Edit pages. When creating an invoice, the field name and information you entered for the contact will be displayed in the Client details section of the PDF invoice.
 
-Company Fields
+Plan Fields
 ^^^^^^^^^^^^^^
 
-To add fields to your company details, click on the Company Fields tab. Enter the Field Label and Field Value information in the relevant fields. The information you entered will automatically appear in the Company details section of the PDF invoice.
+To add fields to your plan details, click on the Plan Fields tab. Enter the Field Label and Field Value information in the relevant fields. The information you entered will automatically appear in the Plan details section of the PDF invoice.
 
 Product Fields
 ^^^^^^^^^^^^^^

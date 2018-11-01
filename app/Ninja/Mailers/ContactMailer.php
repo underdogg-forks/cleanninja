@@ -383,7 +383,7 @@ class ContactMailer extends Mailer
             return false;
         }
 
-        $key = $account->company_id;
+        $key = $account->plan_id;
 
         // http://stackoverflow.com/questions/1375501/how-do-i-throttle-my-sites-api-users
         $day = 60 * 60 * 24;

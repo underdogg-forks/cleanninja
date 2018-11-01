@@ -89,7 +89,7 @@ class StartupCheck
         }
 
         if (Auth::check()) {
-            $company = Auth::user()->account->company;
+            $plan = Auth::user()->account->plan;
             $count = Session::get(SESSION_COUNTER, 0);
             Session::put(SESSION_COUNTER, ++$count);
 
@@ -97,22 +97,22 @@ class StartupCheck
                 if ($coupon = request()->coupon) {
                     if ($code = config('ninja.coupon_50_off')) {
                         if (hash_equals($coupon, $code)) {
-                            $company->applyDiscount(.5);
-                            $company->save();
+                            $plan->applyDiscount(.5);
+                            $plan->save();
                             Session::flash('message', trans('texts.applied_discount', ['discount' => 50]));
                         }
                     }
                     if ($code = config('ninja.coupon_75_off')) {
                         if (hash_equals($coupon, $code)) {
-                            $company->applyDiscount(.75);
-                            $company->save();
+                            $plan->applyDiscount(.75);
+                            $plan->save();
                             Session::flash('message', trans('texts.applied_discount', ['discount' => 75]));
                         }
                     }
                     if ($code = config('ninja.coupon_free_year')) {
                         if (hash_equals($coupon, $code)) {
-                            $company->applyFreeYear();
-                            $company->save();
+                            $plan->applyFreeYear();
+                            $plan->save();
                             Session::flash('message', trans('texts.applied_free_year'));
                         }
                     }
@@ -191,11 +191,11 @@ class StartupCheck
                     if ($date < date_create()) {
                         Session::flash('message', trans('texts.expired_white_label'));
                     } else {
-                        $company->plan_term = PLAN_TERM_YEARLY;
-                        $company->plan_paid = $data;
-                        $company->plan_expires = $date->format('Y-m-d');
-                        $company->plan = PLAN_WHITE_LABEL;
-                        $company->save();
+                        $plan->plan_term = PLAN_TERM_YEARLY;
+                        $plan->plan_paid = $data;
+                        $plan->plan_expires = $date->format('Y-m-d');
+                        $plan->plan = PLAN_WHITE_LABEL;
+                        $plan->save();
 
                         Session::flash('message', trans('texts.bought_white_label'));
                     }

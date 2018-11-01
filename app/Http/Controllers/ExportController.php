@@ -131,7 +131,7 @@ class ExportController extends BaseController
                   ->setKeywords('')
                   ->setCategory('')
                   ->setManager('')
-                  ->setCompany($user->account->getDisplayName());
+                  ->setPlan($user->account->getDisplayName());
 
             foreach ($data as $key => $val) {
                 if ($key === 'account' || $key === 'title' || $key === 'multiUser') {

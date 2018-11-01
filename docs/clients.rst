@@ -48,7 +48,7 @@ The sort and filter functions make it easy for you to manage and view your clien
 
 Sort the clients table via any of the following data columns: Client, Contact, Email, Date Created, Last Login, or Balance. To sort, click on the tab of your choice. A small arrow will appear. If the arrow is pointing up, data is sorted from lowest to highest value. If the arrow is pointing down, data is sorted from highest to lowest value. Click to change the arrow direction. (If you click on the Client, Contact or Email arrow, the data will be displayed in alphabetical or reverse alphabetical order.)
 
-Filter the clients list by completing the Filter field, situated at the top right of the page, to the left of the gray Credits button. Clients can be filtered according to the client name, contact person name, or elements of the client name or contact person name. Here’s an example: Let’s filter the table for a client named “Joe Smith” of “Best Ninja” company. You can type “best ninja”, or “best” or “ninja”, or even “bes”, or “nin”, or “ja”, or “Joe”, “Smith”, “Jo” “oe”, “th” or any other grouping of letters in the client name or contact person name. The filter function will automatically locate and present all the relevant entries. This function makes it easy to find clients with even minimal input of information.
+Filter the clients list by completing the Filter field, situated at the top right of the page, to the left of the gray Credits button. Clients can be filtered according to the client name, contact person name, or elements of the client name or contact person name. Here’s an example: Let’s filter the table for a client named “Joe Smith” of “Best Ninja” plan. You can type “best ninja”, or “best” or “ninja”, or even “bes”, or “nin”, or “ja”, or “Joe”, “Smith”, “Jo” “oe”, “th” or any other grouping of letters in the client name or contact person name. The filter function will automatically locate and present all the relevant entries. This function makes it easy to find clients with even minimal input of information.
 
 .. Tip: Need to search for a specific client in your Clients list? Start typing the first letters of the client's name and the filter will automatically present the relevant listings.
 
@@ -91,10 +91,10 @@ The Create Client page is divided into four sections. Enter the information in t
 
 Let’s take a closer look at each section:
 
-- **Organization**: Enter details about your client’s business/company/organization, including the company name, ID number, VAT number, website address and telephone number.
+- **Organization**: Enter details about your client’s business/plan/organization, including the plan name, ID number, VAT number, website address and telephone number.
 - **Contacts**: Enter the name, email address and phone number of your contact person for this client. You can enter as many contact people as you like. To add more contact people, click +Add Contact.
 - **Address**: Enter the street address of your client. This will be of particular importance if you need to send hard-copy invoices or payment receipts.
-- **Additional Info**: Enter the payment currency, language, payment terms, company size (no. of employees), the relevant industry sector, public notes (these will appear on the invoice by default) and private notes (don’t worry - no one can see them but you.)
+- **Additional Info**: Enter the payment currency, language, payment terms, plan size (no. of employees), the relevant industry sector, public notes (these will appear on the invoice by default) and private notes (don’t worry - no one can see them but you.)
 
 TIP: Understanding the Payment terms field – You may have different payment terms and agreements for various clients. Here, you can select the default due date for the specific client via the drop-down menu of the Payment terms field. The default due date is calculated according to the date on the invoice. For example, Net 0 means the payment is due on the date of the invoice; Net 7 means the payment is due 7 days after the date of the invoice, and so on. Note: Even if you choose default payment terms, you can always manually adjust an invoice payment due date for a specific invoice, via the Edit Invoice page.
 
@@ -137,7 +137,7 @@ The Activity table shows all the past activity with the client, in chronological
 Invoices Table
 **************
 
-The Invoices table shows a list of all the client's invoices and accompanying information. The table has 5 columns:
+The Invoices table shows a list of all the client's invoices and acplaning information. The table has 5 columns:
 
 - **Invoice**: The invoice number
 - **Date**: The date the invoice was created
@@ -151,7 +151,7 @@ The Invoices table shows a list of all the client's invoices and accompanying in
 Payments Table
 **************
 
-The Payments table shows a list of all the client's payments and accompanying information. The table has 7 columns:
+The Payments table shows a list of all the client's payments and acplaning information. The table has 7 columns:
 
 - **Invoice**: The invoice number
 - **Transaction reference**: The reference number of the transaction
@@ -166,7 +166,7 @@ The Payments table shows a list of all the client's payments and accompanying in
 Credits Table
 *************
 
-The Credits table shows a list of all the client's credits and accompanying information. The table has 5 columns:
+The Credits table shows a list of all the client's credits and acplaning information. The table has 5 columns:
 
 - **Amount**: The credit amount
 - **Balance**: The current balance

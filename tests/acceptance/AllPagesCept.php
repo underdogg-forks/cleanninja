@@ -60,7 +60,7 @@ $I->see('Payments', 'li');
 $I->see('Create');
 
 // Settings pages
-$I->amOnPage('/settings/company_details');
+$I->amOnPage('/settings/plan_details');
 $I->see('Details');
 
 //$I->amOnPage('/gateways/create');

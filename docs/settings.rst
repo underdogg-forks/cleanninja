@@ -4,29 +4,29 @@ Settings
 Intro
 """""
 
-Welcome to the Basic Settings section, where you can create the foundations of your Invoice Ninja account. All your company information, user details, product entries, notification preferences, tax rates, payment settings, location and currency selections, and so much more, can be found here. This is your first stop to set up and customize your account to your business. And any time you need to modify your settings, edit your details or change your preferences, this is where you'll return. We've made it simple and user friendly to manage your settings, so the Basic Settings section is a place that's fun to come back to. We promise.
+Welcome to the Basic Settings section, where you can create the foundations of your Invoice Ninja account. All your plan information, user details, product entries, notification preferences, tax rates, payment settings, location and currency selections, and so much more, can be found here. This is your first stop to set up and customize your account to your business. And any time you need to modify your settings, edit your details or change your preferences, this is where you'll return. We've made it simple and user friendly to manage your settings, so the Basic Settings section is a place that's fun to come back to. We promise.
 
-To open the Basic Settings sections, click on the Settings tab, which is the last tab on the Invoice Ninja sidebar. The Basic Settings section will automatically open to the first settings page, Company Details. To move between settings pages, click on the relevant tab on the list situated at the left side of the Basic Settings page.
+To open the Basic Settings sections, click on the Settings tab, which is the last tab on the Invoice Ninja sidebar. The Basic Settings section will automatically open to the first settings page, Plan Details. To move between settings pages, click on the relevant tab on the list situated at the left side of the Basic Settings page.
 
-Company Details
+Plan Details
 """""""""""""""
 
-The company details page is divided into three sections: Details, Address and Email Signature. This covers all the key information about your business.
+The plan details page is divided into three sections: Details, Address and Email Signature. This covers all the key information about your business.
 
-Enter the following company details in the relevant field:
+Enter the following plan details in the relevant field:
 
 Details
 ^^^^^^^
 
-- **Name**: The company name
+- **Name**: The plan name
 - **ID Number**: The business number or personal ID number of the business owner
-- **VAT Number**: The company's VAT number (if applicable)
-- **Website**: Your company web address
-- **Email**: Your company email address
-- **Phone**: Your company phone number
-- **Logo**: Upload your company logo by clicking on the Choose File button. Browse your computer for the appropriate image file and upload it. Remember, the Invoice Ninja system supports JPEG, GIF and PNG file types. TIP: Once, you've uploaded your logo, the graphic image will appear on the page. Uploaded the wrong image? Got yourself a new logo? Click Remove logo, and upload a new one.
-- **Company Size**: Select the company size from the options in the drop down list
-- **Industry Select**: the industry your company belongs to from the options in the drop down list
+- **VAT Number**: The plan's VAT number (if applicable)
+- **Website**: Your plan web address
+- **Email**: Your plan email address
+- **Phone**: Your plan phone number
+- **Logo**: Upload your plan logo by clicking on the Choose File button. Browse your computer for the appropriate image file and upload it. Remember, the Invoice Ninja system supports JPEG, GIF and PNG file types. TIP: Once, you've uploaded your logo, the graphic image will appear on the page. Uploaded the wrong image? Got yourself a new logo? Click Remove logo, and upload a new one.
+- **Plan Size**: Select the plan size from the options in the drop down list
+- **Industry Select**: the industry your plan belongs to from the options in the drop down list
 
 Address
 ^^^^^^^
@@ -36,9 +36,9 @@ Complete the relevant address detail in each field. For the Country field, start
 Email Signature
 ^^^^^^^^^^^^^^^
 
-Create your unique company signature, which will appear on every email that is sent on your behalf from the Invoice Ninja system. First, enter free text in the text box. This may include your company name, address, phone number, website, email address or anything else you can think of. After you've entered the text, use the formatting toolbar to create the look you want. You can select the font, font size, font design (bold, italic, underline, strikethrough), font color, fill, numbering, bullets and alignment. You can also insert hyperlinks, which means you can create clickable links to your website or email address within your email signature.
+Create your unique plan signature, which will appear on every email that is sent on your behalf from the Invoice Ninja system. First, enter free text in the text box. This may include your plan name, address, phone number, website, email address or anything else you can think of. After you've entered the text, use the formatting toolbar to create the look you want. You can select the font, font size, font design (bold, italic, underline, strikethrough), font color, fill, numbering, bullets and alignment. You can also insert hyperlinks, which means you can create clickable links to your website or email address within your email signature.
 
-When you've completed your Company Details, click the green Save button at the bottom of the page. You can edit these details at any time by returning to the page, changing the details and clicking Save again.
+When you've completed your Plan Details, click the green Save button at the bottom of the page. You can edit these details at any time by returning to the page, changing the details and clicking Save again.
 
 User Details
 """"""""""""
@@ -123,7 +123,7 @@ Let's take a look at the default Payment Gateways/ Create screen for the WePay s
 - **First Name**: Enter your first name
 - **Last Name**: Enter your last name
 - **Email**: Enter your email address
-- **Company Name**: Enter the company name. This will appear on the client's credit card bill.
+- **Plan Name**: Enter the plan name. This will appear on the client's credit card bill.
 - **Country**: Select United States or Canada
 - **Billing address**: Check the preferred option
  - **Require client to provide their billing address**: Show the client's address on the payment page

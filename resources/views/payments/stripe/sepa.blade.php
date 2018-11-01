@@ -50,7 +50,7 @@
     {!! Former::text('iban') !!}
 
     {!! Former::checkbox('authorize_sepa')
-            ->text(trans('texts.sepa_authorization', ['company'=>$account->getDisplayName(), 'email' => $account->work_email]))
+            ->text(trans('texts.sepa_authorization', ['plan'=>$account->getDisplayName(), 'email' => $account->work_email]))
             ->label(' ')
             ->value(1) !!}
 

@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 
-class AddCompanyIdNumber extends Migration
+class AddPlanIdNumber extends Migration
 {
     /**
      * Run the migrations.

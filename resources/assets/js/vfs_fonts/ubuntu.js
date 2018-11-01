@@ -27,7 +27,7 @@ or substituting -- in part or in whole -- any of the components of the
 Original Version, by changing formats or by porting the Font Software to
 a new environment.
 
-"Copyright Holder(s)" refers to all individuals and companies who have a
+"Copyright Holder(s)" refers to all individuals and plans who have a
 copyright ownership of the Font Software.
 
 "Substantially Changed" refers to Modified Versions which can be easily

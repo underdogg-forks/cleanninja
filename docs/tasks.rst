@@ -19,7 +19,7 @@ Overview
 
 The Tasks list page provides a range of opportunities to carry out actions relating to each specific task. Now, we’ll explore the Tasks list and show you all the features and actions that make managing tasks so easy.
 
-The Tasks list page displays a table of all your tasks, at every stage, from Running to Logged to Invoiced, together with handy accompanying information about each task.
+The Tasks list page displays a table of all your tasks, at every stage, from Running to Logged to Invoiced, together with handy acplaning information about each task.
 
 Let's explore the tasks list according to the tabs on the main header bar of the table from left to right:
 
@@ -85,7 +85,7 @@ To create a new task, go to the main taskbar and click the Tasks tab. Then, sele
 
 Now that you’ve set the correct time zone, you can begin creating a new task.
 
-On the Tasks / Create page, begin by selecting the client name from the drop-down list that opens when you click on the arrow at the right side of the Client field. Then, in the Description box, enter any information you want to describe the task at hand. For example, you might enter “Designing company logo”, or “Consulting conference call”. This will make it easier to identify and manage each task.
+On the Tasks / Create page, begin by selecting the client name from the drop-down list that opens when you click on the arrow at the right side of the Client field. Then, in the Description box, enter any information you want to describe the task at hand. For example, you might enter “Designing plan logo”, or “Consulting conference call”. This will make it easier to identify and manage each task.
 
 There are two ways to record sessions spent on a task: Timer and Manual.
 

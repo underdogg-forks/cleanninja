@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 
-class MultiCompanySupport extends Migration
+class MultiPlanSupport extends Migration
 {
     /**
      * Run the migrations.

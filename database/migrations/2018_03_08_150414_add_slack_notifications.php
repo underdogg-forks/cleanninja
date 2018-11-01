@@ -48,11 +48,11 @@ class AddSlackNotifications extends Migration
                 $table->index('payment_id');
             });
 
-            Schema::table('companies', function ($table) {
+            Schema::table('core__plans', function ($table) {
                 $table->dropForeign('companies_payment_id_foreign');
             });
 
-            Schema::table('companies', function ($table) {
+            Schema::table('core__plans', function ($table) {
                 $table->index('payment_id');
             });
 

@@ -1,7 +1,7 @@
 Vendors
 =======
 
-Running a business is a two way street. Sure, you serve clients and charge them for it. But you also use suppliers, companies and service providers who charge you for all the things you need to get your job done. Office supplies? Check. Coffee machine? Check. Gas for the car? Check. And a hundred-and-one other supplies and services you can name.
+Running a business is a two way street. Sure, you serve clients and charge them for it. But you also use suppliers, plans and service providers who charge you for all the things you need to get your job done. Office supplies? Check. Coffee machine? Check. Gas for the car? Check. And a hundred-and-one other supplies and services you can name.
 
 Your expenses and vendors are managed with the same ease and one-click functionality as every other part of your business, right here in your Invoice Ninja account. With Invoice Ninja, managing your vendors and expenses is simple – and similar – to managing your clients and invoices. It's only a matter of which way the money's going...
 
@@ -13,9 +13,9 @@ To view your Vendors list page, go to the main taskbar and click the Expenses ta
 Overview
 ^^^^^^^^
 
-The Vendors page shows a list in table format of all companies, service providers or suppliers that you have entered to the Invoice Ninja system as part of your business activities. The table features the following data columns:
+The Vendors page shows a list in table format of all plans, service providers or suppliers that you have entered to the Invoice Ninja system as part of your business activities. The table features the following data columns:
 
-- **Vendor:** The company name of the vendor
+- **Vendor:** The plan name of the vendor
 - **City:** The city where the vendor is located
 - **Phone:** The phone number of the vendor
 - **Email:** The vendor's email address
@@ -78,7 +78,7 @@ The Vendors/ Create page is divided into four sections. Enter the information in
 
 Let’s take a closer look at each section:
 
-- **Organization**: Enter details about the vendor's company, including the company name, ID number, VAT number, website address and telephone number.
+- **Organization**: Enter details about the vendor's plan, including the plan name, ID number, VAT number, website address and telephone number.
 - **Contacts**: Enter the name, email address and phone number of your contact person for this vendor. You can enter as many contact people as you like. To add more contact people, click +Add Contact.
 - **Address**: Enter the vendor's street address.
 - **Additional Info**: Enter the vendor's currency, and any other private notes or reminders you wish to add (don’t worry - no one can see them but you.)

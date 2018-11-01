@@ -42775,7 +42775,7 @@ module.exports = {
     // Byte encodings are:
     //  * Shift_JIS: Compatible with 0201, uses not defined chars in top half as lead bytes for double-byte
     //               encoding of 0208. Lead byte ranges: 0x81-0x9F, 0xE0-0xEF; Trail byte ranges: 0x40-0x7E, 0x80-0x9E, 0x9F-0xFC.
-    //               Windows CP932 is a superset of Shift_JIS. Some companies added more chars, notably KDDI.
+    //               Windows CP932 is a superset of Shift_JIS. Some plans added more chars, notably KDDI.
     //  * EUC-JP:    Up to 3 bytes per character. Used mostly on *nixes.
     //               0x00-0x7F       - lower part of 0201
     //               0x8E, 0xA1-0xDF - upper part of 0201

@@ -8,7 +8,7 @@ use App\Models\AccountGateway;
 use App\Models\AccountTicketSettings;
 use App\Models\AccountToken;
 use App\Models\Client;
-use App\Models\Company;
+use App\Models\Plan;
 use App\Models\Contact;
 use App\Models\Credit;
 use App\Models\Invitation;
@@ -30,41 +30,41 @@ use Validator;
 
 class AccountRepository
 {
-    public function create($firstName = '', $lastName = '', $email = '', $password = '', $company = false)
+    public function create($firstName = '', $lastName = '', $email = '', $password = '', $plan = false)
     {
-        if (! $company) {
+        if (! $plan) {
             if (Utils::isNinja()) {
                 $this->checkForSpammer();
             }
 
-            $company = new Company();
-            $company->utm_source = Input::get('utm_source');
-            $company->utm_medium = Input::get('utm_medium');
-            $company->utm_campaign = Input::get('utm_campaign');
-            $company->utm_term = Input::get('utm_term');
-            $company->utm_content = Input::get('utm_content');
-            $company->referral_code = Session::get(SESSION_REFERRAL_CODE);
+            $plan = new Plan();
+            $plan->utm_source = Input::get('utm_source');
+            $plan->utm_medium = Input::get('utm_medium');
+            $plan->utm_campaign = Input::get('utm_campaign');
+            $plan->utm_term = Input::get('utm_term');
+            $plan->utm_content = Input::get('utm_content');
+            $plan->referral_code = Session::get(SESSION_REFERRAL_CODE);
 
             if (Input::get('utm_campaign')) {
                 if (env('PROMO_CAMPAIGN') && hash_equals(Input::get('utm_campaign'), env('PROMO_CAMPAIGN'))) {
-                    $company->applyDiscount(.75);
+                    $plan->applyDiscount(.75);
                 }
 
                 if (env('PARTNER_CAMPAIGN') && hash_equals(Input::get('utm_campaign'), env('PARTNER_CAMPAIGN'))) {
-                    $company->applyFreeYear();
+                    $plan->applyFreeYear();
                 }
             } else {
-                //$company->applyDiscount(.5);
-                //session()->flash('warning', $company->present()->promoMessage());
+                //$plan->applyDiscount(.5);
+                //session()->flash('warning', $plan->present()->promoMessage());
             }
 
-            $company->save();
+            $plan->save();
         }
 
         $account = new Account();
         $account->ip = Request::getClientIp();
         $account->account_key = strtolower(str_random(RANDOM_KEY_LENGTH));
-        $account->company_id = $company->id;
+        $account->plan_id = $plan->id;
         $account->currency_id = DEFAULT_CURRENCY;
 
         // Set default language/currency based on IP
@@ -152,7 +152,7 @@ class AccountRepository
             \Mail::raw($ip, function ($message) use ($ip, $errorEmail) {
                 $message->to($errorEmail)
                         ->from(CONTACT_EMAIL)
-                        ->subject('Duplicate company for IP: ' . $ip);
+                        ->subject('Duplicate plan for IP: ' . $ip);
             });
             if ($count >= 15) {
                 abort();
@@ -396,10 +396,10 @@ class AccountRepository
         $invoice->invoice_type_id = INVOICE_TYPE_STANDARD;
 
         // check for promo/discount
-        $clientCompany = $clientAccount->company;
-        if ($clientCompany->hasActivePromo() || $clientCompany->hasActiveDiscount($renewalDate)) {
-            $discount = $invoice->amount * $clientCompany->discount;
-            $invoice->discount = $clientCompany->discount * 100;
+        $clientPlan = $clientAccount->plan;
+        if ($clientPlan->hasActivePromo() || $clientPlan->hasActiveDiscount($renewalDate)) {
+            $discount = $invoice->amount * $clientPlan->discount;
+            $invoice->discount = $clientPlan->discount * 100;
             $invoice->amount -= $discount;
             $invoice->balance -= $discount;
         }
@@ -445,15 +445,15 @@ class AccountRepository
         if ($account) {
             return $account;
         } else {
-            $company = new Company();
-            $company->save();
+            $plan = new Plan();
+            $plan->save();
 
             $account = new Account();
             $account->name = 'Invoice Ninja';
             $account->work_email = 'contact@invoiceninja.com';
             $account->work_phone = '(800) 763-1948';
             $account->account_key = NINJA_ACCOUNT_KEY;
-            $account->company_id = $company->id;
+            $account->plan_id = $plan->id;
             $account->save();
 
             $emailSettings = new AccountEmailSettings();
@@ -757,9 +757,9 @@ class AccountRepository
         $user = User::whereId($userId)->first();
 
         if (! $user->public_id && $user->account->hasMultipleAccounts()) {
-            $company = Company::create();
-            $company->save();
-            $user->account->company_id = $company->id;
+            $plan = Plan::create();
+            $plan->save();
+            $user->account->plan_id = $plan->id;
             $user->account->save();
         }
     }

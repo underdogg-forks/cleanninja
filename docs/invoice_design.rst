@@ -1,7 +1,7 @@
 Invoice Design
 ==============
 
-Whether you're a design novice or programming pro, Invoice Ninja gives you the power to customize your invoice design, to give your invoices the exact look you want. The design tool is the perfect way to match your invoices to your company's graphical look and feel, including colors, fonts, logos, margin sizes, column names, headers, footers and much more.
+Whether you're a design novice or programming pro, Invoice Ninja gives you the power to customize your invoice design, to give your invoices the exact look you want. The design tool is the perfect way to match your invoices to your plan's graphical look and feel, including colors, fonts, logos, margin sizes, column names, headers, footers and much more.
 
 You can design you invoice using the simple selection tools, or go deeper and customize it from the foundations with our customization feature.
 
@@ -25,7 +25,7 @@ Quote Design: You can also select a design template for your quotes. Choose from
 - **Primary Color**: Select the desired primary color of the invoice design.
 - **Secondary Color**: Select the desired secondary color of the invoice design.
 
-.. TIP: The invoice design templates are based on a two-tone color scheme. Make sure to select primary and secondary colors that are complementary and reflect your design taste and your company's design theme.
+.. TIP: The invoice design templates are based on a two-tone color scheme. Make sure to select primary and secondary colors that are complementary and reflect your design taste and your plan's design theme.
 
 Invoice Labels
 """"""""""""""
@@ -34,7 +34,7 @@ Want to change the column names or field names on your invoice template? To cust
 
 Invoice Fields
 """""""""""""""
-You can change the order and location of any fields on your invoice template by using the 'drop and drag' feature. The fields are coordinated in groups: Invoice Fields, Client Fields and Company Fields. Use your mouse to drag and drop the fields in the order and location you prefer.
+You can change the order and location of any fields on your invoice template by using the 'drop and drag' feature. The fields are coordinated in groups: Invoice Fields, Client Fields and Plan Fields. Use your mouse to drag and drop the fields in the order and location you prefer.
 
 Product Fields
 """"""""""""""

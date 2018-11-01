@@ -140,7 +140,7 @@
 
     $(function() {
 
-        var settingsURL = '{{ url('/settings/company_details') }}';
+        var settingsURL = '{{ url('/settings/plan_details') }}';
         if (isStorageSupported()) {
             settingsURL = localStorage.getItem('last:settings_page') || settingsURL;
         }
@@ -218,7 +218,7 @@
         @endforeach
 
         @foreach([
-            'g c d' => 'company_details',
+            'g c d' => 'plan_details',
             'g u d' => 'user_details',
             'g l' => 'localization',
             'g o p' => 'online_payments',
@@ -226,7 +226,7 @@
             'g p' => 'products',
             'g n' => 'notifications',
             'g i e' => 'import_export',
-            'g a m' => 'account_management',
+            'g a m' => 'plan_management',
             'g i s' => 'invoice_settings',
             'g i d' => 'invoice_design',
             'g c p' => 'client_portal',

@@ -5,7 +5,7 @@ use App\Models\AccountEmailSettings;
 use App\Models\AccountTicketSettings;
 use App\Models\Affiliate;
 use App\Models\Client;
-use App\Models\Company;
+use App\Models\Plan;
 use App\Models\Contact;
 use App\Models\Country;
 use App\Models\DateFormat;
@@ -23,7 +23,7 @@ class UserTableSeeder extends Seeder
         Eloquent::unguard();
 
         $faker = Faker\Factory::create();
-        $company = Company::create();
+        $plan = Plan::create();
 
         $account = Account::create([
             'name' => $faker->name,
@@ -43,7 +43,7 @@ class UserTableSeeder extends Seeder
             //'body_font_id' => min(Font::all()->random()->id, 17),
             'primary_color' => $faker->hexcolor,
             'timezone_id' => 58,
-            'company_id' => $company->id,
+            'plan_id' => $plan->id,
             'pdf_email_attachment' => true,
         ]);
 

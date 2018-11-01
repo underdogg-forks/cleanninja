@@ -289,10 +289,10 @@ class NinjaController extends BaseController
     public function hideWhiteLabelMessage()
     {
         $user = Auth::user();
-        $company = $user->account->company;
+        $plan = $user->account->plan;
 
-        $company->plan = null;
-        $company->save();
+        $plan->plan = null;
+        $plan->save();
 
         return RESULT_SUCCESS;
     }

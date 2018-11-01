@@ -387,7 +387,7 @@ class AccountGatewayController extends BaseController
         $account = $user->account;
 
         $rules = [
-            'company_name' => 'required',
+            'plan_name' => 'required',
             'tos_agree' => 'required',
             'first_name' => 'required',
             'last_name' => 'required',
@@ -434,7 +434,7 @@ class AccountGatewayController extends BaseController
             $wepay = new WePay($accessToken);
 
             $accountDetails = [
-                'name' => Input::get('company_name'),
+                'name' => Input::get('plan_name'),
                 'description' => trans('texts.wepay_account_description'),
                 'theme_object' => json_decode(WEPAY_THEME),
                 'callback_uri' => $accountGateway->getWebhookUrl(),

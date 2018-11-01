@@ -161,7 +161,7 @@ class AccountController extends BaseController
     {
         $user = Auth::user();
         $account = $user->account;
-        $company = $account->company;
+        $plan = $account->plan;
 
         $plan = Input::get('plan');
         $term = Input::get('plan_term');
@@ -181,11 +181,11 @@ class AccountController extends BaseController
         $newPlan['price'] = Utils::getPlanPrice($newPlan);
         $credit = 0;
 
-        if ($plan == PLAN_FREE && $company->processRefund(Auth::user())) {
+        if ($plan == PLAN_FREE && $plan->processRefund(Auth::user())) {
             Session::flash('warning', trans('texts.plan_refunded'));
         }
 
-        if ($company->payment && ! empty($planDetails['paid']) && $plan != PLAN_FREE) {
+        if ($plan->payment && ! empty($planDetails['paid']) && $plan != PLAN_FREE) {
             $time_used = $planDetails['paid']->diff(date_create());
             $days_used = $time_used->days;
 
@@ -196,7 +196,7 @@ class AccountController extends BaseController
 
             $days_total = $planDetails['paid']->diff($planDetails['expires'])->days;
             $percent_used = $days_used / $days_total;
-            $credit = round(floatval($company->payment->amount) * (1 - $percent_used), 2);
+            $credit = round(floatval($plan->payment->amount) * (1 - $percent_used), 2);
         }
 
         if ($newPlan['price'] > $credit) {
@@ -204,21 +204,21 @@ class AccountController extends BaseController
             return Redirect::to('view/' . $invitation->invitation_key);
         } else {
             if ($plan == PLAN_FREE) {
-                $company->discount = 0;
+                $plan->discount = 0;
 
                 $ninjaClient = $this->accountRepo->getNinjaClient($account);
                 $ninjaClient->send_reminders = false;
                 $ninjaClient->save();
             } else {
-                $company->plan_term = $term;
-                $company->plan_price = $newPlan['price'];
-                $company->num_users = $numUsers;
-                $company->plan_expires = date_create()->modify($term == PLAN_TERM_MONTHLY ? '+1 month' : '+1 year')->format('Y-m-d');
+                $plan->plan_term = $term;
+                $plan->plan_price = $newPlan['price'];
+                $plan->num_users = $numUsers;
+                $plan->plan_expires = date_create()->modify($term == PLAN_TERM_MONTHLY ? '+1 month' : '+1 year')->format('Y-m-d');
             }
 
-            $company->trial_plan = null;
-            $company->plan = $plan;
-            $company->save();
+            $plan->trial_plan = null;
+            $plan->plan = $plan;
+            $plan->save();
 
             Session::flash('message', trans('texts.updated_plan'));
 
@@ -279,11 +279,11 @@ class AccountController extends BaseController
         }
 
         if (! $section) {
-            return Redirect::to('/settings/'.ACCOUNT_COMPANY_DETAILS, 301);
+            return Redirect::to('/settings/'.ACCOUNT_PLAN_DETAILS, 301);
         }
 
-        if ($section == ACCOUNT_COMPANY_DETAILS) {
-            return self::showCompanyDetails();
+        if ($section == ACCOUNT_PLAN_DETAILS) {
+            return self::showPlanDetails();
         } elseif ($section == ACCOUNT_LOCALIZATION) {
             return self::showLocalization();
         } elseif ($section == ACCOUNT_PAYMENTS) {
@@ -317,7 +317,7 @@ class AccountController extends BaseController
         } else {
             $view = "accounts.{$section}";
             if (! view()->exists($view)) {
-                return redirect('/settings/company_details');
+                return redirect('/settings/plan_details');
             }
 
             $data = [
@@ -378,7 +378,7 @@ class AccountController extends BaseController
     /**
      * @return \Illuminate\Contracts\View\View
      */
-    private function showCompanyDetails()
+    private function showPlanDetails()
     {
         // check that logo is less than the max file size
         $account = Auth::user()->account;
@@ -389,7 +389,7 @@ class AccountController extends BaseController
         $data = [
             'account' => Account::with('users')->findOrFail(Auth::user()->account_id),
             'sizes' => Cache::get('sizes'),
-            'title' => trans('texts.company_details'),
+            'title' => trans('texts.plan_details'),
         ];
 
         return View::make('accounts.details', $data);
@@ -1254,7 +1254,7 @@ class AccountController extends BaseController
 
         Session::flash('message', trans('texts.updated_settings'));
 
-        return Redirect::to('settings/'.ACCOUNT_COMPANY_DETAILS);
+        return Redirect::to('settings/'.ACCOUNT_PLAN_DETAILS);
     }
 
     /**
@@ -1471,7 +1471,7 @@ class AccountController extends BaseController
 
         Session::flash('message', trans('texts.removed_logo'));
 
-        return Redirect::to('settings/'.ACCOUNT_COMPANY_DETAILS);
+        return Redirect::to('settings/'.ACCOUNT_PLAN_DETAILS);
     }
 
     /**
@@ -1555,12 +1555,12 @@ class AccountController extends BaseController
         }
 
         if ($user->registered) {
-            $newAccount = $this->accountRepo->create($firstName, $lastName, $email, $password, $account->company);
+            $newAccount = $this->accountRepo->create($firstName, $lastName, $email, $password, $account->plan);
             $newUser = $newAccount->users()->first();
             $newUser->acceptLatestTerms($ip)->save();
             $users = $this->accountRepo->associateAccounts($user->id, $newUser->id);
 
-            Session::flash('message', trans('texts.created_new_company'));
+            Session::flash('message', trans('texts.created_new_plan'));
             Session::put(SESSION_USER_ACCOUNTS, $users);
             Auth::loginUsingId($newUser->id);
 
@@ -1643,15 +1643,15 @@ class AccountController extends BaseController
         $account = Auth::user()->account;
 
         \Log::info("Canceled Account: {$account->name} - {$user->email}");
-        $type = $account->hasMultipleAccounts() ? 'company' : 'account';
+        $type = $account->hasMultipleAccounts() ? 'plan' : 'account';
         $subject = trans("texts.deleted_{$type}");
         $message = trans("texts.deleted_{$type}_details", ['account' => $account->getDisplayName()]);
         $this->userMailer->sendMessage($user, $subject, $message);
 
         $refunded = false;
         if (! $account->hasMultipleAccounts()) {
-            $company = $account->company;
-            $refunded = $company->processRefund(Auth::user());
+            $plan = $account->plan;
+            $refunded = $plan->processRefund(Auth::user());
 
             $ninjaClient = $this->accountRepo->getNinjaClient($account);
             dispatch(new \App\Jobs\PurgeClientData($ninjaClient));
@@ -1695,7 +1695,7 @@ class AccountController extends BaseController
     public function redirectLegacy($section, $subSection = false)
     {
         if ($section === 'details') {
-            $section = ACCOUNT_COMPANY_DETAILS;
+            $section = ACCOUNT_PLAN_DETAILS;
         } elseif ($section === 'payments') {
             $section = ACCOUNT_PAYMENTS;
         } elseif ($section === 'advanced_settings') {
@@ -1706,7 +1706,7 @@ class AccountController extends BaseController
         }
 
         if (! in_array($section, array_merge(Account::$basicSettings, Account::$advancedSettings))) {
-            $section = ACCOUNT_COMPANY_DETAILS;
+            $section = ACCOUNT_PLAN_DETAILS;
         }
 
         return Redirect::to("/settings/$section/", 301);

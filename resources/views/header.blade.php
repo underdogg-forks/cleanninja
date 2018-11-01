@@ -289,7 +289,7 @@
                 {!! Button::success(trans('texts.sign_up'))->withAttributes(array('id' => 'signUpButton', 'onclick' => 'showSignUp()', 'style' => 'max-width:100px;;overflow:hidden'))->small() !!} &nbsp;
               @endif
           @elseif (Utils::isNinjaProd() && (!Auth::user()->isPro() || Auth::user()->isTrial()))
-            @if (Auth::user()->account->company->hasActivePromo())
+            @if (Auth::user()->account->plan->hasActivePromo())
                 {!! Button::warning(trans('texts.plan_upgrade'))->withAttributes(array('onclick' => 'showUpgradeModal()', 'style' => 'max-width:100px;overflow:hidden'))->small() !!} &nbsp;
             @else
                 {!! Button::success(trans('texts.plan_upgrade'))->withAttributes(array('onclick' => 'showUpgradeModal()', 'style' => 'max-width:100px;overflow:hidden'))->small() !!} &nbsp;
@@ -345,7 +345,7 @@
             <li class="divider"></li>
             @if (Utils::isAdmin() && Auth::user()->confirmed && Utils::getResllerType() != RESELLER_ACCOUNT_COUNT)
               @if (!session(SESSION_USER_ACCOUNTS) || count(session(SESSION_USER_ACCOUNTS)) < 5)
-                  <li>{!! link_to('#', trans('texts.add_company'), ['onclick' => 'showSignUp()']) !!}</li>
+                  <li>{!! link_to('#', trans('texts.add_plan'), ['onclick' => 'showSignUp()']) !!}</li>
               @endif
             @endif
             <li>{!! link_to('#', trans('texts.logout'), array('onclick'=>'logout()')) !!}</li>
@@ -533,7 +533,7 @@
                       ]) !!}
                 @endif
               @else
-                @include('partials.white_label', ['company' => Auth::user()->account->company])
+                @include('partials.white_label', ['plan' => Auth::user()->account->plan])
               @endif
             </div>
         </div>

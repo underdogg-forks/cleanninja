@@ -32,8 +32,8 @@ class PruneData extends Command
         // delete accounts who never registered, didn't create any invoices,
         // hansn't logged in within the past 6 months and isn't linked to another account
         $sql = 'select c.id
-                from companies c
-                left join accounts a on a.company_id = c.id
+                from plans c
+                left join accounts a on a.plan_id = c.id
                 left join clients cl on cl.account_id = a.id
                 left join tasks t on t.account_id = a.id
                 left join expenses e on e.account_id = a.id
@@ -50,14 +50,14 @@ class PruneData extends Command
         $results = DB::select($sql);
 
         foreach ($results as $result) {
-            $this->info("Deleting company: {$result->id}");
+            $this->info("Deleting plan: {$result->id}");
             try {
-                DB::table('companies')
+                DB::table('core__plans')
                     ->where('id', '=', $result->id)
                     ->delete();
             } catch (\Illuminate\Database\QueryException $e) {
                 // most likely because a user_account record exists which doesn't cascade delete
-                $this->info("Unable to delete companyId: {$result->id}");
+                $this->info("Unable to delete planId: {$result->id}");
             }
         }
 

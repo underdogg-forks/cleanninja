@@ -9,17 +9,20 @@ use Laracasts\Presenter\PresentableTrait;
 use Utils;
 
 /**
- * Class Company.
+ * Class Plan.
  */
-class Company extends Eloquent
+class Plan extends Eloquent
 {
     use SoftDeletes;
     use PresentableTrait;
 
+	protected $table = 'core__plans';
+
+
     /**
      * @var string
      */
-    protected $presenter = 'App\Ninja\Presenters\CompanyPresenter';
+    protected $presenter = 'App\Ninja\Presenters\PlanPresenter';
 
     /**
      * @var array
@@ -212,7 +215,7 @@ class Company extends Eloquent
     }
 }
 
-Company::deleted(function ($company)
+Plan::deleted(function ($plan)
 {
     if (! env('MULTI_DB_ENABLED')) {
         return;
@@ -220,8 +223,8 @@ Company::deleted(function ($company)
 
     $server = \App\Models\DbServer::whereName(config('database.default'))->firstOrFail();
 
-    LookupCompany::deleteWhere([
-        'company_id' => $company->id,
+    LookupPlan::deleteWhere([
+        'plan_id' => $plan->id,
         'db_server_id' => $server->id,
     ]);
 });

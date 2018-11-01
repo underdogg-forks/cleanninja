@@ -17,7 +17,7 @@ class AddInvoiceSignature extends Migration
                 $table->timestamp('signature_date')->nullable();
             });
 
-            Schema::table('companies', function ($table) {
+            Schema::table('core__plans', function ($table) {
                 $table->string('utm_source')->nullable();
                 $table->string('utm_medium')->nullable();
                 $table->string('utm_campaign')->nullable();
@@ -66,7 +66,7 @@ class AddInvoiceSignature extends Migration
             $table->dropColumn('signature_date');
         });
 
-        Schema::table('companies', function ($table) {
+        Schema::table('core__plans', function ($table) {
             $table->dropColumn('utm_source');
             $table->dropColumn('utm_medium');
             $table->dropColumn('utm_campaign');

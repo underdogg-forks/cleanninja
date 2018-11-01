@@ -1193,7 +1193,7 @@ NINJA.accountDetails = function(invoice) {
         var fields = JSON.parse(account.invoice_fields).account_fields1;
     } else {
         var fields = [
-            'account.company_name',
+            'account.plan_name',
             'account.id_number',
             'account.vat_number',
             'account.website',
@@ -1381,7 +1381,7 @@ NINJA.renderField = function(invoice, field, twoColumn) {
             label = NINJA.getCustomLabel(account.custom_fields.contact2);
             value = contact.custom_value2;
         }
-    } else if (field == 'account.company_name') {
+    } else if (field == 'account.plan_name') {
         value = account.name + ' ';
     } else if (field == 'account.id_number') {
         value = account.id_number;
@@ -1485,7 +1485,7 @@ NINJA.renderField = function(invoice, field, twoColumn) {
         if (parts.length >= 2) {
             var shortField = parts[1];
         }
-        var style = snakeToCamel(shortField == 'company_name' ? 'account_name' : shortField); // backwards compatibility
+        var style = snakeToCamel(shortField == 'plan_name' ? 'account_name' : shortField); // backwards compatibility
         if (twoColumn) {
             // try to automatically determine the label
             if (! label && label != 'Blank') {
