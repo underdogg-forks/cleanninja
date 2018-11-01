@@ -11,7 +11,7 @@ class ConfideSetupUsersTable extends Migration
      */
     public function up()
     {
-        Schema::dropIfExists('payment_terms');
+        Schema::dropIfExists('core__paymentterms');
         Schema::dropIfExists('themes');
         Schema::dropIfExists('credits');
         Schema::dropIfExists('core__timeline');
@@ -30,14 +30,14 @@ class ConfideSetupUsersTable extends Migration
         Schema::dropIfExists('currencies');
         Schema::dropIfExists('invoice_statuses');
         Schema::dropIfExists('core__countries');
-        Schema::dropIfExists('timezones');
-        Schema::dropIfExists('frequencies');
+        Schema::dropIfExists('core__timezones');
+        Schema::dropIfExists('core__frequencies');
         Schema::dropIfExists('date_formats');
         Schema::dropIfExists('datetime_formats');
-        Schema::dropIfExists('sizes');
-        Schema::dropIfExists('industries');
-        Schema::dropIfExists('gateways');
-        Schema::dropIfExists('payment_types');
+        Schema::dropIfExists('core__sizes');
+        Schema::dropIfExists('core__industries');
+        Schema::dropIfExists('core__gateways');
+        Schema::dropIfExists('core__paymenttypes');
 
         Schema::create('core__countries', function ($table) {
             $table->increments('id');
@@ -61,18 +61,18 @@ class ConfideSetupUsersTable extends Migration
             $t->string('name');
         });
 
-        Schema::create('payment_types', function ($t) {
+        Schema::create('core__paymenttypes', function ($t) {
             $t->increments('id');
             $t->string('name');
         });
 
-        Schema::create('payment_terms', function ($t) {
+        Schema::create('core__paymentterms', function ($t) {
             $t->increments('id');
             $t->integer('num_days');
             $t->string('name');
         });
 
-        Schema::create('timezones', function ($t) {
+        Schema::create('core__timezones', function ($t) {
             $t->increments('id');
             $t->string('name');
             $t->string('location');
@@ -102,12 +102,12 @@ class ConfideSetupUsersTable extends Migration
             $t->string('code');
         });
 
-        Schema::create('sizes', function ($t) {
+        Schema::create('core__sizes', function ($t) {
             $t->increments('id');
             $t->string('name');
         });
 
-        Schema::create('industries', function ($t) {
+        Schema::create('core__industries', function ($t) {
             $t->increments('id');
             $t->string('name');
         });
@@ -139,13 +139,13 @@ class ConfideSetupUsersTable extends Migration
             $t->boolean('invoice_taxes')->default(true);
             $t->boolean('invoice_item_taxes')->default(false);
 
-            $t->foreign('timezone_id')->references('id')->on('timezones');
+            $t->foreign('timezone_id')->references('id')->on('core__timezones');
             $t->foreign('date_format_id')->references('id')->on('date_formats');
             $t->foreign('datetime_format_id')->references('id')->on('datetime_formats');
             $t->foreign('country_id')->references('id')->on('core__countries');
             $t->foreign('currency_id')->references('id')->on('currencies');
-            $t->foreign('industry_id')->references('id')->on('industries');
-            $t->foreign('size_id')->references('id')->on('sizes');
+            $t->foreign('industry_id')->references('id')->on('core__industries');
+            $t->foreign('size_id')->references('id')->on('core__sizes');
 
 
             $t->timestamps();
@@ -153,7 +153,7 @@ class ConfideSetupUsersTable extends Migration
 
         });
 
-        Schema::create('gateways', function ($t) {
+        Schema::create('core__gateways', function ($t) {
             $t->increments('id');
 
             $t->string('name');
@@ -200,7 +200,7 @@ class ConfideSetupUsersTable extends Migration
             $t->text('config');
 
             $t->foreign('account_id')->references('id')->on('accounts')->onDelete('cascade');
-            $t->foreign('gateway_id')->references('id')->on('gateways');
+            $t->foreign('gateway_id')->references('id')->on('core__gateways');
             $t->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
             $t->unsignedInteger('public_id')->index();
@@ -242,13 +242,13 @@ class ConfideSetupUsersTable extends Migration
             $t->unsignedInteger('industry_id')->nullable();
             $t->unsignedInteger('size_id')->nullable();
             $t->boolean('is_deleted')->default(false);
-            $t->integer('payment_terms')->nullable();
+            $t->integer('core__paymentterms')->nullable();
 
             $t->foreign('account_id')->references('id')->on('accounts')->onDelete('cascade');
             $t->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $t->foreign('country_id')->references('id')->on('core__countries');
-            $t->foreign('industry_id')->references('id')->on('industries');
-            $t->foreign('size_id')->references('id')->on('sizes');
+            $t->foreign('industry_id')->references('id')->on('core__industries');
+            $t->foreign('size_id')->references('id')->on('core__sizes');
             $t->foreign('currency_id')->references('id')->on('currencies');
 
             $t->unsignedInteger('public_id')->index();
@@ -292,7 +292,7 @@ class ConfideSetupUsersTable extends Migration
             $t->string('name');
         });
 
-        Schema::create('frequencies', function ($t) {
+        Schema::create('core__frequencies', function ($t) {
             $t->increments('id');
             $t->string('name');
         });
@@ -465,7 +465,7 @@ class ConfideSetupUsersTable extends Migration
             $t->foreign('account_gateway_id')->references('id')->on('account_gateways')->onDelete('cascade');
             $t->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
-            $t->foreign('payment_type_id')->references('id')->on('payment_types');
+            $t->foreign('payment_type_id')->references('id')->on('core__paymenttypes');
 
             $t->unsignedInteger('public_id')->index();
             $t->unique(['account_id', 'public_id']);
@@ -536,7 +536,7 @@ class ConfideSetupUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('payment_terms');
+        Schema::dropIfExists('core__paymentterms');
         Schema::dropIfExists('themes');
         Schema::dropIfExists('credits');
         Schema::dropIfExists('core__timeline');
@@ -555,13 +555,13 @@ class ConfideSetupUsersTable extends Migration
         Schema::dropIfExists('currencies');
         Schema::dropIfExists('invoice_statuses');
         Schema::dropIfExists('core__countries');
-        Schema::dropIfExists('timezones');
-        Schema::dropIfExists('frequencies');
+        Schema::dropIfExists('core__timezones');
+        Schema::dropIfExists('core__frequencies');
         Schema::dropIfExists('date_formats');
         Schema::dropIfExists('datetime_formats');
-        Schema::dropIfExists('sizes');
-        Schema::dropIfExists('industries');
-        Schema::dropIfExists('gateways');
-        Schema::dropIfExists('payment_types');
+        Schema::dropIfExists('core__sizes');
+        Schema::dropIfExists('core__industries');
+        Schema::dropIfExists('core__gateways');
+        Schema::dropIfExists('core__paymenttypes');
     }
 }

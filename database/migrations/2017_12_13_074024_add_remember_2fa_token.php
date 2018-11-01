@@ -70,7 +70,7 @@ class AddRemember2faToken extends Migration
             $table->unsignedInteger('frequency_id_reminder4')->nullable();
         });
 
-        Schema::table('frequencies', function ($table) {
+        Schema::table('core__frequencies', function ($table) {
             $table->string('date_interval')->nullable();
         });
 
@@ -151,7 +151,7 @@ class AddRemember2faToken extends Migration
             $table->dropColumn('frequency_id_reminder4');
         });
 
-        Schema::table('frequencies', function ($table) {
+        Schema::table('core__frequencies', function ($table) {
             $table->dropColumn('date_interval');
         });
 

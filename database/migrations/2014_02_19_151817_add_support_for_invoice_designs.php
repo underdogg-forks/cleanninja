@@ -11,15 +11,15 @@ class AddSupportForInvoiceDesigns extends Migration
      */
     public function up()
     {
-        Schema::create('invoice_designs', function ($table) {
+        Schema::create('core__invoicedesigns', function ($table) {
             $table->increments('id');
             $table->string('name');
         });
 
-        DB::table('invoice_designs')->insert(['name' => 'Clean']);
-        DB::table('invoice_designs')->insert(['name' => 'Bold']);
-        DB::table('invoice_designs')->insert(['name' => 'Modern']);
-        DB::table('invoice_designs')->insert(['name' => 'Plain']);
+        DB::table('core__invoicedesigns')->insert(['name' => 'Clean']);
+        DB::table('core__invoicedesigns')->insert(['name' => 'Bold']);
+        DB::table('core__invoicedesigns')->insert(['name' => 'Modern']);
+        DB::table('core__invoicedesigns')->insert(['name' => 'Plain']);
 
         Schema::table('invoices', function ($table) {
             $table->unsignedInteger('invoice_design_id')->default(1)->after('invoice_status_id');
@@ -33,11 +33,11 @@ class AddSupportForInvoiceDesigns extends Migration
         DB::table('accounts')->update(['invoice_design_id' => 1]);
 
         Schema::table('invoices', function ($table) {
-            $table->foreign('invoice_design_id')->references('id')->on('invoice_designs');
+            $table->foreign('invoice_design_id')->references('id')->on('core__invoicedesigns');
         });
     
         Schema::table('accounts', function ($table) {
-            $table->foreign('invoice_design_id')->references('id')->on('invoice_designs');
+            $table->foreign('invoice_design_id')->references('id')->on('core__invoicedesigns');
         });
     }
 
@@ -58,6 +58,6 @@ class AddSupportForInvoiceDesigns extends Migration
             $table->dropColumn('invoice_design_id');
         });
 
-        Schema::dropIfExists('invoice_designs');
+        Schema::dropIfExists('core__invoicedesigns');
     }
 }

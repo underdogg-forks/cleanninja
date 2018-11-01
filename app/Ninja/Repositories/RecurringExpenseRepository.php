@@ -34,7 +34,7 @@ class RecurringExpenseRepository extends BaseRepository
                     ->leftjoin('clients', 'clients.id', '=', 'recurring_expenses.client_id')
                     ->leftJoin('contacts', 'contacts.client_id', '=', 'clients.id')
                     ->leftjoin('vendors', 'vendors.id', '=', 'recurring_expenses.vendor_id')
-                    ->join('frequencies', 'frequencies.id', '=', 'recurring_expenses.frequency_id')
+                    ->join('core__frequencies', 'frequencies.id', '=', 'recurring_expenses.frequency_id')
                     ->leftJoin('expense_categories', 'recurring_expenses.expense_category_id', '=', 'expense_categories.id')
                     ->where('recurring_expenses.account_id', '=', $accountid)
                     ->where('contacts.deleted_at', '=', null)

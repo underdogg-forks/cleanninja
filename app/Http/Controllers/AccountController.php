@@ -529,7 +529,6 @@ class AccountController extends BaseController
      */
     private function showTickets()
     {
-
         $data = [
             'account' => Auth::user()->account,
             'account_ticket_settings' => Auth::user()->account->account_ticket_settings,

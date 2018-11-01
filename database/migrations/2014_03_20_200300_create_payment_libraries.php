@@ -23,13 +23,13 @@ class CreatePaymentLibraries extends Migration
 
         });
 
-        Schema::table('gateways', function ($table) {
+        Schema::table('core__gateways', function ($table) {
             $table->unsignedInteger('payment_library_id')->default(1)->after('name');
         });
 
-        DB::table('gateways')->update(['payment_library_id' => 1]);
+        DB::table('core__gateways')->update(['payment_library_id' => 1]);
 
-        Schema::table('gateways', function ($table) {
+        Schema::table('core__gateways', function ($table) {
             $table->foreign('payment_library_id')->references('id')->on('payment_libraries')->onDelete('cascade');
         });
     }
@@ -41,8 +41,8 @@ class CreatePaymentLibraries extends Migration
      */
     public function down()
     {
-        if (Schema::hasColumn('gateways', 'payment_library_id')) {
-            Schema::table('gateways', function ($table) {
+        if (Schema::hasColumn('core__gateways', 'payment_library_id')) {
+            Schema::table('core__gateways', function ($table) {
                 $table->dropForeign('gateways_payment_library_id_foreign');
                 $table->dropColumn('payment_library_id');
             });

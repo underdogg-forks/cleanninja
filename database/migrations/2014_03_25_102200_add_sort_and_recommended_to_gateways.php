@@ -11,7 +11,7 @@ class AddSortAndRecommendedToGateways extends Migration
      */
     public function up()
     {
-        Schema::table('gateways', function ($table) {
+        Schema::table('core__gateways', function ($table) {
             $table->unsignedInteger('sort_order')->default(10000)->after('name');
             $table->boolean('recommended')->default(0)->after('sort_order');
             $table->string('site_url', 200)->nullable()->after('recommended');
@@ -20,20 +20,20 @@ class AddSortAndRecommendedToGateways extends Migration
     
     public function down()
     {
-        if (Schema::hasColumn('gateways', 'sort_order')) {
-            Schema::table('gateways', function ($table) {
+        if (Schema::hasColumn('core__gateways', 'sort_order')) {
+            Schema::table('core__gateways', function ($table) {
                 $table->dropColumn('sort_order');
             });
         }
         
-        if (Schema::hasColumn('gateways', 'recommended')) {
-            Schema::table('gateways', function ($table) {
+        if (Schema::hasColumn('core__gateways', 'recommended')) {
+            Schema::table('core__gateways', function ($table) {
                 $table->dropColumn('recommended');
             });
         }
         
-        if (Schema::hasColumn('gateways', 'site_url')) {
-            Schema::table('gateways', function ($table) {
+        if (Schema::hasColumn('core__gateways', 'site_url')) {
+            Schema::table('core__gateways', function ($table) {
                 $table->dropColumn('site_url');
             });
         }

@@ -38,11 +38,11 @@ class AddCustomProductFields extends Migration
         DB::table('currencies')->where('code', '=', 'HKR')->update(['code' => 'HRK']);
 
         // Add 'Two Months' frequency option
-        if (DB::table('frequencies')->count() == 7) {
-            DB::table('frequencies')->where('id', '=', 5)->update(['name' => 'Two months']);
-            DB::table('frequencies')->where('id', '=', 6)->update(['name' => 'Three months']);
-            DB::table('frequencies')->where('id', '=', 7)->update(['name' => 'Six months']);
-            DB::table('frequencies')->insert(['name' => 'Yearly']);
+        if (DB::table('core__frequencies')->count() == 7) {
+            DB::table('core__frequencies')->where('id', '=', 5)->update(['name' => 'Two months']);
+            DB::table('core__frequencies')->where('id', '=', 6)->update(['name' => 'Three months']);
+            DB::table('core__frequencies')->where('id', '=', 7)->update(['name' => 'Six months']);
+            DB::table('core__frequencies')->insert(['name' => 'Yearly']);
             DB::statement('update invoices set frequency_id = frequency_id + 1 where frequency_id >= 5');
         }
     }

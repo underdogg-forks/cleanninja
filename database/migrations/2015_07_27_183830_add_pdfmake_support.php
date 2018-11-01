@@ -11,7 +11,7 @@ class AddPdfmakeSupport extends Migration
      */
     public function up()
     {
-        Schema::table('invoice_designs', function ($table) {
+        Schema::table('core__invoicedesigns', function ($table) {
             $table->mediumText('pdfmake')->nullable()->after('javascript');
         });
     }
@@ -23,7 +23,7 @@ class AddPdfmakeSupport extends Migration
      */
     public function down()
     {
-        Schema::table('invoice_designs', function ($table) {
+        Schema::table('core__invoicedesigns', function ($table) {
             $table->dropColumn('pdfmake');
         });
     }

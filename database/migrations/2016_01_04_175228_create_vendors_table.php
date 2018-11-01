@@ -99,7 +99,7 @@ class CreateVendorsTable extends Migration
             $table->unique(['account_id', 'public_id']);
         });
 
-        Schema::table('payment_terms', function (Blueprint $table) {
+        Schema::table('core__paymentterms', function (Blueprint $table) {
             $table->timestamps();
             $table->softDeletes();
             $table->unsignedInteger('user_id');
@@ -112,21 +112,21 @@ class CreateVendorsTable extends Migration
         });
 
         // Update public id
-        $paymentTerms = DB::table('payment_terms')
+        $paymentTerms = DB::table('core__paymentterms')
                     ->where('public_id', '=', 0)
                     ->select('id', 'public_id')
                     ->get();
         $i = 1;
         foreach ($paymentTerms as $pTerm) {
             $data = ['public_id' => $i++];
-            DB::table('payment_terms')->where('id', $pTerm->id)->update($data);
+            DB::table('core__paymentterms')->where('id', $pTerm->id)->update($data);
         }
 
         Schema::table('invoices', function (Blueprint $table) {
             $table->boolean('has_expenses')->default(false);
         });
 
-        Schema::table('payment_terms', function (Blueprint $table) {
+        Schema::table('core__paymentterms', function (Blueprint $table) {
             $table->unique(['account_id', 'public_id']);
         });
     }

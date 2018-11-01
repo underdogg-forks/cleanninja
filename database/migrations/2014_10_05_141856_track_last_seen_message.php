@@ -16,8 +16,8 @@ class TrackLastSeenMessage extends Migration
         });
 
         if (DB::table('payment_libraries')->count() > 0) {
-            DB::table('gateways')->update(['recommended' => 0]);
-            DB::table('gateways')->insert([
+            DB::table('core__gateways')->update(['recommended' => 0]);
+            DB::table('core__gateways')->insert([
                 'name' => 'moolah',
                 'provider' => 'AuthorizeNet_AIM',
                 'sort_order' => 1,

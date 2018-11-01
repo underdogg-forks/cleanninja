@@ -75,7 +75,7 @@ class AddDefaultNoteToClient extends Migration
         DB::statement('update accounts
             set quote_design_id = invoice_design_id');
 
-        DB::statement('update invoice_designs
+        DB::statement('update core__invoicedesigns
             set name = "Custom1"
             where id = 11
             and name = "Custom"');

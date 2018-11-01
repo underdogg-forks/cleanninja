@@ -11,7 +11,7 @@ class AddInvoiceDesignTable extends Migration
      */
     public function up()
     {
-        Schema::table('invoice_designs', function ($table) {
+        Schema::table('core__invoicedesigns', function ($table) {
             $table->mediumText('javascript')->nullable()->after('name');
         });
 
@@ -19,7 +19,7 @@ class AddInvoiceDesignTable extends Migration
             $table->text('invoice_design')->nullable()->after('slug');
         });
 
-        DB::table('invoice_designs')->where('id', 1)->update([
+        DB::table('core__invoicedesigns')->where('id', 1)->update([
             'javascript' => "var GlobalY=0;//Y position of line at current page
 
 	    var client = invoice.client;
@@ -113,7 +113,7 @@ class AddInvoiceDesignTable extends Migration
 	    doc.text(AmountX, y, AmountText);",
         ]);
 
-        DB::table('invoice_designs')->where('id', 2)->update([
+        DB::table('core__invoicedesigns')->where('id', 2)->update([
             'javascript' => "  var GlobalY=0;//Y position of line at current page
 
 			  var client = invoice.client;
@@ -263,7 +263,7 @@ class AddInvoiceDesignTable extends Migration
 			  doc.text(AmountX, y, AmountText);",
             ]);
 
-        DB::table('invoice_designs')->where('id', 3)->update([
+        DB::table('core__invoicedesigns')->where('id', 3)->update([
                 'javascript' => "    var client = invoice.client;
 	    var account = invoice.account;
 	    var currencyId = client.currency_id;
@@ -414,7 +414,7 @@ class AddInvoiceDesignTable extends Migration
 	    doc.text(amountX, y+2, amount);",
         ]);
 
-        DB::table('invoice_designs')->where('id', 4)->update([
+        DB::table('core__invoicedesigns')->where('id', 4)->update([
             'javascript' => "  var client = invoice.client;
 		  var account = invoice.account;
 		  var currencyId = client.currency_id;  
@@ -500,7 +500,7 @@ class AddInvoiceDesignTable extends Migration
      */
     public function down()
     {
-        Schema::table('invoice_designs', function ($table) {
+        Schema::table('core__invoicedesigns', function ($table) {
             $table->dropColumn('javascript');
         });
 

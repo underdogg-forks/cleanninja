@@ -69,7 +69,7 @@ class PaymentsChanges extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('contact_id')->references('id')->on('contacts')->onDelete('cascade');
             $table->foreign('account_gateway_token_id')->references('id')->on('account_gateway_tokens');
-            $table->foreign('payment_type_id')->references('id')->on('payment_types');
+            $table->foreign('payment_type_id')->references('id')->on('core__paymenttypes');
             $table->foreign('currency_id')->references('id')->on('currencies');
 
             $table->unique(['account_id', 'public_id']);

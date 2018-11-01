@@ -18,7 +18,7 @@ class AddHeaderFooterOption extends Migration
             $table->date('pro_plan_trial')->nullable()->after('show_currency_code');
         });
 
-        Schema::table('gateways', function ($table) {
+        Schema::table('core__gateways', function ($table) {
             $table->boolean('is_offsite')->after('recommended');
             $table->boolean('is_secure')->after('is_offsite');
         });
@@ -51,7 +51,7 @@ class AddHeaderFooterOption extends Migration
             $table->dropColumn('pro_plan_trial');
         });
 
-        Schema::table('gateways', function ($table) {
+        Schema::table('core__gateways', function ($table) {
             $table->dropColumn('is_offsite');
             $table->dropColumn('is_secure');
         });
