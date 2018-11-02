@@ -40,9 +40,9 @@ class PaymentsChanges extends Migration
         }
         Eloquent::reguard();
 
-        Schema::dropIfExists('payment_methods');
+        Schema::dropIfExists('payments__methods');
 
-        Schema::create('payment_methods', function ($table) {
+        Schema::create('payments__methods', function ($table) {
             $table->increments('id');
             $table->unsignedInteger('account_id');
             $table->unsignedInteger('user_id');
@@ -64,7 +64,7 @@ class PaymentsChanges extends Migration
             $table->unsignedInteger('public_id')->index();
         });
 
-        Schema::table('payment_methods', function ($table) {
+        Schema::table('payments__methods', function ($table) {
             $table->foreign('account_id')->references('id')->on('accounts')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('contact_id')->references('id')->on('contacts')->onDelete('cascade');
@@ -89,7 +89,7 @@ class PaymentsChanges extends Migration
 
         Schema::table('payments', function ($table) {
             $table->foreign('payment_status_id')->references('id')->on('payment_statuses');
-            $table->foreign('payment_method_id')->references('id')->on('payment_methods');
+            $table->foreign('payment_method_id')->references('id')->on('payments__methods');
         });
 
         Schema::table('invoices', function ($table) {
@@ -110,7 +110,7 @@ class PaymentsChanges extends Migration
         });
 
         Schema::table('account_gateway_tokens', function ($table) {
-            $table->foreign('default_payment_method_id')->references('id')->on('payment_methods');
+            $table->foreign('default_payment_method_id')->references('id')->on('payments__methods');
         });
     }
 
@@ -165,6 +165,6 @@ class PaymentsChanges extends Migration
             $table->dropColumn('default_payment_method_id');
         });
 
-        Schema::dropIfExists('payment_methods');
+        Schema::dropIfExists('payments__methods');
     }
 }

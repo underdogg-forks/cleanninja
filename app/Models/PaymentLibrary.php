@@ -12,7 +12,7 @@ class PaymentLibrary extends Eloquent
     /**
      * @var string
      */
-    protected $table = 'payment_libraries';
+    protected $table = 'payments__libraries';
     /**
      * @var bool
      */

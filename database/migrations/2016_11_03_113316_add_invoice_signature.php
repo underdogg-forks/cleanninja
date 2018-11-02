@@ -26,20 +26,20 @@ class AddInvoiceSignature extends Migration
             });
 
             if (Utils::isNinja()) {
-                Schema::table('payment_methods', function ($table) {
+                Schema::table('payments__methods', function ($table) {
                     $table->unsignedInteger('account_gateway_token_id')->nullable()->change();
                 });
 
                 // This may fail if the foreign key doesn't exist
                 try {
-                    Schema::table('payment_methods', function ($table) {
+                    Schema::table('payments__methods', function ($table) {
                         $table->dropForeign('payment_methods_account_gateway_token_id_foreign');
                     });
                 } catch (Exception $e) {
                     // do nothing
                 }
 
-                Schema::table('payment_methods', function ($table) {
+                Schema::table('payments__methods', function ($table) {
                     $table->foreign('account_gateway_token_id')->references('id')->on('account_gateway_tokens')->onDelete('cascade');
                 });
 
@@ -48,7 +48,7 @@ class AddInvoiceSignature extends Migration
                 });
 
                 Schema::table('payments', function ($table) {
-                    $table->foreign('payment_method_id')->references('id')->on('payment_methods')->onDelete('cascade');
+                    $table->foreign('payment_method_id')->references('id')->on('payments__methods')->onDelete('cascade');
                 });
             }
         }

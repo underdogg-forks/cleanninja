@@ -12,6 +12,9 @@ class PaymentMethod extends EntityModel
 {
     use SoftDeletes;
 
+    protected $table = 'payments__methods';
+
+
     /**
      * @var bool
      */

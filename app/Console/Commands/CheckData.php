@@ -425,7 +425,7 @@ class CheckData extends Command
         }
 
         $queueDB = config('queue.connections.database.connection');
-        $count = DB::connection($queueDB)->table('failed_jobs')->count();
+        $count = DB::connection($queueDB)->table('core__failedjobs')->count();
 
         if ($count > 0) {
             $this->isValid = false;

@@ -64,7 +64,7 @@ class AddTaskProjects extends Migration
         }
 
         Schema::table('account_gateway_tokens', function ($table) {
-            $table->foreign('default_payment_method_id')->references('id')->on('payment_methods')->onDelete('cascade');
+            $table->foreign('default_payment_method_id')->references('id')->on('payments__methods')->onDelete('cascade');
         });
 
         if (! Schema::hasColumn('invoices', 'is_public')) {

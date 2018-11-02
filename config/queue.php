@@ -38,7 +38,7 @@ return [
 		'database' => [
 			'connection' => env('QUEUE_DATABASE', 'mysql'),
 			'driver' => 'database',
-			'table' => 'jobs',
+			'table' => 'core__cronjobs',
 			'queue' => 'default',
 			'expire' => 60,
 		],
@@ -88,7 +88,7 @@ return [
 
 	'failed' => [
 		'database' => env('QUEUE_DATABASE', 'mysql'),
-		'table' => 'failed_jobs',
+		'table' => 'core__failedjobs',
 	],
 
 ];

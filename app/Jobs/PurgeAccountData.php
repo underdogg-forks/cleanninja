@@ -35,7 +35,7 @@ class PurgeAccountData extends Job
             'core__timeline',
             'invitations',
             'account_gateway_tokens',
-            'payment_methods',
+            'payments__methods',
             'bookkeeping__credits',
             'expenses__categories',
             'expenses',

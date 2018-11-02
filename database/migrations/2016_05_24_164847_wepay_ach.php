@@ -16,7 +16,7 @@ class WepayAch extends Migration
             $table->string('contact_key')->nullable()->default(null)->index()->unique();
         });
 
-        Schema::table('payment_methods', function ($table) {
+        Schema::table('payments__methods', function ($table) {
             $table->string('bank_name')->nullable();
             $table->string('ip')->nullable();
         });
@@ -47,7 +47,7 @@ class WepayAch extends Migration
             $table->dropColumn('ip');
         });
 
-        Schema::table('payment_methods', function ($table) {
+        Schema::table('payments__methods', function ($table) {
             $table->dropColumn('bank_name');
             $table->dropColumn('ip');
         });

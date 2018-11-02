@@ -118,7 +118,7 @@ class StripePaymentDriver extends BasePaymentDriver
             if ($paymentMethod = $this->createPaymentMethod($customer)) {
                 $customer->default_payment_method_id = $paymentMethod->id;
                 $customer->save();
-                $customer->load('payment_methods');
+                $customer->load('payments__methods');
             }
         }
 

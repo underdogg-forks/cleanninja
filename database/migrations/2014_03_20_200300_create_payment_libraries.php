@@ -11,9 +11,9 @@ class CreatePaymentLibraries extends Migration
      */
     public function up()
     {
-        Schema::dropIfExists('payment_libraries');
+        Schema::dropIfExists('payments__libraries');
 
-        Schema::create('payment_libraries', function ($t) {
+        Schema::create('payments__libraries', function ($t) {
             $t->increments('id');
 
             $t->string('name');
@@ -30,7 +30,7 @@ class CreatePaymentLibraries extends Migration
         DB::table('core__gateways')->update(['payment_library_id' => 1]);
 
         Schema::table('core__gateways', function ($table) {
-            $table->foreign('payment_library_id')->references('id')->on('payment_libraries')->onDelete('cascade');
+            $table->foreign('payment_library_id')->references('id')->on('payments__libraries')->onDelete('cascade');
         });
     }
 
@@ -48,6 +48,6 @@ class CreatePaymentLibraries extends Migration
             });
         }
 
-        Schema::dropIfExists('payment_libraries');
+        Schema::dropIfExists('payments__libraries');
     }
 }

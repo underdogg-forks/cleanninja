@@ -47,10 +47,10 @@ class ClientPortalHeaderComposer
 
         $hasPaymentMethods = false;
         if ($account->getTokenGatewayId() && ! $account->enable_client_portal_dashboard) {
-            $hasPaymentMethods = DB::table('payment_methods')
+            $hasPaymentMethods = DB::table('payments__methods')
                                     ->where('contacts.client_id', '=', $client->id)
-                                    ->whereNull('payment_methods.deleted_at')
-                                    ->join('contacts', 'contacts.id', '=', 'payment_methods.contact_id')
+                                    ->whereNull('payments__methods.deleted_at')
+                                    ->join('contacts', 'contacts.id', '=', 'payments__methods.contact_id')
                                     ->count();
         }
 

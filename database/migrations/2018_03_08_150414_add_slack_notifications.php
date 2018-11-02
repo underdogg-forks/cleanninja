@@ -75,13 +75,13 @@ class AddSlackNotifications extends Migration
             // do nothing, change only needed for invoiceninja servers
         }
 
-        Schema::table('jobs', function (Blueprint $table) {
+        Schema::table('core__cronjobs', function (Blueprint $table) {
             $table->dropIndex('jobs_queue_reserved_reserved_at_index');
             $table->dropColumn('reserved');
             $table->index(['queue', 'reserved_at']);
         });
 
-        Schema::table('failed_jobs', function (Blueprint $table) {
+        Schema::table('core__failedjobs', function (Blueprint $table) {
             $table->longText('exception')->after('payload');
         });
     }
@@ -107,13 +107,13 @@ class AddSlackNotifications extends Migration
             $table->dropColumn('send_item_details');
         });
 
-        Schema::table('jobs', function (Blueprint $table) {
+        Schema::table('core__cronjobs', function (Blueprint $table) {
             $table->tinyInteger('reserved')->unsigned();
             $table->index(['queue', 'reserved', 'reserved_at']);
             $table->dropIndex('jobs_queue_reserved_at_index');
         });
 
-        Schema::table('failed_jobs', function (Blueprint $table) {
+        Schema::table('core__failedjobs', function (Blueprint $table) {
             $table->dropColumn('exception');
         });
     }

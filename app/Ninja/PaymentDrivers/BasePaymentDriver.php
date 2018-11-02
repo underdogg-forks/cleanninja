@@ -595,7 +595,7 @@ class BasePaymentDriver
         }
 
         $this->customer = AccountGatewayToken::clientAndGateway($clientId, $this->accountGateway->id)
-                            ->with('payment_methods')
+                            ->with('payments__methods')
                             ->orderBy('id', 'desc')
                             ->first();
 

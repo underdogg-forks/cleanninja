@@ -15,7 +15,7 @@ class TrackLastSeenMessage extends Migration
             $table->unsignedInteger('news_feed_id')->nullable()->after('last_name');
         });
 
-        if (DB::table('payment_libraries')->count() > 0) {
+        if (DB::table('payments__libraries')->count() > 0) {
             DB::table('core__gateways')->update(['recommended' => 0]);
             DB::table('core__gateways')->insert([
                 'name' => 'moolah',

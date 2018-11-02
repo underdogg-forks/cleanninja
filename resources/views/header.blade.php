@@ -1,6 +1,9 @@
 @extends('master')
 
 @section('head_css')
+
+//flatly.min.css
+    {{--  <link href="{{ asset('css/themes/flatly.min.css') }}?no_cache={{ NINJA_VERSION }}" rel="stylesheet" type="text/css"/>  --}}
     <link href="{{ asset('css/built.css') }}?no_cache={{ NINJA_VERSION }}" rel="stylesheet" type="text/css"/>
 
     @if (Utils::isNinjaDev())
@@ -261,19 +264,22 @@
 <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="height:60px;">
 
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-1">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a href="#" id="left-menu-toggle" class="menu-toggle" title="{{ trans('texts.toggle_navigation') }}">
+
+        <a href="#" id="left-menu-toggle" class="menu-toggle" title="{{ trans('texts.toggle_navigation') }}">
           <div class="navbar-brand">
                 <i class="fa fa-bars hide-phone" style="width:32px;padding-top:2px;float:left"></i>
                 {{-- Per our license, please do not remove or modify this link. --}}
                 <img src="{{ asset('images/invoiceninja-logo.png') }}" width="193" height="25" style="float:left"/>
           </div>
       </a>
+
+
+      <button type="button" class="navbar-toggle" data-toggle="collapse"  style="float:right" data-target="#navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
     </div>
 
     <a id="right-menu-toggle" class="menu-toggle hide-phone pull-right" title="{{ trans('texts.toggle_history') }}" style="cursor:pointer">

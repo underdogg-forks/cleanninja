@@ -49,7 +49,7 @@ class SupportNewPricing extends Migration
         });
 
         // https://github.com/invoiceninja/invoiceninja/pull/959
-        Schema::create('jobs', function (Blueprint $table) {
+        Schema::create('core__cronjobs', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('queue');
             $table->longText('payload');
@@ -61,7 +61,7 @@ class SupportNewPricing extends Migration
             $table->index(['queue', 'reserved', 'reserved_at']);
         });
 
-        Schema::create('failed_jobs', function (Blueprint $table) {
+        Schema::create('core__failedjobs', function (Blueprint $table) {
             $table->increments('id');
             $table->text('connection');
             $table->text('queue');
@@ -92,7 +92,7 @@ class SupportNewPricing extends Migration
             $table->dropColumn('start_of_week');
         });
 
-        Schema::drop('jobs');
-        Schema::drop('failed_jobs');
+        Schema::drop('core__cronjobs');
+        Schema::drop('core__failedjobs');
     }
 }
