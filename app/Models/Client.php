@@ -345,7 +345,7 @@ class Client extends EntityModel
      */
     public function getTotalCredit()
     {
-        return DB::table('credits')
+        return DB::table('bookkeeping__credits')
                 ->where('client_id', '=', $this->id)
                 ->whereNull('deleted_at')
                 ->sum('balance');

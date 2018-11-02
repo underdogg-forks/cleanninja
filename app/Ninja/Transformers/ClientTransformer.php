@@ -61,7 +61,7 @@ class ClientTransformer extends EntityTransformer
      */
     protected $availableIncludes = [
         'invoices',
-        'credits',
+        'bookkeeping__credits',
         'core__timeline',
     ];
 

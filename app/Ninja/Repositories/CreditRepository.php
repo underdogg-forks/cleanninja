@@ -16,9 +16,9 @@ class CreditRepository extends BaseRepository
 
     public function find($clientPublicId = null, $filter = null)
     {
-        $query = DB::table('credits')
-                    ->join('accounts', 'accounts.id', '=', 'credits.account_id')
-                    ->join('clients', 'clients.id', '=', 'credits.client_id')
+        $query = DB::table('bookkeeping__credits')
+                    ->join('accounts', 'accounts.id', '=', 'bookkeeping__credits.account_id')
+                    ->join('clients', 'clients.id', '=', 'bookkeeping__credits.client_id')
                     ->join('contacts', 'contacts.client_id', '=', 'clients.id')
                     ->where('clients.account_id', '=', \Auth::user()->account_id)
                     ->where('contacts.deleted_at', '=', null)
@@ -26,31 +26,34 @@ class CreditRepository extends BaseRepository
                     ->select(
                         DB::raw('COALESCE(clients.currency_id, accounts.currency_id) currency_id'),
                         DB::raw('COALESCE(clients.country_id, accounts.country_id) country_id'),
-                        'credits.public_id',
+                        'bookkeeping__credits.public_id',
                         DB::raw("COALESCE(NULLIF(clients.name,''), NULLIF(CONCAT(contacts.first_name, ' ', contacts.last_name),''), NULLIF(contacts.email,'')) client_name"),
                         'clients.public_id as client_public_id',
                         'clients.user_id as client_user_id',
-                        'credits.amount',
-                        'credits.balance',
-                        'credits.credit_date as credit_date_sql',
-                        DB::raw("CONCAT(credits.credit_date, credits.created_at) as credit_date"),
+                        'bookkeeping__credits.amount',
+                        'bookkeeping__credits.balance',
+                        'bookkeeping__credits.credit_date as credit_date_sql',
+                        DB::raw("CONCAT(bookkeeping__credits.credit_date, bookkeeping__credits.created_at) as credit_date"),
                         'contacts.first_name',
                         'contacts.last_name',
                         'contacts.email',
-                        'credits.private_notes',
-                        'credits.public_notes',
-                        'credits.deleted_at',
-                        'credits.is_deleted',
-                        'credits.user_id'
+                        'bookkeeping__credits.private_notes',
+                        'bookkeeping__credits.public_notes',
+                        'bookkeeping__credits.deleted_at',
+                        'bookkeeping__credits.is_deleted',
+                        'bookkeeping__credits.user_id'
                     );
 
+        /*
         if ($clientPublicId) {
             $query->where('clients.public_id', '=', $clientPublicId);
         } else {
             $query->whereNull('clients.deleted_at');
         }
+        */
 
-        $this->applyFilters($query, ENTITY_CREDIT);
+        //$query, $entityType, $table = false
+        //$this->applyFilters($query, ENTITY_CREDIT, $table = 'bookkeeping__credits');
 
         if ($filter) {
             $query->where(function ($query) use ($filter) {
@@ -58,25 +61,47 @@ class CreditRepository extends BaseRepository
             });
         }
 
+
+
         return $query;
     }
 
     public function getClientDatatable($clientId)
     {
-        $query = DB::table('credits')
-                    ->join('accounts', 'accounts.id', '=', 'credits.account_id')
-                    ->join('clients', 'clients.id', '=', 'credits.client_id')
-                    ->where('credits.client_id', '=', $clientId)
-                    ->where('clients.deleted_at', '=', null)
-                    ->where('credits.deleted_at', '=', null)
+        $query = DB::table('bookkeeping__credits')
+                    ->join('accounts', 'accounts.id', '=', 'bookkeeping__credits.account_id')
+                    ->join('clients', 'clients.id', '=', 'bookkeeping__credits.client_id')
+                    ->where('bookkeeping__credits.client_id', '=', $clientId)
+                    ->where('clients.deleted_at', '=', null)->select(
+                             DB::raw('COALESCE(clients.currency_id, accounts.currency_id) currency_id'),
+                             DB::raw('COALESCE(clients.country_id, accounts.country_id) country_id'),
+                             'bookkeeping__credits.amount',
+                             'bookkeeping__credits.balance',
+                             'bookkeeping__credits.credit_date',
+                             'bookkeeping__credits.public_notes')
                     ->select(
-                        DB::raw('COALESCE(clients.currency_id, accounts.currency_id) currency_id'),
-                        DB::raw('COALESCE(clients.country_id, accounts.country_id) country_id'),
-                        'credits.amount',
-                        'credits.balance',
-                        'credits.credit_date',
-                        'credits.public_notes'
+                             DB::raw('COALESCE(clients.currency_id, accounts.currency_id) currency_id'),
+                             DB::raw('COALESCE(clients.country_id, accounts.country_id) country_id'),
+                             'bookkeeping__credits.amount',
+                             'bookkeeping__credits.balance',
+                             'bookkeeping__credits.credit_date',
+                             'bookkeeping__credits.public_notes'
                     );
+
+/**
+ * ->select(
+                    //     DB::raw('COALESCE(clients.currency_id, accounts.currency_id) currency_id'),
+                    //     DB::raw('COALESCE(clients.country_id, accounts.country_id) country_id'),
+                    //     'bookkeeping__credits.amount',
+                    //     'bookkeeping__credits.balance',
+                    //     'bookkeeping__credits.credit_date',
+                    //     'bookkeeping__credits.public_notes'
+                    // )
+ * 
+ * 
+*/
+
+
 
         $table = \Datatable::query($query)
             ->addColumn('credit_date', function ($model) {
@@ -92,6 +117,12 @@ class CreditRepository extends BaseRepository
                 return e($model->public_notes);
             })
             ->make();
+
+
+
+dd($table);
+
+
 
         return $table;
     }

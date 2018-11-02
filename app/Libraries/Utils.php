@@ -653,6 +653,8 @@ class Utils
             return 'expense_categories';
         } elseif ($type === ENTITY_PROPOSAL_CATEGORY) {
             return 'proposal_categories';
+        } elseif ($type === ENTITY_CREDIT) {
+            return 'bookkeeping__credits';
         } elseif ($type === ENTITY_TASK_STATUS) {
             return 'task_statuses';
         } elseif ($type === ENTITY_TICKET_STATUS) {

@@ -74,7 +74,7 @@ class TimelineRepository
                     ->leftJoin('contacts', 'contacts.client_id', '=', 'clients.id')
                     ->leftJoin('invoices', 'invoices.id', '=', 'core__timeline.invoice_id')
                     ->leftJoin('payments', 'payments.id', '=', 'core__timeline.payment_id')
-                    ->leftJoin('credits', 'credits.id', '=', 'core__timeline.credit_id')
+                    ->leftJoin('bookkeeping__credits', 'bookkeeping__credits.id', '=', 'core__timeline.credit_id')
                     ->leftJoin('tasks', 'tasks.id', '=', 'core__timeline.task_id')
                     ->leftJoin('expenses', 'expenses.id', '=', 'core__timeline.expense_id')
                     ->leftJoin('tickets', 'tickets.id', '=', 'core__timeline.ticket_id')
@@ -108,7 +108,7 @@ class TimelineRepository
                         'contacts.email as email',
                         'payments.transaction_reference as payment',
                         'payments.amount as payment_amount',
-                        'credits.amount as credit',
+                        'bookkeeping__credits.amount as credit',
                         'tasks.description as task_description',
                         'tasks.public_id as task_public_id',
                         'expenses.public_notes as expense_public_notes',

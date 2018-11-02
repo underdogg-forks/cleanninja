@@ -13,7 +13,7 @@ class ConfideSetupUsersTable extends Migration
     {
         Schema::dropIfExists('core__paymentterms');
         Schema::dropIfExists('themes');
-        Schema::dropIfExists('credits');
+        Schema::dropIfExists('bookkeeping__credits');
         Schema::dropIfExists('core__timeline');
         Schema::dropIfExists('invitations');
         Schema::dropIfExists('payments');
@@ -37,7 +37,7 @@ class ConfideSetupUsersTable extends Migration
         Schema::dropIfExists('core__sizes');
         Schema::dropIfExists('core__industries');
         Schema::dropIfExists('core__gateways');
-        Schema::dropIfExists('core__paymenttypes');
+        Schema::dropIfExists('bookkeeping__paymenttypes');
 
         Schema::create('core__countries', function ($table) {
             $table->increments('id');
@@ -61,7 +61,7 @@ class ConfideSetupUsersTable extends Migration
             $t->string('name');
         });
 
-        Schema::create('core__paymenttypes', function ($t) {
+        Schema::create('bookkeeping__paymenttypes', function ($t) {
             $t->increments('id');
             $t->string('name');
         });
@@ -465,7 +465,7 @@ class ConfideSetupUsersTable extends Migration
             $t->foreign('account_gateway_id')->references('id')->on('account_gateways')->onDelete('cascade');
             $t->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
-            $t->foreign('payment_type_id')->references('id')->on('core__paymenttypes');
+            $t->foreign('payment_type_id')->references('id')->on('bookkeeping__paymenttypes');
 
             $t->unsignedInteger('public_id')->index();
             $t->unique(['account_id', 'public_id']);
@@ -476,7 +476,7 @@ class ConfideSetupUsersTable extends Migration
 
         });
 
-        Schema::create('credits', function ($t) {
+        Schema::create('bookkeeping__credits', function ($t) {
             $t->increments('id');
             $t->unsignedInteger('account_id')->index();
             $t->unsignedInteger('client_id')->index();
@@ -538,7 +538,7 @@ class ConfideSetupUsersTable extends Migration
     {
         Schema::dropIfExists('core__paymentterms');
         Schema::dropIfExists('themes');
-        Schema::dropIfExists('credits');
+        Schema::dropIfExists('bookkeeping__credits');
         Schema::dropIfExists('core__timeline');
         Schema::dropIfExists('invitations');
         Schema::dropIfExists('payments');
@@ -562,6 +562,6 @@ class ConfideSetupUsersTable extends Migration
         Schema::dropIfExists('core__sizes');
         Schema::dropIfExists('core__industries');
         Schema::dropIfExists('core__gateways');
-        Schema::dropIfExists('core__paymenttypes');
+        Schema::dropIfExists('bookkeeping__paymenttypes');
     }
 }

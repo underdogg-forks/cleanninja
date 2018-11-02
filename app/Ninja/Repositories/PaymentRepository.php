@@ -24,9 +24,9 @@ class PaymentRepository extends BaseRepository
                     ->join('invoices', 'invoices.id', '=', 'payments.invoice_id')
                     ->join('contacts', 'contacts.client_id', '=', 'clients.id')
                     ->join('payment_statuses', 'payment_statuses.id', '=', 'payments.payment_status_id')
-                    ->leftJoin('core__paymenttypes', 'payment_types.id', '=', 'payments.payment_type_id')
+                    ->leftJoin('bookkeeping__paymenttypes', 'bookkeeping__paymenttypes.id', '=', 'payments.payment_type_id')
                     ->leftJoin('account_gateways', 'account_gateways.id', '=', 'payments.account_gateway_id')
-                    ->leftJoin('core__gateways', 'gateways.id', '=', 'account_gateways.gateway_id')
+                    ->leftJoin('core__gateways', 'core__gateways.id', '=', 'account_gateways.gateway_id')
                     ->where('payments.account_id', '=', \Auth::user()->account_id)
                     ->where('contacts.is_primary', '=', true)
                     ->where('contacts.deleted_at', '=', null)
@@ -51,8 +51,8 @@ class PaymentRepository extends BaseRepository
                         'contacts.first_name',
                         'contacts.last_name',
                         'contacts.email',
-                        'payment_types.name as method',
-                        'payment_types.name as payment_type',
+                        'bookkeeping__paymenttypes.name as method',
+                        'bookkeeping__paymenttypes.name as payment_type',
                         'payments.account_gateway_id',
                         'payments.deleted_at',
                         'payments.is_deleted',
@@ -67,8 +67,8 @@ class PaymentRepository extends BaseRepository
                         'payments.exchange_rate',
                         'payments.exchange_currency_id',
                         'invoices.is_deleted as invoice_is_deleted',
-                        'gateways.name as gateway_name',
-                        'gateways.id as gateway_id',
+                        'core__gateways.name as gateway_name',
+                        'core__gateways.id as gateway_id',
                         'payment_statuses.name as status'
                     );
 
@@ -85,8 +85,8 @@ class PaymentRepository extends BaseRepository
                 $query->where('clients.name', 'like', '%'.$filter.'%')
                       ->orWhere('invoices.invoice_number', 'like', '%'.$filter.'%')
                       ->orWhere('payments.transaction_reference', 'like', '%'.$filter.'%')
-                      ->orWhere('gateways.name', 'like', '%'.$filter.'%')
-                      ->orWhere('payment_types.name', 'like', '%'.$filter.'%')
+                      ->orWhere('core__gateways.name', 'like', '%'.$filter.'%')
+                      ->orWhere('bookkeeping__paymenttypes.name', 'like', '%'.$filter.'%')
                       ->orWhere('contacts.first_name', 'like', '%'.$filter.'%')
                       ->orWhere('contacts.last_name', 'like', '%'.$filter.'%')
                       ->orWhere('contacts.email', 'like', '%'.$filter.'%');
@@ -108,7 +108,7 @@ class PaymentRepository extends BaseRepository
                         $join->on('invitations.invoice_id', '=', 'invoices.id')
                              ->on('invitations.contact_id', '=', 'contacts.id');
                     })
-                    ->leftJoin('core__paymenttypes', 'payment_types.id', '=', 'payments.payment_type_id')
+                    ->leftJoin('bookkeeping__paymenttypes', 'bookkeeping__paymenttypes.id', '=', 'payments.payment_type_id')
                     ->where('clients.is_deleted', '=', false)
                     ->where('payments.is_deleted', '=', false)
                     ->where('invitations.deleted_at', '=', null)
@@ -131,7 +131,7 @@ class PaymentRepository extends BaseRepository
                         'contacts.first_name',
                         'contacts.last_name',
                         'contacts.email',
-                        'payment_types.name as payment_type',
+                        'bookkeeping__paymenttypes.name as payment_type',
                         'payments.account_gateway_id',
                         'payments.refunded',
                         'payments.expiration',

@@ -14,6 +14,10 @@ class Credit extends EntityModel
     use SoftDeletes;
     use PresentableTrait;
 
+
+    protected $table = 'bookkeeping__credits';
+
+
     /**
      * @var array
      */

@@ -27,7 +27,7 @@ class CreditReport extends AbstractReport
         $clients = Client::scope()
                         ->orderBy('name')
                         ->withArchived()
-                        ->with(['contacts', 'user', 'credits' => function ($query) {
+                        ->with(['contacts', 'user', 'bookkeeping__credits' => function ($query) {
                             $query->where('credit_date', '>=', $this->startDate)
                                   ->where('credit_date', '<=', $this->endDate)
                                   ->withArchived();

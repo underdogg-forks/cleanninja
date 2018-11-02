@@ -96,7 +96,7 @@
 						{!! Former::text('postal_code')
 								->oninput(config('ninja.google_maps_api_key') ? 'lookupPostalCode()' : '') !!}
 						{!! Former::select('country_id')->addOption('','')
-							->fromQuery($countries, 'name', 'id') !!}
+							->fromQuery($core__countries, 'name', 'id') !!}
 
 						<div class="form-group" id="copyShippingDiv" style="display:none;">
 							<label for="city" class="control-label col-lg-4 col-sm-4"></label>
@@ -115,7 +115,7 @@
 								->oninput(config('ninja.google_maps_api_key') ? 'lookupPostalCode(true)' : '')
 								->label('postal_code') !!}
 						{!! Former::select('shipping_country_id')->addOption('','')
-							->fromQuery($countries, 'name', 'id')->label('country_id') !!}
+							->fromQuery($core__countries, 'name', 'id')->label('country_id') !!}
 
 						<div class="form-group" id="copyBillingDiv" style="display:none;">
 							<label for="city" class="control-label col-lg-4 col-sm-4"></label>

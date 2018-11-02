@@ -48,7 +48,7 @@ class AddCustomContactFields extends Migration
             $table->unsignedInteger('payment_type_id')->nullable();
             $table->date('payment_date')->nullable();
             $table->string('transaction_reference')->nullable();
-            $table->foreign('payment_type_id')->references('id')->on('core__paymenttypes');
+            $table->foreign('payment_type_id')->references('id')->on('bookkeeping__paymenttypes');
             $table->boolean('invoice_documents')->default(true);
         });
 

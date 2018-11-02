@@ -152,7 +152,7 @@
 		{!! Button::normal(trans('texts.time_tracker'))->asLinkTo('javascript:openTimeTracker()')->appendIcon(Icon::create('time')) !!}
     @endif
 
-	@if (Auth::user()->can('createEntity', $entityType) && empty($vendorId))
+	@if (Auth::user()->can('createEntity', $entityType) && empty($vendorId) && ($entityType !== ENTITY_CREDIT))
     	{!! Button::primary(mtrans($entityType, "new_{$entityType}"))
 			->asLinkTo(url(
 				(in_array($entityType, [ENTITY_PROPOSAL_SNIPPET, ENTITY_PROPOSAL_CATEGORY, ENTITY_PROPOSAL_TEMPLATE]) ? str_replace('_', 's/', Utils::pluralizeEntityType($entityType)) : Utils::pluralizeEntityType($entityType)) .
@@ -161,7 +161,29 @@
 			->appendIcon(Icon::create('plus-sign')) !!}
 	@endif
 
+
+	@if ($entityType == ENTITY_CREDIT)
+		{!! Button::primary(mtrans($entityType, "new_{$entityType}"))
+			->asLinkTo(url(
+				'credits/create/' . (isset($clientId) ? ($clientId) : '')
+			))
+			->appendIcon(Icon::create('minus-sign')) !!}
+	@endif
+
 </div>
+
+
+@php
+
+if (in_array($entityType, [ENTITY_CREDIT]))
+{
+	$url = '/api/credits';
+	$entityType = str_replace('ss', 's', $entityType);	
+	//$entityType = str_replace('ss', 's', $entityType);	
+}
+
+@endphp
+
 
 
 {!! Datatable::table()
@@ -172,6 +194,7 @@
 	->setOptions('sPaginationType', 'bootstrap')
     ->setOptions('aaSorting', [[isset($clientId) ? ($datatable->sortCol-1) : $datatable->sortCol, 'desc']])
 	->render('datatable') !!}
+
 
 @if ($entityType == ENTITY_PAYMENT)
 	@include('partials/refund_payment')

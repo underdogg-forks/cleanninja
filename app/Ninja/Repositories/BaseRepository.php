@@ -146,9 +146,19 @@ class BaseRepository
         return $this->getInstance()->scope($ids)->withTrashed()->get();
     }
 
+
+
+
+
     protected function applyFilters($query, $entityType, $table = false)
     {
         $table = Utils::pluralizeEntityType($table ?: $entityType);
+
+
+        // if($table == 'bookkeeping__creditss')
+        // {
+        // $table = 'bookkeeping__credits';
+        // }
 
         if ($filter = session('entity_state_filter:' . $entityType, STATUS_ACTIVE)) {
             $filters = explode(',', $filter);

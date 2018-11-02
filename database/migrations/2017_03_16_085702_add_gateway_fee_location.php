@@ -17,7 +17,7 @@ class AddGatewayFeeLocation extends Migration
             $table->integer('quote_number_counter')->default(1)->nullable();
         });
 
-        Schema::table('credits', function ($table) {
+        Schema::table('bookkeeping__credits', function ($table) {
             $table->text('public_notes')->nullable();
         });
 
@@ -141,7 +141,7 @@ class AddGatewayFeeLocation extends Migration
             $table->dropColumn('quote_number_counter');
         });
 
-        Schema::table('credits', function ($table) {
+        Schema::table('bookkeeping__credits', function ($table) {
             $table->dropColumn('public_notes');
         });
 
