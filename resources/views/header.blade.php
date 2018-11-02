@@ -1,8 +1,6 @@
 @extends('master')
 
 @section('head_css')
-
-//flatly.min.css
     {{--  <link href="{{ asset('css/themes/flatly.min.css') }}?no_cache={{ NINJA_VERSION }}" rel="stylesheet" type="text/css"/>  --}}
     <link href="{{ asset('css/built.css') }}?no_cache={{ NINJA_VERSION }}" rel="stylesheet" type="text/css"/>
 

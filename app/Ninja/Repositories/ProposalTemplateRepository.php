@@ -21,16 +21,16 @@ class ProposalTemplateRepository extends BaseRepository
 
     public function find($filter = null, $userId = false)
     {
-        $query = DB::table('proposal_templates')
-                ->where('proposal_templates.account_id', '=', Auth::user()->account_id)
+        $query = DB::table('proposals__templates')
+                ->where('proposals__templates.account_id', '=', Auth::user()->account_id)
                 ->select(
-                    'proposal_templates.name',
-                    'proposal_templates.public_id',
-                    'proposal_templates.user_id',
-                    'proposal_templates.deleted_at',
-                    'proposal_templates.is_deleted',
-                    'proposal_templates.html as content',
-                    'proposal_templates.private_notes'
+                    'proposals__templates.name',
+                    'proposals__templates.public_id',
+                    'proposals__templates.user_id',
+                    'proposals__templates.deleted_at',
+                    'proposals__templates.is_deleted',
+                    'proposals__templates.html as content',
+                    'proposals__templates.private_notes'
                 );
 
         $this->applyFilters($query, ENTITY_PROPOSAL_TEMPLATE);
@@ -41,12 +41,12 @@ class ProposalTemplateRepository extends BaseRepository
                       ->orWhere('contacts.first_name', 'like', '%'.$filter.'%')
                       ->orWhere('contacts.last_name', 'like', '%'.$filter.'%')
                       ->orWhere('contacts.email', 'like', '%'.$filter.'%')
-                      ->orWhere('proposal_templates.name', 'like', '%'.$filter.'%');
+                      ->orWhere('proposals__templates.name', 'like', '%'.$filter.'%');
             });
         }
 
         if ($userId) {
-            $query->where('proposal_templates.user_id', '=', $userId);
+            $query->where('proposals__templates.user_id', '=', $userId);
         }
 
         return $query;

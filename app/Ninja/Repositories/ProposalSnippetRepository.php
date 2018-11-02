@@ -22,21 +22,21 @@ class ProposalSnippetRepository extends BaseRepository
 
     public function find($filter = null, $userId = false)
     {
-        $query = DB::table('proposal_snippets')
-                ->leftjoin('proposal_categories', 'proposal_categories.id', '=', 'proposal_snippets.proposal_category_id')
-                ->where('proposal_snippets.account_id', '=', Auth::user()->account_id)
+        $query = DB::table('proposals__snippets')
+                ->leftjoin('proposals__categories', 'proposals__categories.id', '=', 'proposals__snippets.proposal_category_id')
+                ->where('proposals__snippets.account_id', '=', Auth::user()->account_id)
                 ->select(
-                    'proposal_snippets.name',
-                    'proposal_snippets.public_id',
-                    'proposal_snippets.user_id',
-                    'proposal_snippets.deleted_at',
-                    'proposal_snippets.is_deleted',
-                    'proposal_snippets.icon',
-                    'proposal_snippets.private_notes',
-                    'proposal_snippets.html as content',
-                    'proposal_categories.name as category',
-                    'proposal_categories.public_id as category_public_id',
-                    'proposal_categories.user_id as category_user_id'
+                    'proposals__snippets.name',
+                    'proposals__snippets.public_id',
+                    'proposals__snippets.user_id',
+                    'proposals__snippets.deleted_at',
+                    'proposals__snippets.is_deleted',
+                    'proposals__snippets.icon',
+                    'proposals__snippets.private_notes',
+                    'proposals__snippets.html as content',
+                    'proposals__categories.name as category',
+                    'proposals__categories.public_id as category_public_id',
+                    'proposals__categories.user_id as category_user_id'
                 );
 
         $this->applyFilters($query, ENTITY_PROPOSAL_SNIPPET);
@@ -47,12 +47,12 @@ class ProposalSnippetRepository extends BaseRepository
                       ->orWhere('contacts.first_name', 'like', '%'.$filter.'%')
                       ->orWhere('contacts.last_name', 'like', '%'.$filter.'%')
                       ->orWhere('contacts.email', 'like', '%'.$filter.'%')
-                      ->orWhere('proposal_snippets.name', 'like', '%'.$filter.'%');
+                      ->orWhere('proposals__snippets.name', 'like', '%'.$filter.'%');
             });
         }
 
         if ($userId) {
-            $query->where('proposal_snippets.user_id', '=', $userId);
+            $query->where('proposals__snippets.user_id', '=', $userId);
         }
 
         return $query;

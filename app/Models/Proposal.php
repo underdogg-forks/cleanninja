@@ -73,15 +73,15 @@ class Proposal extends EntityModel
      */
     public function invitations()
     {
-        return $this->hasMany('App\Models\ProposalInvitation')->orderBy('proposal_invitations.contact_id');
+        return $this->hasMany('App\Models\ProposalInvitation')->orderBy('proposals__invitations.contact_id');
     }
 
     /**
      * @return mixed
      */
-    public function proposal_invitations()
+    public function proposals__invitations()
     {
-        return $this->hasMany('App\Models\ProposalInvitation')->orderBy('proposal_invitations.contact_id');
+        return $this->hasMany('App\Models\ProposalInvitation')->orderBy('proposals__invitations.contact_id');
     }
 
     /**

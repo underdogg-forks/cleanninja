@@ -39,7 +39,7 @@ class AddSubscriptionFormat extends Migration
             $table->decimal('discount', 13, 2)->change();
         });
 
-        Schema::create('proposal_categories', function ($table) {
+        Schema::create('proposals__categories', function ($table) {
             $table->increments('id');
             $table->unsignedInteger('account_id');
             $table->unsignedInteger('user_id');
@@ -56,7 +56,7 @@ class AddSubscriptionFormat extends Migration
             $table->unique(['account_id', 'public_id']);
         });
 
-        Schema::create('proposal_snippets', function ($table) {
+        Schema::create('proposals__snippets', function ($table) {
             $table->increments('id');
             $table->unsignedInteger('account_id');
             $table->unsignedInteger('user_id');
@@ -79,7 +79,7 @@ class AddSubscriptionFormat extends Migration
             $table->unique(['account_id', 'public_id']);
         });
 
-        Schema::create('proposal_templates', function ($table) {
+        Schema::create('proposals__templates', function ($table) {
             $table->increments('id');
             $table->unsignedInteger('account_id')->nullable();
             $table->unsignedInteger('user_id')->nullable();
@@ -116,13 +116,13 @@ class AddSubscriptionFormat extends Migration
             $table->foreign('account_id')->references('id')->on('accounts')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('invoice_id')->references('id')->on('invoices')->onDelete('cascade');
-            $table->foreign('proposal_template_id')->references('id')->on('proposal_templates')->onDelete('cascade');
+            $table->foreign('proposal_template_id')->references('id')->on('proposals__templates')->onDelete('cascade');
 
             $table->unsignedInteger('public_id')->index();
             $table->unique(['account_id', 'public_id']);
         });
 
-        Schema::create('proposal_invitations', function ($table) {
+        Schema::create('proposals__invitations', function ($table) {
             $table->increments('id');
             $table->unsignedInteger('account_id');
             $table->unsignedInteger('user_id');
@@ -184,10 +184,10 @@ class AddSubscriptionFormat extends Migration
         });
 
         Schema::dropIfExists('lookup_proposal_invitations');
-        Schema::dropIfExists('proposal_invitations');
+        Schema::dropIfExists('proposals__invitations');
         Schema::dropIfExists('proposals');
-        Schema::dropIfExists('proposal_templates');
-        Schema::dropIfExists('proposal_snippets');
-        Schema::dropIfExists('proposal_categories');
+        Schema::dropIfExists('proposals__templates');
+        Schema::dropIfExists('proposals__snippets');
+        Schema::dropIfExists('proposals__categories');
     }
 }

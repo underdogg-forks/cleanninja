@@ -542,17 +542,17 @@ class CheckData extends Command
                 ENTITY_INVOICE,
                 ENTITY_PROPOSAL_TEMPLATE,
             ],
-            'proposal_categories' => [
+            'proposals__categories' => [
                 ENTITY_USER,
             ],
-            'proposal_templates' => [
+            'proposals__templates' => [
                 ENTITY_USER,
             ],
-            'proposal_snippets' => [
+            'proposals__snippets' => [
                 ENTITY_USER,
                 ENTITY_PROPOSAL_CATEGORY,
             ],
-            'proposal_invitations' => [
+            'proposals__invitations' => [
                 ENTITY_USER,
                 ENTITY_PROPOSAL,
             ],

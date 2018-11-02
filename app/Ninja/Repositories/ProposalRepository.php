@@ -29,7 +29,7 @@ class ProposalRepository extends BaseRepository
                 ->leftjoin('invoices', 'invoices.id', '=', 'proposals.invoice_id')
                 ->leftjoin('clients', 'clients.id', '=', 'invoices.client_id')
                 ->leftJoin('contacts', 'contacts.client_id', '=', 'clients.id')
-                ->leftJoin('proposal_templates', 'proposal_templates.id', '=', 'proposals.proposal_template_id')
+                ->leftJoin('proposals__templates', 'proposals__templates.id', '=', 'proposals.proposal_template_id')
                 ->where('clients.deleted_at', '=', null)
                 ->where('contacts.deleted_at', '=', null)
                 ->where('contacts.is_primary', '=', true)
@@ -48,9 +48,9 @@ class ProposalRepository extends BaseRepository
                     'invoices.invoice_number as invoice_number',
                     'invoices.public_id as invoice_public_id',
                     'invoices.user_id as invoice_user_id',
-                    'proposal_templates.name as template',
-                    'proposal_templates.public_id as template_public_id',
-                    'proposal_templates.user_id as template_user_id'
+                    'proposals__templates.name as template',
+                    'proposals__templates.public_id as template_public_id',
+                    'proposals__templates.user_id as template_user_id'
                 );
 
         $this->applyFilters($query, ENTITY_PROPOSAL);
@@ -85,7 +85,9 @@ class ProposalRepository extends BaseRepository
         }
 
         if (isset($input['proposal_template_id'])) {
-            $proposal->proposal_template_id = $input['proposal_template_id'] ? ProposalTemplate::getPrivateId($input['proposal_template_id']) : null;
+            $proposal->proposal_template_id = $input['proposal_template_id'];
+            //? ProposalTemplate::getPrivateId($input['proposal_template_id']) : null
+            //dd($proposal->proposal_template_id);
         }
 
         $proposal->save();
@@ -96,7 +98,7 @@ class ProposalRepository extends BaseRepository
         foreach ($proposal->invoice->invitations as $invitation) {
             $conactIds[] = $invitation->contact_id;
             $found = false;
-            foreach ($proposal->proposal_invitations as $proposalInvitation) {
+            foreach ($proposal->proposals__invitations as $proposalInvitation) {
                 if ($invitation->contact_id == $proposalInvitation->contact_id) {
                     $found = true;
                     break;
@@ -112,7 +114,7 @@ class ProposalRepository extends BaseRepository
         }
 
         // delete invitations
-        foreach ($proposal->proposal_invitations as $proposalInvitation) {
+        foreach ($proposal->proposals__invitations as $proposalInvitation) {
             if (! in_array($proposalInvitation->contact_id, $conactIds)) {
                 $proposalInvitation->delete();
             }

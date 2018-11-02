@@ -21,21 +21,21 @@ class ProposalCategoryRepository extends BaseRepository
 
     public function find($filter = null, $userId = false)
     {
-        $query = DB::table('proposal_categories')
-                ->where('proposal_categories.account_id', '=', Auth::user()->account_id)
+        $query = DB::table('proposals__categories')
+                ->where('proposals__categories.account_id', '=', Auth::user()->account_id)
                 ->select(
-                    'proposal_categories.name',
-                    'proposal_categories.public_id',
-                    'proposal_categories.user_id',
-                    'proposal_categories.deleted_at',
-                    'proposal_categories.is_deleted'
+                    'proposals__categories.name',
+                    'proposals__categories.public_id',
+                    'proposals__categories.user_id',
+                    'proposals__categories.deleted_at',
+                    'proposals__categories.is_deleted'
                 );
 
         $this->applyFilters($query, ENTITY_PROPOSAL_CATEGORY);
 
         if ($filter) {
             $query->where(function ($query) use ($filter) {
-                $query->Where('proposal_categories.name', 'like', '%'.$filter.'%');
+                $query->Where('proposals__categories.name', 'like', '%'.$filter.'%');
             });
         }
 

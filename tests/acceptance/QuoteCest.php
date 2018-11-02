@@ -86,7 +86,7 @@ class QuoteCest
         $clientId = $I->grabFromDatabase('contacts', 'client_id', ['email' => $clientEmail]);
         $invoiceId = $I->grabFromDatabase('invoices', 'id', ['client_id' => $clientId]);
         $proposalId = $I->grabFromDatabase('proposals', 'id', ['invoice_id' => $invoiceId]);
-        $invitationKey = $I->grabFromDatabase('proposal_invitations', 'invitation_key', ['proposal_id' => $proposalId]);
+        $invitationKey = $I->grabFromDatabase('proposals__invitations', 'invitation_key', ['proposal_id' => $proposalId]);
 
         $clientSession = $I->haveFriend('client');
         $clientSession->does(function(AcceptanceTester $I) use ($invitationKey) {

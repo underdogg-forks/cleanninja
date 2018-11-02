@@ -51,10 +51,10 @@ class PurgeAccountData extends Job
             'contacts',
             'clients',
             'proposals',
-            'proposal_templates',
-            'proposal_snippets',
-            'proposal_categories',
-            'proposal_invitations',
+            'proposals__templates',
+            'proposals__snippets',
+            'proposals__categories',
+            'proposals__invitations',
             'tax_rates',
         ];
 

@@ -1730,7 +1730,7 @@ CREATE TABLE `lookup_proposal_invitations` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `lookup_proposal_invitations_invitation_key_unique` (`invitation_key`),
   UNIQUE KEY `lookup_proposal_invitations_message_id_unique` (`message_id`),
-  KEY `lookup_proposal_invitations_lookup_account_id_index` (`lookup_account_id`),
+  KEY `lookup_proposals__invitations_lookup_account_id_index` (`lookup_account_id`),
   CONSTRAINT `lookup_proposal_invitations_lookup_account_id_foreign` FOREIGN KEY (`lookup_account_id`) REFERENCES `lookup_accounts` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -1739,7 +1739,7 @@ CREATE TABLE `lookup_proposal_invitations` (
 -- Dumping data for table `lookup_proposal_invitations`
 --
 
-LOCK TABLES `lookup_proposal_invitations` WRITE;
+LOCK TABLES `lookup_proposals__invitations` WRITE;
 /*!40000 ALTER TABLE `lookup_proposal_invitations` DISABLE KEYS */;
 /*!40000 ALTER TABLE `lookup_proposal_invitations` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -2145,12 +2145,12 @@ LOCK TABLES `projects` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `proposal_categories`
+-- Table structure for table `proposals__categories`
 --
 
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `proposal_categories` (
+CREATE TABLE `proposals__categories` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `account_id` int(10) unsigned NOT NULL,
   `user_id` int(10) unsigned NOT NULL,
@@ -2170,21 +2170,21 @@ CREATE TABLE `proposal_categories` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `proposal_categories`
+-- Dumping data for table `proposals__categories`
 --
 
-LOCK TABLES `proposal_categories` WRITE;
-/*!40000 ALTER TABLE `proposal_categories` DISABLE KEYS */;
-/*!40000 ALTER TABLE `proposal_categories` ENABLE KEYS */;
+LOCK TABLES `proposals__categories` WRITE;
+/*!40000 ALTER TABLE `proposals__categories` DISABLE KEYS */;
+/*!40000 ALTER TABLE `proposals__categories` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `proposal_invitations`
+-- Table structure for table `proposals__invitations`
 --
 
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `proposal_invitations` (
+CREATE TABLE `proposals__invitations` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `account_id` int(10) unsigned NOT NULL,
   `user_id` int(10) unsigned NOT NULL,
@@ -2201,34 +2201,34 @@ CREATE TABLE `proposal_invitations` (
   `email_error` text COLLATE utf8_unicode_ci,
   `public_id` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `proposal_invitations_account_id_public_id_unique` (`account_id`,`public_id`),
-  UNIQUE KEY `proposal_invitations_invitation_key_unique` (`invitation_key`),
-  KEY `proposal_invitations_user_id_foreign` (`user_id`),
-  KEY `proposal_invitations_contact_id_foreign` (`contact_id`),
-  KEY `proposal_invitations_proposal_id_index` (`proposal_id`),
-  KEY `proposal_invitations_public_id_index` (`public_id`),
-  CONSTRAINT `proposal_invitations_contact_id_foreign` FOREIGN KEY (`contact_id`) REFERENCES `contacts` (`id`) ON DELETE CASCADE,
-  CONSTRAINT `proposal_invitations_proposal_id_foreign` FOREIGN KEY (`proposal_id`) REFERENCES `proposals` (`id`) ON DELETE CASCADE,
-  CONSTRAINT `proposal_invitations_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
+  UNIQUE KEY `proposals__invitations_account_id_public_id_unique` (`account_id`,`public_id`),
+  UNIQUE KEY `proposals__invitations_invitation_key_unique` (`invitation_key`),
+  KEY `proposals__invitations_user_id_foreign` (`user_id`),
+  KEY `proposals__invitations_contact_id_foreign` (`contact_id`),
+  KEY `proposals__invitations_proposal_id_index` (`proposal_id`),
+  KEY `proposals__invitations_public_id_index` (`public_id`),
+  CONSTRAINT `proposals__invitations_contact_id_foreign` FOREIGN KEY (`contact_id`) REFERENCES `contacts` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `proposals__invitations_proposal_id_foreign` FOREIGN KEY (`proposal_id`) REFERENCES `proposals` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `proposals__invitations_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `proposal_invitations`
+-- Dumping data for table `proposals__invitations`
 --
 
-LOCK TABLES `proposal_invitations` WRITE;
-/*!40000 ALTER TABLE `proposal_invitations` DISABLE KEYS */;
-/*!40000 ALTER TABLE `proposal_invitations` ENABLE KEYS */;
+LOCK TABLES `proposals__invitations` WRITE;
+/*!40000 ALTER TABLE `proposals__invitations` DISABLE KEYS */;
+/*!40000 ALTER TABLE `proposals__invitations` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `proposal_snippets`
+-- Table structure for table `proposals__snippets`
 --
 
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `proposal_snippets` (
+CREATE TABLE `proposals__snippets` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `account_id` int(10) unsigned NOT NULL,
   `user_id` int(10) unsigned NOT NULL,
@@ -2253,21 +2253,21 @@ CREATE TABLE `proposal_snippets` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `proposal_snippets`
+-- Dumping data for table `proposals__snippets`
 --
 
-LOCK TABLES `proposal_snippets` WRITE;
-/*!40000 ALTER TABLE `proposal_snippets` DISABLE KEYS */;
-/*!40000 ALTER TABLE `proposal_snippets` ENABLE KEYS */;
+LOCK TABLES `proposals__snippets` WRITE;
+/*!40000 ALTER TABLE `proposals__snippets` DISABLE KEYS */;
+/*!40000 ALTER TABLE `proposals__snippets` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `proposal_templates`
+-- Table structure for table `proposals__templates`
 --
 
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `proposal_templates` (
+CREATE TABLE `proposals__templates` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `account_id` int(10) unsigned DEFAULT NULL,
   `user_id` int(10) unsigned DEFAULT NULL,
@@ -2290,13 +2290,13 @@ CREATE TABLE `proposal_templates` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `proposal_templates`
+-- Dumping data for table `proposals__templates`
 --
 
-LOCK TABLES `proposal_templates` WRITE;
-/*!40000 ALTER TABLE `proposal_templates` DISABLE KEYS */;
-INSERT INTO `proposal_templates` VALUES (1,NULL,NULL,'2018-08-01 16:12:59','2018-08-01 16:12:59',NULL,0,'','Clean','<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\">\n\n	<tr class=\"grey-bg\">\n		<td><img src=\"$logoUrl\" width=\"193\"/></td>\n		<td align=\"right\"><p class=\"quote quote-number grey-upper\">Proposal #$quoteNumber</p></td>\n	</tr>\n\n	<tr class=\"top-header grey-bg\">\n		<td colspan=\"2\" align=\"center\">\n			<h1 class=\"cover-heading\">New Business Proposal</h1>\n			<p class=\"quote quoteDate grey-upper\">Valid Until $validUntil</p>\n		</td>\n	</tr>\n\n	<tr align=\"center\" class=\"grey-bg proposal-info\">\n		<td width=\"50%\">\n			<p class=\"blue-upper\">Prepared for:</p>\n			<h3 class=\"client name\">$client.name</h3>\n			<p>\n				<span class=\"client address1\">$client.address1</span><br/>\n				<span class=\"client city\">$client.city</span>, <span class=\"client state\">$client.state</span> <span class=\"client postal-code\">$client.postal_code</span>\n			</p>\n		</td>\n		<td width=\"50%\">\n			<p class=\"blue-upper\">Prepared by:</p>\n			<h3 class=\"account name\">$account.name</h3>\n			<p>\n				<span class=\"account address1\">$account.address1</span><br/>\n				<span class=\"account city\">$account.city</span>, <span class=\"account state\">$account.state</span> <span class=\"account postal-code\">$account.postal_code</span></p>\n			</td>\n		</tr>\n	</td>\n</tr>\n</table>\n\n<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\">\n	<tr>\n		<td colspan=\"2\" class=\"card-content\">\n			<h2 class=\"card-title\">PROJECT DESCRIPTION:</h2>\n			<p class=\"card-text\">Koala Photography seeks a full review of their historical financial records and future accounting needs. At the start, our experts carefully review your past records and assess your financial services needs according to the nature of your plan and suggest the services model best suited to your requirements. The work plan is finalized only after an initial (and possibly subsequent) extensive consultation with [Client.Plan]. Periodic review of our services and client feedback is an essential feature of our work plan which ensures that we remain an efficient accounting partner for your business.</p><br/>\n		</td>\n	</tr>\n</table>\n\n<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\">\n	<tr>\n		<td colspan=\"2\">\n			<hr/>\n		</td>\n	</tr>\n</table>\n\n<table>\n	<tr>\n		<td class=\"grid-item-card card-content\">\n			<h2 class=\"card-title\">OBJECTIVE:</h2>\n			<p class=\"card-text\">Koala Photography seeks a full review of their historical financial records and future accounting needs. At the start, our experts carefully review your past records and assess your financial services needs according to the nature of your plan and suggest the services model best suited to your requirements. The work plan is finalized only after an initial (and possibly subsequent) extensive consultation with [Client.Plan]. Periodic review of our services and client feedback is an essential feature of our work plan which ensures that we remain an efficient accounting partner for your business.</p>\n		</td>\n		<td class=\"grid-item-card card-content\">\n			<h2 class=\"card-title\">GOAL:</h2>\n			<p class=\"card-text\">Koala Photography seeks a full review of their historical financial records and future accounting needs. At the start, our experts carefully review your past records and assess your financial services needs according to the nature of your plan and suggest the services model best suited to your requirements. The work plan is finalized only after an initial (and possibly subsequent) extensive consultation with [Client.Plan]. Periodic review of our services and client feedback is an essential feature of our work plan which ensures that we remain an efficient accounting partner for your business.</p>\n		</td>\n	</tr>\n</table>\n\n<table>\n	<tr class=\"block-quote\" align=\"center\">\n		<td colspan=\"2\">\n			<img src=\"$quoteImageUrl\" width=\"25\"/>\n			<p class=\"quote\">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce congue auctor magna id sodales. Maecenas mollis justo sed tempor facilisis. Ut malesuada in nibh ultrices auctor. Proin id maximus ipsum. Sed eu magna ac nisl sollicitudin porta in non augue. Mauris feugiat interdum aliquam. Aliquam ultrices interdum dolor.</p>\n		</td>\n	</tr>\n</table>\n\n<table>\n	<tr>\n		<td class=\"card-content\">\n			<img width=\"150px\" srcx=\"img/thumb-square.jpg\"/>\n		</td>\n		<td class=\"card-content\">\n			<h2 class=\"card-title\">OBJECTIVE:</h2>\n			<p class=\"card-text\">Koala Photography seeks a full review of their historical financial records and future accounting needs. At the start, our experts carefully review your past records and assess your financial services needs according to the nature of your plan and suggest the services model best suited to your requirements. The work plan is finalized only after an initial (and possibly subsequent) extensive consultation with [Client.Plan]. Periodic review of our services and client feedback is an essential feature of our work plan which ensures that we remain an efficient accounting partner for your business.</p>\n		</td>\n	</tr>\n	<tr>\n		<td class=\"card-content\">\n			<img width=\"150px\" srcx=\"img/thumb-square.jpg\"/>\n		</td>\n		<td class=\"card-content\">\n			<h2 class=\"card-title\">OBJECTIVE:</h2>\n			<p class=\"card-text\">Koala Photography seeks a full review of their historical financial records and future accounting needs. At the start, our experts carefully review your past records and assess your financial services needs according to the nature of your plan and suggest the services model best suited to your requirements. The work plan is finalized only after an initial (and possibly subsequent) extensive consultation with [Client.Plan]. Periodic review of our services and client feedback is an essential feature of our work plan which ensures that we remain an efficient accounting partner for your business.</p>\n		</td>\n	</tr>\n</table>\n\n<table>\n	<tr>\n		<td colspan=\"2\">\n			<hr/>\n		</td>\n	</tr>\n\n	<tr>\n		<td class=\"grid-item-card card-content\">\n			<img/>\n			<h2 class=\"card-title\">OBJECTIVE:</h2>\n			<p class=\"card-text\">Koala Photography seeks a full review of their historical financial records and future accounting needs. At the start, our experts carefully review your past records and assess your financial services needs according to the nature of your plan and suggest the services model best suited to your requirements. The work plan is finalized only after an initial (and possibly subsequent) extensive consultation with [Client.Plan]. Periodic review of our services and client feedback is an essential feature of our work plan which ensures that we remain an efficient accounting partner for your business.</p>\n		</td>\n		<td class=\"grid-item-card card-content\">\n			<img/>\n			<h2 class=\"card-title\">GOAL:</h2>\n			<p class=\"card-text\">Koala Photography seeks a full review of their historical financial records and future accounting needs. At the start, our experts carefully review your past records and assess your financial services needs according to the nature of your plan and suggest the services model best suited to your requirements. The work plan is finalized only after an initial (and possibly subsequent) extensive consultation with [Client.Plan]. Periodic review of our services and client feedback is an essential feature of our work plan which ensures that we remain an efficient accounting partner for your business.</p>\n		</td>\n	</tr>\n\n	<tr class=\"footer\" align=\"center\">\n		<td colspan=\"2\"></td>\n	</tr>\n\n</table>\n','body {\n    font-family: \'Open Sans\', Helvetica, arial, sans-serif;\n    color: #161616;\n}\n\n.grey-upper {\n	font-size: 11px;\n	letter-spacing: 3px;\n	text-transform: uppercase;\n	color: #9a9a9a;\n}\n\n.blue-upper {\n	padding-bottom: 8px;\n	font-size: 11px;\n	letter-spacing: 3px;\n	text-transform: uppercase;\n	color: #37a3c6;\n	margin: 0;\n}\n\np span.client  {\n	margin:5px 0px 0px 0px;\n}\n\nh1.cover-heading {\n	font-size: 48px;\n	line-height: 53px;\n	text-transform: uppercase;\n	font-weight: 100;\n	letter-spacing: 3px;\n	padding: 0 50px;\n}\n\nh3.client.name {\n	padding: 0;\n	margin: 0 0 -10px 0;\n	font-size:18px;\n	font-weight: 600;\n}\n\nspan.client.address1, span.client.city, span.client.state, span.client.postal-code {\n	font-size: 14px;\n	line-height: 18.5px;\n}\n\nh3.account.name {\n	padding: 0;\n	margin: 0 0 -10px 0;\n	font-size:18px;\n	font-weight: 600;\n}\n\nspan.account.address1, span.account.city, span.account.state, span.account.postal-code {\n	font-size: 14px;\n	line-height: 18.5px;\n}\n\n\n.heading,\n.card-title {\n	font-size: 14px;\n	letter-spacing: 3px;\n	color: #37a3c6;\n	font-weight: 600;\n}\n\n.card-text {\n	font-size: 15px;\n	line-height: 21px;\n}\n\na.button {\n	background: #37a3c6;\n	padding: 12px 25px;\n	border-radius: 2px;\n	color: #fff;\n	text-transform: uppercase;\n	font-size: 12px;\n	text-decoration: none;\n	letter-spacing: 3px;\n	font-weight: 600;\n	margin: 15px 0;\n}\n\na.button:hover {\n	background: #161616;\n}\n\n/****** Table *****************************************/\n\n.grey-bg {\n	background: #eeefef;\n}\n\n.card-content {\n	padding: 20px;\n}\n\ntd {\n    vertical-align: top;\n}\n\ntr.top-header {\n	height: 350px;\n}\n\ntr.top-header td {\n	padding: 80px 0 0 0;\n	border-bottom: 1px solid #dddcdc;\n}\n\ntr.top-header h1.heading {\n	margin: 0;\n}\n\ntr.top-header p {\n	margin: 5px 0 0 0;\n}\n\n.proposal-info {\n	height: 350px;\n}\n\n.proposal-info td {\n	padding: 0 0 120px 0;\n}\n\ntr.block-quote {\n	margin: 50px 0 ;\n}\n\ntr.block-quote td {\n	background: #fbfbfb;\n	font-style: italic;\n	padding: 0 75px;\n	font-size: 17px;\n	line-height: 24px;\n	padding: 80px 120px;\n	color: #686766;\n	border-top: 1px solid #dddcdc;\n	border-bottom: 1px solid #dddcdc;\n}\n\ntr.footer td {\n	background: #f0efef;\n	font-size: 12px;\n	letter-spacing: 3px;\n	color: #8c8b8a;\n	padding: 50px 0;\n	text-transform: uppercase;\n}\n\n/****** Misc *****************************************/\n\n\nhr {\n	border: 0;\n	height: 1px;\n	background: #dddada;\n}\n\n.footer img {\n	vertical-align: middle;\n}\n',1);
-/*!40000 ALTER TABLE `proposal_templates` ENABLE KEYS */;
+LOCK TABLES `proposals__templates` WRITE;
+/*!40000 ALTER TABLE `proposals__templates` DISABLE KEYS */;
+INSERT INTO `proposals__templates` VALUES (1,NULL,NULL,'2018-08-01 16:12:59','2018-08-01 16:12:59',NULL,0,'','Clean','<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\">\n\n	<tr class=\"grey-bg\">\n		<td><img src=\"$logoUrl\" width=\"193\"/></td>\n		<td align=\"right\"><p class=\"quote quote-number grey-upper\">Proposal #$quoteNumber</p></td>\n	</tr>\n\n	<tr class=\"top-header grey-bg\">\n		<td colspan=\"2\" align=\"center\">\n			<h1 class=\"cover-heading\">New Business Proposal</h1>\n			<p class=\"quote quoteDate grey-upper\">Valid Until $validUntil</p>\n		</td>\n	</tr>\n\n	<tr align=\"center\" class=\"grey-bg proposal-info\">\n		<td width=\"50%\">\n			<p class=\"blue-upper\">Prepared for:</p>\n			<h3 class=\"client name\">$client.name</h3>\n			<p>\n				<span class=\"client address1\">$client.address1</span><br/>\n				<span class=\"client city\">$client.city</span>, <span class=\"client state\">$client.state</span> <span class=\"client postal-code\">$client.postal_code</span>\n			</p>\n		</td>\n		<td width=\"50%\">\n			<p class=\"blue-upper\">Prepared by:</p>\n			<h3 class=\"account name\">$account.name</h3>\n			<p>\n				<span class=\"account address1\">$account.address1</span><br/>\n				<span class=\"account city\">$account.city</span>, <span class=\"account state\">$account.state</span> <span class=\"account postal-code\">$account.postal_code</span></p>\n			</td>\n		</tr>\n	</td>\n</tr>\n</table>\n\n<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\">\n	<tr>\n		<td colspan=\"2\" class=\"card-content\">\n			<h2 class=\"card-title\">PROJECT DESCRIPTION:</h2>\n			<p class=\"card-text\">Koala Photography seeks a full review of their historical financial records and future accounting needs. At the start, our experts carefully review your past records and assess your financial services needs according to the nature of your plan and suggest the services model best suited to your requirements. The work plan is finalized only after an initial (and possibly subsequent) extensive consultation with [Client.Plan]. Periodic review of our services and client feedback is an essential feature of our work plan which ensures that we remain an efficient accounting partner for your business.</p><br/>\n		</td>\n	</tr>\n</table>\n\n<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\">\n	<tr>\n		<td colspan=\"2\">\n			<hr/>\n		</td>\n	</tr>\n</table>\n\n<table>\n	<tr>\n		<td class=\"grid-item-card card-content\">\n			<h2 class=\"card-title\">OBJECTIVE:</h2>\n			<p class=\"card-text\">Koala Photography seeks a full review of their historical financial records and future accounting needs. At the start, our experts carefully review your past records and assess your financial services needs according to the nature of your plan and suggest the services model best suited to your requirements. The work plan is finalized only after an initial (and possibly subsequent) extensive consultation with [Client.Plan]. Periodic review of our services and client feedback is an essential feature of our work plan which ensures that we remain an efficient accounting partner for your business.</p>\n		</td>\n		<td class=\"grid-item-card card-content\">\n			<h2 class=\"card-title\">GOAL:</h2>\n			<p class=\"card-text\">Koala Photography seeks a full review of their historical financial records and future accounting needs. At the start, our experts carefully review your past records and assess your financial services needs according to the nature of your plan and suggest the services model best suited to your requirements. The work plan is finalized only after an initial (and possibly subsequent) extensive consultation with [Client.Plan]. Periodic review of our services and client feedback is an essential feature of our work plan which ensures that we remain an efficient accounting partner for your business.</p>\n		</td>\n	</tr>\n</table>\n\n<table>\n	<tr class=\"block-quote\" align=\"center\">\n		<td colspan=\"2\">\n			<img src=\"$quoteImageUrl\" width=\"25\"/>\n			<p class=\"quote\">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce congue auctor magna id sodales. Maecenas mollis justo sed tempor facilisis. Ut malesuada in nibh ultrices auctor. Proin id maximus ipsum. Sed eu magna ac nisl sollicitudin porta in non augue. Mauris feugiat interdum aliquam. Aliquam ultrices interdum dolor.</p>\n		</td>\n	</tr>\n</table>\n\n<table>\n	<tr>\n		<td class=\"card-content\">\n			<img width=\"150px\" srcx=\"img/thumb-square.jpg\"/>\n		</td>\n		<td class=\"card-content\">\n			<h2 class=\"card-title\">OBJECTIVE:</h2>\n			<p class=\"card-text\">Koala Photography seeks a full review of their historical financial records and future accounting needs. At the start, our experts carefully review your past records and assess your financial services needs according to the nature of your plan and suggest the services model best suited to your requirements. The work plan is finalized only after an initial (and possibly subsequent) extensive consultation with [Client.Plan]. Periodic review of our services and client feedback is an essential feature of our work plan which ensures that we remain an efficient accounting partner for your business.</p>\n		</td>\n	</tr>\n	<tr>\n		<td class=\"card-content\">\n			<img width=\"150px\" srcx=\"img/thumb-square.jpg\"/>\n		</td>\n		<td class=\"card-content\">\n			<h2 class=\"card-title\">OBJECTIVE:</h2>\n			<p class=\"card-text\">Koala Photography seeks a full review of their historical financial records and future accounting needs. At the start, our experts carefully review your past records and assess your financial services needs according to the nature of your plan and suggest the services model best suited to your requirements. The work plan is finalized only after an initial (and possibly subsequent) extensive consultation with [Client.Plan]. Periodic review of our services and client feedback is an essential feature of our work plan which ensures that we remain an efficient accounting partner for your business.</p>\n		</td>\n	</tr>\n</table>\n\n<table>\n	<tr>\n		<td colspan=\"2\">\n			<hr/>\n		</td>\n	</tr>\n\n	<tr>\n		<td class=\"grid-item-card card-content\">\n			<img/>\n			<h2 class=\"card-title\">OBJECTIVE:</h2>\n			<p class=\"card-text\">Koala Photography seeks a full review of their historical financial records and future accounting needs. At the start, our experts carefully review your past records and assess your financial services needs according to the nature of your plan and suggest the services model best suited to your requirements. The work plan is finalized only after an initial (and possibly subsequent) extensive consultation with [Client.Plan]. Periodic review of our services and client feedback is an essential feature of our work plan which ensures that we remain an efficient accounting partner for your business.</p>\n		</td>\n		<td class=\"grid-item-card card-content\">\n			<img/>\n			<h2 class=\"card-title\">GOAL:</h2>\n			<p class=\"card-text\">Koala Photography seeks a full review of their historical financial records and future accounting needs. At the start, our experts carefully review your past records and assess your financial services needs according to the nature of your plan and suggest the services model best suited to your requirements. The work plan is finalized only after an initial (and possibly subsequent) extensive consultation with [Client.Plan]. Periodic review of our services and client feedback is an essential feature of our work plan which ensures that we remain an efficient accounting partner for your business.</p>\n		</td>\n	</tr>\n\n	<tr class=\"footer\" align=\"center\">\n		<td colspan=\"2\"></td>\n	</tr>\n\n</table>\n','body {\n    font-family: \'Open Sans\', Helvetica, arial, sans-serif;\n    color: #161616;\n}\n\n.grey-upper {\n	font-size: 11px;\n	letter-spacing: 3px;\n	text-transform: uppercase;\n	color: #9a9a9a;\n}\n\n.blue-upper {\n	padding-bottom: 8px;\n	font-size: 11px;\n	letter-spacing: 3px;\n	text-transform: uppercase;\n	color: #37a3c6;\n	margin: 0;\n}\n\np span.client  {\n	margin:5px 0px 0px 0px;\n}\n\nh1.cover-heading {\n	font-size: 48px;\n	line-height: 53px;\n	text-transform: uppercase;\n	font-weight: 100;\n	letter-spacing: 3px;\n	padding: 0 50px;\n}\n\nh3.client.name {\n	padding: 0;\n	margin: 0 0 -10px 0;\n	font-size:18px;\n	font-weight: 600;\n}\n\nspan.client.address1, span.client.city, span.client.state, span.client.postal-code {\n	font-size: 14px;\n	line-height: 18.5px;\n}\n\nh3.account.name {\n	padding: 0;\n	margin: 0 0 -10px 0;\n	font-size:18px;\n	font-weight: 600;\n}\n\nspan.account.address1, span.account.city, span.account.state, span.account.postal-code {\n	font-size: 14px;\n	line-height: 18.5px;\n}\n\n\n.heading,\n.card-title {\n	font-size: 14px;\n	letter-spacing: 3px;\n	color: #37a3c6;\n	font-weight: 600;\n}\n\n.card-text {\n	font-size: 15px;\n	line-height: 21px;\n}\n\na.button {\n	background: #37a3c6;\n	padding: 12px 25px;\n	border-radius: 2px;\n	color: #fff;\n	text-transform: uppercase;\n	font-size: 12px;\n	text-decoration: none;\n	letter-spacing: 3px;\n	font-weight: 600;\n	margin: 15px 0;\n}\n\na.button:hover {\n	background: #161616;\n}\n\n/****** Table *****************************************/\n\n.grey-bg {\n	background: #eeefef;\n}\n\n.card-content {\n	padding: 20px;\n}\n\ntd {\n    vertical-align: top;\n}\n\ntr.top-header {\n	height: 350px;\n}\n\ntr.top-header td {\n	padding: 80px 0 0 0;\n	border-bottom: 1px solid #dddcdc;\n}\n\ntr.top-header h1.heading {\n	margin: 0;\n}\n\ntr.top-header p {\n	margin: 5px 0 0 0;\n}\n\n.proposal-info {\n	height: 350px;\n}\n\n.proposal-info td {\n	padding: 0 0 120px 0;\n}\n\ntr.block-quote {\n	margin: 50px 0 ;\n}\n\ntr.block-quote td {\n	background: #fbfbfb;\n	font-style: italic;\n	padding: 0 75px;\n	font-size: 17px;\n	line-height: 24px;\n	padding: 80px 120px;\n	color: #686766;\n	border-top: 1px solid #dddcdc;\n	border-bottom: 1px solid #dddcdc;\n}\n\ntr.footer td {\n	background: #f0efef;\n	font-size: 12px;\n	letter-spacing: 3px;\n	color: #8c8b8a;\n	padding: 50px 0;\n	text-transform: uppercase;\n}\n\n/****** Misc *****************************************/\n\n\nhr {\n	border: 0;\n	height: 1px;\n	background: #dddada;\n}\n\n.footer img {\n	vertical-align: middle;\n}\n',1);
+/*!40000 ALTER TABLE `proposals__templates` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -2327,7 +2327,7 @@ CREATE TABLE `proposals` (
   KEY `proposals_public_id_index` (`public_id`),
   CONSTRAINT `proposals_account_id_foreign` FOREIGN KEY (`account_id`) REFERENCES `accounts` (`id`) ON DELETE CASCADE,
   CONSTRAINT `proposals_invoice_id_foreign` FOREIGN KEY (`invoice_id`) REFERENCES `invoices` (`id`) ON DELETE CASCADE,
-  CONSTRAINT `proposals_proposal_template_id_foreign` FOREIGN KEY (`proposal_template_id`) REFERENCES `proposal_templates` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `proposals_proposal_template_id_foreign` FOREIGN KEY (`proposal_template_id`) REFERENCES `proposals__templates` (`id`) ON DELETE CASCADE,
   CONSTRAINT `proposals_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;

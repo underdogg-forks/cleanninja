@@ -13,6 +13,8 @@ class ProposalTemplate extends EntityModel
     use SoftDeletes;
     use PresentableTrait;
 
+    protected $table = 'proposals__templates';
+
     /**
      * @var array
      */

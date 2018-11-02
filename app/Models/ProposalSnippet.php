@@ -13,6 +13,8 @@ class ProposalSnippet extends EntityModel
     use SoftDeletes;
     use PresentableTrait;
 
+    protected $table = 'proposals__snippets';
+
     /**
      * @var array
      */
