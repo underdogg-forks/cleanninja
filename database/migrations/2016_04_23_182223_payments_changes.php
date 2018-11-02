@@ -12,9 +12,9 @@ class PaymentsChanges extends Migration
      */
     public function up()
     {
-        Schema::dropIfExists('payment_statuses');
+        Schema::dropIfExists('payments__statuses');
 
-        Schema::create('payment_statuses', function ($table) {
+        Schema::create('payments__statuses', function ($table) {
             $table->increments('id');
             $table->string('name');
         });
@@ -88,7 +88,7 @@ class PaymentsChanges extends Migration
         });
 
         Schema::table('payments', function ($table) {
-            $table->foreign('payment_status_id')->references('id')->on('payment_statuses');
+            $table->foreign('payment_status_id')->references('id')->on('payments__statuses');
             $table->foreign('payment_method_id')->references('id')->on('payments__methods');
         });
 
@@ -158,7 +158,7 @@ class PaymentsChanges extends Migration
             $table->dropColumn('client_enable_auto_bill');
         });
 
-        Schema::dropIfExists('payment_statuses');
+        Schema::dropIfExists('payments__statuses');
 
         Schema::table('account_gateway_tokens', function ($table) {
             $table->dropForeign('account_gateway_tokens_default_payment_method_id_foreign');

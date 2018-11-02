@@ -23,7 +23,7 @@ class PaymentRepository extends BaseRepository
                     ->join('clients', 'clients.id', '=', 'payments.client_id')
                     ->join('invoices', 'invoices.id', '=', 'payments.invoice_id')
                     ->join('contacts', 'contacts.client_id', '=', 'clients.id')
-                    ->join('payment_statuses', 'payment_statuses.id', '=', 'payments.payment_status_id')
+                    ->join('payments__statuses', 'payments__statuses.id', '=', 'payments.payment_status_id')
                     ->leftJoin('bookkeeping__paymenttypes', 'bookkeeping__paymenttypes.id', '=', 'payments.payment_type_id')
                     ->leftJoin('account_gateways', 'account_gateways.id', '=', 'payments.account_gateway_id')
                     ->leftJoin('core__gateways', 'core__gateways.id', '=', 'account_gateways.gateway_id')
@@ -69,7 +69,7 @@ class PaymentRepository extends BaseRepository
                         'invoices.is_deleted as invoice_is_deleted',
                         'core__gateways.name as gateway_name',
                         'core__gateways.id as gateway_id',
-                        'payment_statuses.name as status'
+                        'payments__statuses.name as status'
                     );
 
         $this->applyFilters($query, ENTITY_PAYMENT);
@@ -103,7 +103,7 @@ class PaymentRepository extends BaseRepository
                     ->join('clients', 'clients.id', '=', 'payments.client_id')
                     ->join('invoices', 'invoices.id', '=', 'payments.invoice_id')
                     ->join('contacts', 'contacts.client_id', '=', 'clients.id')
-                    ->join('payment_statuses', 'payment_statuses.id', '=', 'payments.payment_status_id')
+                    ->join('payments__statuses', 'payments__statuses.id', '=', 'payments.payment_status_id')
                     ->leftJoin('invitations', function ($join) {
                         $join->on('invitations.invoice_id', '=', 'invoices.id')
                              ->on('invitations.contact_id', '=', 'contacts.id');
@@ -140,7 +140,7 @@ class PaymentRepository extends BaseRepository
                         'payments.routing_number',
                         'payments.bank_name',
                         'payments.payment_status_id',
-                        'payment_statuses.name as payment_status_name'
+                        'payments__statuses.name as payment_status_name'
                     );
 
         if ($filter) {

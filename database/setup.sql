@@ -1905,12 +1905,12 @@ LOCK TABLES `payment_methods` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `payment_statuses`
+-- Table structure for table `payments__statuses`
 --
 
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `payment_statuses` (
+CREATE TABLE `payments__statuses` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
@@ -1918,13 +1918,13 @@ CREATE TABLE `payment_statuses` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `payment_statuses`
+-- Dumping data for table `payments__statuses`
 --
 
-LOCK TABLES `payment_statuses` WRITE;
-/*!40000 ALTER TABLE `payment_statuses` DISABLE KEYS */;
-INSERT INTO `payment_statuses` VALUES (1,'Pending'),(2,'Voided'),(3,'Failed'),(4,'Completed'),(5,'Partially Refunded'),(6,'Refunded');
-/*!40000 ALTER TABLE `payment_statuses` ENABLE KEYS */;
+LOCK TABLES `payments__statuses` WRITE;
+/*!40000 ALTER TABLE `payments__statuses` DISABLE KEYS */;
+INSERT INTO `payments__statuses` VALUES (1,'Pending'),(2,'Voided'),(3,'Failed'),(4,'Completed'),(5,'Partially Refunded'),(6,'Refunded');
+/*!40000 ALTER TABLE `payments__statuses` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -2042,7 +2042,7 @@ CREATE TABLE `payments` (
   CONSTRAINT `payments_contact_id_foreign` FOREIGN KEY (`contact_id`) REFERENCES `contacts` (`id`) ON DELETE CASCADE,
   CONSTRAINT `payments_invoice_id_foreign` FOREIGN KEY (`invoice_id`) REFERENCES `invoices` (`id`) ON DELETE CASCADE,
   CONSTRAINT `payments_payment_method_id_foreign` FOREIGN KEY (`payment_method_id`) REFERENCES `payment_methods` (`id`) ON DELETE CASCADE,
-  CONSTRAINT `payments_payment_status_id_foreign` FOREIGN KEY (`payment_status_id`) REFERENCES `payment_statuses` (`id`),
+  CONSTRAINT `payments_payment_status_id_foreign` FOREIGN KEY (`payment_status_id`) REFERENCES `payments__statuses` (`id`),
   CONSTRAINT `payments_payment_type_id_foreign` FOREIGN KEY (`payment_type_id`) REFERENCES `payment_types` (`id`),
   CONSTRAINT `payments_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
