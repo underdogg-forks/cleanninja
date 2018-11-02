@@ -31,7 +31,7 @@ class UpdateDarkMode extends Migration
             where invoices.has_tasks = 1
             and invoice_item_type_id = 1');
 
-        Schema::create('recurring_expenses', function (Blueprint $table) {
+        Schema::create('expenses__recurring', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
             $table->softDeletes();
@@ -87,7 +87,7 @@ class UpdateDarkMode extends Migration
      */
     public function down()
     {
-        Schema::drop('recurring_expenses');
+        Schema::drop('expenses__recurring');
 
         Schema::table('expenses', function ($table) {
             $table->dropColumn('recurring_expense_id');

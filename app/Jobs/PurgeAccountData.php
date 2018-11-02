@@ -39,7 +39,7 @@ class PurgeAccountData extends Job
             'bookkeeping__credits',
             'expenses__categories',
             'expenses',
-            'recurring_expenses',
+            'expenses__recurring',
             'invoice_items',
             'payments',
             'invoices',

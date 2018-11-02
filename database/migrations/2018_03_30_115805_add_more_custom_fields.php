@@ -138,7 +138,7 @@ class AddMoreCustomFields extends Migration
 
         DB::statement('UPDATE gateways SET provider = "Custom1" WHERE id = 62');
         DB::statement('UPDATE gateway_types SET alias = "custom1" WHERE id = 6');
-        DB::statement('ALTER TABLE recurring_expenses MODIFY COLUMN last_sent_date DATE');
+        DB::statement('ALTER TABLE expenses__recurring MODIFY COLUMN last_sent_date DATE');
     }
 
     /**

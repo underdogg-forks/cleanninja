@@ -2342,12 +2342,12 @@ LOCK TABLES `proposals` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `recurring_expenses`
+-- Table structure for table `expenses__recurring`
 --
 
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `recurring_expenses` (
+CREATE TABLE `expenses__recurring` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
@@ -2390,12 +2390,12 @@ CREATE TABLE `recurring_expenses` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `recurring_expenses`
+-- Dumping data for table `expenses__recurring`
 --
 
-LOCK TABLES `recurring_expenses` WRITE;
-/*!40000 ALTER TABLE `recurring_expenses` DISABLE KEYS */;
-/*!40000 ALTER TABLE `recurring_expenses` ENABLE KEYS */;
+LOCK TABLES `expenses__recurring` WRITE;
+/*!40000 ALTER TABLE `expenses__recurring` DISABLE KEYS */;
+/*!40000 ALTER TABLE `expenses__recurring` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --

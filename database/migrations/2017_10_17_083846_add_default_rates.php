@@ -38,7 +38,7 @@ class AddDefaultRates extends Migration
             DB::table('core__frequencies')->where('id', '=', 8)->update(['name' => 'Six months']);
             DB::table('core__frequencies')->insert(['name' => 'Annually']);
             DB::statement('update invoices set frequency_id = frequency_id + 1 where frequency_id >= 7');
-            DB::statement('update recurring_expenses set frequency_id = frequency_id + 1 where frequency_id >= 7');
+            DB::statement('update expenses__recurring set frequency_id = frequency_id + 1 where frequency_id >= 7');
             DB::statement('update accounts set reset_counter_frequency_id = reset_counter_frequency_id + 1 where reset_counter_frequency_id >= 7');
         }
     }

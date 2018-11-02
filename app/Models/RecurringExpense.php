@@ -19,6 +19,8 @@ class RecurringExpense extends EntityModel
     use PresentableTrait;
     use HasRecurrence;
 
+    protected $table = 'expenses__recurring';
+
     /**
      * @var array
      */

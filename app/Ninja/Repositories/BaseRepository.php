@@ -154,11 +154,16 @@ class BaseRepository
     {
         $table = Utils::pluralizeEntityType($table ?: $entityType);
 
-
         // if($table == 'bookkeeping__creditss')
         // {
         // $table = 'bookkeeping__credits';
         // }
+
+        if($table == 'expenses__recurrings')
+        {
+        $table = 'expenses__recurring';
+        }
+
 
         if ($filter = session('entity_state_filter:' . $entityType, STATUS_ACTIVE)) {
             $filters = explode(',', $filter);

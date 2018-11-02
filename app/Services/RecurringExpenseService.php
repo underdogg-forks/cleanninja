@@ -74,7 +74,7 @@ class RecurringExpenseService extends BaseService
         $query = $this->recurringExpenseRepo->find($search);
 
         if (! Utils::hasPermission('view_expense')) {
-            $query->where('recurring_expenses.user_id', '=', Auth::user()->id);
+            $query->where('expenses__recurring.user_id', '=', Auth::user()->id);
         }
 
         return $this->datatableService->createDatatable(new RecurringExpenseDatatable(), $query);

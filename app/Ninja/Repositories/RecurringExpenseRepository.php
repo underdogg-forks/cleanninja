@@ -29,14 +29,14 @@ class RecurringExpenseRepository extends BaseRepository
     public function find($filter = null)
     {
         $accountid = \Auth::user()->account_id;
-        $query = DB::table('recurring_expenses')
-                    ->join('accounts', 'accounts.id', '=', 'recurring_expenses.account_id')
-                    ->leftjoin('clients', 'clients.id', '=', 'recurring_expenses.client_id')
+        $query = DB::table('expenses__recurring')
+                    ->join('accounts', 'accounts.id', '=', 'expenses__recurring.account_id')
+                    ->leftjoin('clients', 'clients.id', '=', 'expenses__recurring.client_id')
                     ->leftJoin('contacts', 'contacts.client_id', '=', 'clients.id')
-                    ->leftjoin('vendors', 'vendors.id', '=', 'recurring_expenses.vendor_id')
-                    ->join('core__frequencies', 'frequencies.id', '=', 'recurring_expenses.frequency_id')
-                    ->leftJoin('expenses__categories', 'recurring_expenses.expense_category_id', '=', 'expenses__categories.id')
-                    ->where('recurring_expenses.account_id', '=', $accountid)
+                    ->leftjoin('vendors', 'vendors.id', '=', 'expenses__recurring.vendor_id')
+                    ->join('core__frequencies', 'core__frequencies.id', '=', 'expenses__recurring.frequency_id')
+                    ->leftJoin('expenses__categories', 'expenses__recurring.expense_category_id', '=', 'expenses__categories.id')
+                    ->where('expenses__recurring.account_id', '=', $accountid)
                     ->where('contacts.deleted_at', '=', null)
                     ->where('vendors.deleted_at', '=', null)
                     ->where('clients.deleted_at', '=', null)
@@ -45,23 +45,23 @@ class RecurringExpenseRepository extends BaseRepository
                               ->orWhere('contacts.is_primary', '=', null);
                     })
                     ->select(
-                        'recurring_expenses.account_id',
-                        'recurring_expenses.amount',
-                        'recurring_expenses.deleted_at',
-                        'recurring_expenses.id',
-                        'recurring_expenses.is_deleted',
-                        'recurring_expenses.private_notes',
-                        'recurring_expenses.public_id',
-                        'recurring_expenses.public_notes',
-                        'recurring_expenses.should_be_invoiced',
-                        'recurring_expenses.vendor_id',
-                        'recurring_expenses.expense_currency_id',
-                        'recurring_expenses.invoice_currency_id',
-                        'recurring_expenses.user_id',
-                        'recurring_expenses.tax_rate1',
-                        'recurring_expenses.tax_rate2',
-                        'recurring_expenses.private_notes',
-                        'frequencies.name as frequency',
+                        'expenses__recurring.account_id',
+                        'expenses__recurring.amount',
+                        'expenses__recurring.deleted_at',
+                        'expenses__recurring.id',
+                        'expenses__recurring.is_deleted',
+                        'expenses__recurring.private_notes',
+                        'expenses__recurring.public_id',
+                        'expenses__recurring.public_notes',
+                        'expenses__recurring.should_be_invoiced',
+                        'expenses__recurring.vendor_id',
+                        'expenses__recurring.expense_currency_id',
+                        'expenses__recurring.invoice_currency_id',
+                        'expenses__recurring.user_id',
+                        'expenses__recurring.tax_rate1',
+                        'expenses__recurring.tax_rate2',
+                        'expenses__recurring.private_notes',
+                        'core__frequencies.name as frequency',
                         'expenses__categories.name as category',
                         'expenses__categories.user_id as category_user_id',
                         'expenses__categories.public_id as category_public_id',
@@ -77,11 +77,11 @@ class RecurringExpenseRepository extends BaseRepository
                         'clients.country_id as client_country_id'
                     );
 
-        $this->applyFilters($query, ENTITY_RECURRING_EXPENSE);
+        $this->applyFilters($query, ENTITY_RECURRING_EXPENSE, 'expenses__recurring');
 
         if ($filter) {
             $query->where(function ($query) use ($filter) {
-                $query->where('recurring_expenses.public_notes', 'like', '%'.$filter.'%')
+                $query->where('expenses__recurring.public_notes', 'like', '%'.$filter.'%')
                       ->orWhere('clients.name', 'like', '%'.$filter.'%')
                       ->orWhere('vendors.name', 'like', '%'.$filter.'%')
                       ->orWhere('expenses__categories.name', 'like', '%'.$filter.'%');
