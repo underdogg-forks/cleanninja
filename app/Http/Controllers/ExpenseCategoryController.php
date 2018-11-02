@@ -7,6 +7,7 @@ use App\Http\Requests\ExpenseCategoryRequest;
 use App\Http\Requests\UpdateExpenseCategoryRequest;
 use App\Ninja\Datatables\ExpenseCategoryDatatable;
 use App\Ninja\Repositories\ExpenseCategoryRepository;
+use App\Models\EntityModel;
 use App\Services\ExpenseCategoryService;
 use Input;
 use Session;
@@ -57,7 +58,12 @@ class ExpenseCategoryController extends BaseController
 
     public function edit(ExpenseCategoryRequest $request)
     {
-        $category = $request->entity();
+        //$category = $request->entity();
+
+        //$category = $this->categoryService->firstOrFail();
+        $class = EntityModel::getClassName('expense_category');
+        $entity = new $class;
+        $category = $entity->firstOrFail();
 
         $data = [
             'category' => $category,

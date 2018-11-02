@@ -21,7 +21,7 @@ class AddPageSize extends Migration
             $table->dropColumn('is_early_access');
         });
 
-        Schema::create('expense_categories', function ($table) {
+        Schema::create('expenses__categories', function ($table) {
             $table->increments('id');
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('account_id')->index();
@@ -31,7 +31,7 @@ class AddPageSize extends Migration
             $table->unsignedInteger('public_id')->index();
         });
 
-        Schema::table('expense_categories', function ($table) {
+        Schema::table('expenses__categories', function ($table) {
             $table->foreign('account_id')->references('id')->on('accounts')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->unique(['account_id', 'public_id']);
@@ -42,7 +42,7 @@ class AddPageSize extends Migration
         });
 
         Schema::table('expenses', function ($table) {
-            $table->foreign('expense_category_id')->references('id')->on('expense_categories')->onDelete('cascade');
+            $table->foreign('expense_category_id')->references('id')->on('expenses__categories')->onDelete('cascade');
         });
     }
 
@@ -68,6 +68,6 @@ class AddPageSize extends Migration
             $table->dropColumn('expense_category_id');
         });
 
-        Schema::dropIfExists('expense_categories');
+        Schema::dropIfExists('expenses__categories');
     }
 }

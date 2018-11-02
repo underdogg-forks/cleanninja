@@ -61,7 +61,7 @@ class ExpenseRepository extends BaseRepository
                     ->leftJoin('contacts', 'contacts.client_id', '=', 'clients.id')
                     ->leftjoin('vendors', 'vendors.id', '=', 'expenses.vendor_id')
                     ->leftJoin('invoices', 'invoices.id', '=', 'expenses.invoice_id')
-                    ->leftJoin('expense_categories', 'expenses.expense_category_id', '=', 'expense_categories.id')
+                    ->leftJoin('expenses__categories', 'expenses.expense_category_id', '=', 'expenses__categories.id')
                     ->where('expenses.account_id', '=', $accountid)
                     ->where('contacts.deleted_at', '=', null)
                     //->where('vendors.deleted_at', '=', null)
@@ -93,9 +93,9 @@ class ExpenseRepository extends BaseRepository
                         'expenses.tax_rate2',
                         'expenses.private_notes',
                         'expenses.payment_date',
-                        'expense_categories.name as category',
-                        'expense_categories.user_id as category_user_id',
-                        'expense_categories.public_id as category_public_id',
+                        'expenses__categories.name as category',
+                        'expenses__categories.user_id as category_user_id',
+                        'expenses__categories.public_id as category_public_id',
                         'invoices.public_id as invoice_public_id',
                         'invoices.user_id as invoice_user_id',
                         'invoices.balance',
@@ -150,7 +150,7 @@ class ExpenseRepository extends BaseRepository
                 $query->where('expenses.public_notes', 'like', '%'.$filter.'%')
                       ->orWhere('clients.name', 'like', '%'.$filter.'%')
                       ->orWhere('vendors.name', 'like', '%'.$filter.'%')
-                      ->orWhere('expense_categories.name', 'like', '%'.$filter.'%');
+                      ->orWhere('expenses__categories.name', 'like', '%'.$filter.'%');
                 ;
             });
         }

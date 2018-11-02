@@ -511,7 +511,7 @@ class CheckData extends Command
             'task_statuses' => [
                 ENTITY_USER,
             ],
-            'credits' => [
+            'bookkeeping__credits' => [
                 ENTITY_CLIENT,
                 ENTITY_USER,
             ],
@@ -527,7 +527,7 @@ class CheckData extends Command
             'vendors' => [
                 ENTITY_USER,
             ],
-            'expense_categories' => [
+            'expenses__categories' => [
                 ENTITY_USER,
             ],
             'payment_terms' => [

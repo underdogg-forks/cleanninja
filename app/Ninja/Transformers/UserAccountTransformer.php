@@ -59,11 +59,11 @@ class UserAccountTransformer extends EntityTransformer
     protected $availableIncludes = [
 		'users',
         'tax_rates',
-        'expense_categories',
+        'expenses__categories',
         'account_email_settings',
         'custom_payment_terms',
         'tax_rates',
-        'expense_categories',
+        'expenses__categories',
         'account_email_settings',
     ];
 
@@ -129,7 +129,7 @@ class UserAccountTransformer extends EntityTransformer
     {
         $transformer = new ExpenseCategoryTransformer($this->account, $this->serializer);
 
-        return $this->includeCollection($this->account->expense_categories, $transformer, 'expense_categories');
+        return $this->includeCollection($this->account->expense_categories, $transformer, 'expenses__categories');
     }
 
     /**

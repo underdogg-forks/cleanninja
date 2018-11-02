@@ -650,7 +650,7 @@ class Utils
         }
 
         if ($type === ENTITY_EXPENSE_CATEGORY) {
-            return 'expense_categories';
+            return 'expenses__categories';
         } elseif ($type === ENTITY_PROPOSAL_CATEGORY) {
             return 'proposal_categories';
         } elseif ($type === ENTITY_CREDIT) {
@@ -1365,7 +1365,7 @@ class Utils
         } elseif (in_array($first, $entityTypes)) {
             $action = ($first == 'payments' || $first == 'credits') ? 'enter' : 'create';
             $page = "/{$first}.html#{$action}-" . substr(str_replace('_', '-', $first), 0, -1);
-        } elseif ($first == 'expense_categories') {
+        } elseif ($first == 'expenses__categories') {
             $page = '/expenses.html#expense-categories';
         } elseif ($first == 'settings') {
             if ($second == 'banking__bankaccounts') {

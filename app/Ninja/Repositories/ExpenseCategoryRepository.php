@@ -20,21 +20,21 @@ class ExpenseCategoryRepository extends BaseRepository
 
     public function find($filter = null)
     {
-        $query = DB::table('expense_categories')
-                ->where('expense_categories.account_id', '=', Auth::user()->account_id)
+        $query = DB::table('expenses__categories')
+                ->where('expenses__categories.account_id', '=', Auth::user()->account_id)
                 ->select(
-                    'expense_categories.name as category',
-                    'expense_categories.public_id',
-                    'expense_categories.user_id',
-                    'expense_categories.deleted_at',
-                    'expense_categories.is_deleted'
+                    'expenses__categories.name as category',
+                    'expenses__categories.public_id',
+                    'expenses__categories.user_id',
+                    'expenses__categories.deleted_at',
+                    'expenses__categories.is_deleted'
                 );
 
         $this->applyFilters($query, ENTITY_EXPENSE_CATEGORY);
 
         if ($filter) {
             $query->where(function ($query) use ($filter) {
-                $query->where('expense_categories.name', 'like', '%'.$filter.'%');
+                $query->where('expenses__categories.name', 'like', '%'.$filter.'%');
             });
         }
 

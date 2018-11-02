@@ -45,7 +45,7 @@ class AddTaskProjects extends Migration
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
         // is_deleted to standardize tables
-        Schema::table('expense_categories', function ($table) {
+        Schema::table('expenses__categories', function ($table) {
             $table->boolean('is_deleted')->default(false);
         });
 
@@ -90,7 +90,7 @@ class AddTaskProjects extends Migration
 
         Schema::dropIfExists('projects');
 
-        Schema::table('expense_categories', function ($table) {
+        Schema::table('expenses__categories', function ($table) {
             $table->dropColumn('is_deleted');
         });
 

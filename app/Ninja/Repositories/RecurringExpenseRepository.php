@@ -35,7 +35,7 @@ class RecurringExpenseRepository extends BaseRepository
                     ->leftJoin('contacts', 'contacts.client_id', '=', 'clients.id')
                     ->leftjoin('vendors', 'vendors.id', '=', 'recurring_expenses.vendor_id')
                     ->join('core__frequencies', 'frequencies.id', '=', 'recurring_expenses.frequency_id')
-                    ->leftJoin('expense_categories', 'recurring_expenses.expense_category_id', '=', 'expense_categories.id')
+                    ->leftJoin('expenses__categories', 'recurring_expenses.expense_category_id', '=', 'expenses__categories.id')
                     ->where('recurring_expenses.account_id', '=', $accountid)
                     ->where('contacts.deleted_at', '=', null)
                     ->where('vendors.deleted_at', '=', null)
@@ -62,9 +62,9 @@ class RecurringExpenseRepository extends BaseRepository
                         'recurring_expenses.tax_rate2',
                         'recurring_expenses.private_notes',
                         'frequencies.name as frequency',
-                        'expense_categories.name as category',
-                        'expense_categories.user_id as category_user_id',
-                        'expense_categories.public_id as category_public_id',
+                        'expenses__categories.name as category',
+                        'expenses__categories.user_id as category_user_id',
+                        'expenses__categories.public_id as category_public_id',
                         'vendors.name as vendor_name',
                         'vendors.public_id as vendor_public_id',
                         'vendors.user_id as vendor_user_id',
@@ -84,7 +84,7 @@ class RecurringExpenseRepository extends BaseRepository
                 $query->where('recurring_expenses.public_notes', 'like', '%'.$filter.'%')
                       ->orWhere('clients.name', 'like', '%'.$filter.'%')
                       ->orWhere('vendors.name', 'like', '%'.$filter.'%')
-                      ->orWhere('expense_categories.name', 'like', '%'.$filter.'%');
+                      ->orWhere('expenses__categories.name', 'like', '%'.$filter.'%');
                 ;
             });
         }

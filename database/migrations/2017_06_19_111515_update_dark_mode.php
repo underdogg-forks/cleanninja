@@ -63,7 +63,7 @@ class UpdateDarkMode extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('invoice_currency_id')->references('id')->on('currencies');
             $table->foreign('expense_currency_id')->references('id')->on('currencies');
-            $table->foreign('expense_category_id')->references('id')->on('expense_categories')->onDelete('cascade');
+            $table->foreign('expense_category_id')->references('id')->on('expenses__categories')->onDelete('cascade');
 
             // Indexes
             $table->unsignedInteger('public_id')->index();

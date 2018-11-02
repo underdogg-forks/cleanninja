@@ -1001,12 +1001,12 @@ LOCK TABLES `documents` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `expense_categories`
+-- Table structure for table `expenses__categories`
 --
 
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `expense_categories` (
+CREATE TABLE `expenses__categories` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` int(10) unsigned NOT NULL,
   `account_id` int(10) unsigned NOT NULL,
@@ -1017,22 +1017,22 @@ CREATE TABLE `expense_categories` (
   `public_id` int(10) unsigned NOT NULL,
   `is_deleted` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
-  UNIQUE KEY `expense_categories_account_id_public_id_unique` (`account_id`,`public_id`),
-  KEY `expense_categories_account_id_index` (`account_id`),
-  KEY `expense_categories_public_id_index` (`public_id`),
-  KEY `expense_categories_user_id_foreign` (`user_id`),
-  CONSTRAINT `expense_categories_account_id_foreign` FOREIGN KEY (`account_id`) REFERENCES `accounts` (`id`) ON DELETE CASCADE,
-  CONSTRAINT `expense_categories_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
+  UNIQUE KEY `expenses__categories_account_id_public_id_unique` (`account_id`,`public_id`),
+  KEY `expenses__categories_account_id_index` (`account_id`),
+  KEY `expenses__categories_public_id_index` (`public_id`),
+  KEY `expenses__categories_user_id_foreign` (`user_id`),
+  CONSTRAINT `expenses__categories_account_id_foreign` FOREIGN KEY (`account_id`) REFERENCES `accounts` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `expenses__categories_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `expense_categories`
+-- Dumping data for table `expenses__categories`
 --
 
-LOCK TABLES `expense_categories` WRITE;
-/*!40000 ALTER TABLE `expense_categories` DISABLE KEYS */;
-/*!40000 ALTER TABLE `expense_categories` ENABLE KEYS */;
+LOCK TABLES `expenses__categories` WRITE;
+/*!40000 ALTER TABLE `expenses__categories` DISABLE KEYS */;
+/*!40000 ALTER TABLE `expenses__categories` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -1087,7 +1087,7 @@ CREATE TABLE `expenses` (
   KEY `expenses_client_id_foreign` (`client_id`),
   CONSTRAINT `expenses_account_id_foreign` FOREIGN KEY (`account_id`) REFERENCES `accounts` (`id`) ON DELETE CASCADE,
   CONSTRAINT `expenses_client_id_foreign` FOREIGN KEY (`client_id`) REFERENCES `clients` (`id`) ON DELETE CASCADE,
-  CONSTRAINT `expenses_expense_category_id_foreign` FOREIGN KEY (`expense_category_id`) REFERENCES `expense_categories` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `expenses_expense_category_id_foreign` FOREIGN KEY (`expense_category_id`) REFERENCES `expenses__categories` (`id`) ON DELETE CASCADE,
   CONSTRAINT `expenses_expense_currency_id_foreign` FOREIGN KEY (`expense_currency_id`) REFERENCES `currencies` (`id`),
   CONSTRAINT `expenses_invoice_currency_id_foreign` FOREIGN KEY (`invoice_currency_id`) REFERENCES `currencies` (`id`),
   CONSTRAINT `expenses_payment_type_id_foreign` FOREIGN KEY (`payment_type_id`) REFERENCES `payment_types` (`id`),
@@ -2382,7 +2382,7 @@ CREATE TABLE `recurring_expenses` (
   KEY `recurring_expenses_expense_category_id_index` (`expense_category_id`),
   KEY `recurring_expenses_public_id_index` (`public_id`),
   CONSTRAINT `recurring_expenses_account_id_foreign` FOREIGN KEY (`account_id`) REFERENCES `accounts` (`id`) ON DELETE CASCADE,
-  CONSTRAINT `recurring_expenses_expense_category_id_foreign` FOREIGN KEY (`expense_category_id`) REFERENCES `expense_categories` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `recurring_expenses_expense_category_id_foreign` FOREIGN KEY (`expense_category_id`) REFERENCES `expenses__categories` (`id`) ON DELETE CASCADE,
   CONSTRAINT `recurring_expenses_expense_currency_id_foreign` FOREIGN KEY (`expense_currency_id`) REFERENCES `currencies` (`id`),
   CONSTRAINT `recurring_expenses_invoice_currency_id_foreign` FOREIGN KEY (`invoice_currency_id`) REFERENCES `currencies` (`id`),
   CONSTRAINT `recurring_expenses_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE

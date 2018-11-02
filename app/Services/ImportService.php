@@ -880,7 +880,7 @@ class ImportService
             'client_ids' => [],
             'invoice_ids' => [],
             'vendors' => [],
-            'expense_categories' => [],
+            'expenses__categories' => [],
             'tax_rates' => [],
             'tax_names' => [],
         ];

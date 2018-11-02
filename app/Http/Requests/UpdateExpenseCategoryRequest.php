@@ -27,7 +27,7 @@ class UpdateExpenseCategoryRequest extends ExpenseCategoryRequest
 
         return [
             'name' => 'required',
-            'name' => sprintf('required|unique:expense_categories,name,%s,id,account_id,%s', $this->entity()->id, $this->user()->account_id),
+            'name' => sprintf('required|unique:expenses__categories,name,%s,id,account_id,%s', $this->entity()->id, $this->user()->account_id),
         ];
     }
 }

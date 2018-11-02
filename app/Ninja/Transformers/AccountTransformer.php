@@ -140,7 +140,7 @@ class AccountTransformer extends EntityTransformer
         'users',
         'products',
         'tax_rates',
-        'expense_categories',
+        'expenses__categories',
         'projects',
         'account_email_settings',
     ];
@@ -175,7 +175,7 @@ class AccountTransformer extends EntityTransformer
     {
         $transformer = new ExpenseCategoryTransformer($account, $this->serializer);
 
-        return $this->includeCollection($account->expense_categories, $transformer, 'expense_categories');
+        return $this->includeCollection($account->expense_categories, $transformer, 'expenses__categories');
     }
 
     /**

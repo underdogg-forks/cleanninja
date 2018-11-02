@@ -21,6 +21,7 @@ class EntityRequest extends Request
 
         $class = EntityModel::getClassName($this->entityType);
 
+
         // The entity id can appear as invoices, invoice_id, public_id or id
         $publicId = false;
         $field = $this->entityType . '_id';
@@ -59,9 +60,7 @@ class EntityRequest extends Request
             $this->entity = $class::scope($publicId, $accountId)->withTrashed()->firstOrFail();
         } else {
             $this->entity = $class::scope($publicId, $accountId)->firstOrFail();
-
         }
-
         return $this->entity;
     }
 
