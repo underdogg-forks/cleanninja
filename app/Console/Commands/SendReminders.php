@@ -99,7 +99,7 @@ class SendReminders extends Command
     {
         $today = new DateTime();
 
-        $delayedAutoBillInvoices = Invoice::with('account.timezone', 'recurring_invoice', 'invoice_items', 'client', 'user')
+        $delayedAutoBillInvoices = Invoice::with('account.timezone', 'recurring_invoice', 'invoices__items', 'client', 'user')
             ->whereRaw('is_deleted IS FALSE AND deleted_at IS NULL AND is_recurring IS FALSE AND is_public IS TRUE
             AND balance > 0 AND due_date = ? AND recurring_invoice_id IS NOT NULL',
                 [$today->format('Y-m-d')])

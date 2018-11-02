@@ -170,7 +170,7 @@ class OnlinePaymentController extends BaseController
         }
 
         $invitationKey = $invitationKey ?: Session::get('invitation_key');
-        $invitation = Invitation::with('invoice.invoice_items', 'invoice.client.currency', 'invoice.client.account.account_gateways.gateway')
+        $invitation = Invitation::with('invoice.invoices__items', 'invoice.client.currency', 'invoice.client.account.account_gateways.gateway')
                         ->where('invitation_key', '=', $invitationKey)->firstOrFail();
 
         if (! $gatewayTypeAlias) {

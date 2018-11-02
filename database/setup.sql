@@ -1341,12 +1341,12 @@ INSERT INTO `core__invoicedesigns` VALUES (1,'Clean','var GlobalY=0;//Y position
 UNLOCK TABLES;
 
 --
--- Table structure for table `invoice_items`
+-- Table structure for table `invoices__items`
 --
 
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `invoice_items` (
+CREATE TABLE `invoices__items` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `account_id` int(10) unsigned NOT NULL,
   `user_id` int(10) unsigned NOT NULL,
@@ -1380,12 +1380,12 @@ CREATE TABLE `invoice_items` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `invoice_items`
+-- Dumping data for table `invoices__items`
 --
 
-LOCK TABLES `invoice_items` WRITE;
-/*!40000 ALTER TABLE `invoice_items` DISABLE KEYS */;
-/*!40000 ALTER TABLE `invoice_items` ENABLE KEYS */;
+LOCK TABLES `invoices__items` WRITE;
+/*!40000 ALTER TABLE `invoices__items` DISABLE KEYS */;
+/*!40000 ALTER TABLE `invoices__items` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --

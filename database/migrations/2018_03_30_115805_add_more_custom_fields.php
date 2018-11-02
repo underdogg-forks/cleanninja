@@ -127,7 +127,7 @@ class AddMoreCustomFields extends Migration
             $table->text('custom_text_value2')->nullable()->change();
         });
 
-        Schema::table('invoice_items', function ($table) {
+        Schema::table('invoices__items', function ($table) {
             $table->text('custom_value1')->nullable()->change();
             $table->text('custom_value2')->nullable()->change();
         });

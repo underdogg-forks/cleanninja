@@ -18,7 +18,7 @@ class ConfideSetupUsersTable extends Migration
         Schema::dropIfExists('invitations');
         Schema::dropIfExists('payments');
         Schema::dropIfExists('account_gateways');
-        Schema::dropIfExists('invoice_items');
+        Schema::dropIfExists('invoices__items');
         Schema::dropIfExists('products');
         Schema::dropIfExists('tax_rates');
         Schema::dropIfExists('contacts');
@@ -413,7 +413,7 @@ class ConfideSetupUsersTable extends Migration
 
         });
 
-        Schema::create('invoice_items', function ($t) {
+        Schema::create('invoices__items', function ($t) {
             $t->increments('id');
             $t->unsignedInteger('account_id');
             $t->unsignedInteger('user_id');
@@ -543,7 +543,7 @@ class ConfideSetupUsersTable extends Migration
         Schema::dropIfExists('invitations');
         Schema::dropIfExists('payments');
         Schema::dropIfExists('account_gateways');
-        Schema::dropIfExists('invoice_items');
+        Schema::dropIfExists('invoices__items');
         Schema::dropIfExists('products');
         Schema::dropIfExists('tax_rates');
         Schema::dropIfExists('contacts');

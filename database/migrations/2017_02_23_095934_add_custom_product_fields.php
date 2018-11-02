@@ -26,7 +26,7 @@ class AddCustomProductFields extends Migration
             $table->decimal('fee_tax_rate2', 13, 3)->nullable();
         });
 
-        Schema::table('invoice_items', function ($table) {
+        Schema::table('invoices__items', function ($table) {
             $table->smallInteger('invoice_item_type_id')->default(1);
         });
 
@@ -68,7 +68,7 @@ class AddCustomProductFields extends Migration
             $table->dropColumn('fee_tax_name2');
         });
 
-        Schema::table('invoice_items', function ($table) {
+        Schema::table('invoices__items', function ($table) {
             $table->dropColumn('invoice_item_type_id');
         });
 

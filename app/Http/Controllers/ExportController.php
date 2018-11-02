@@ -80,7 +80,7 @@ class ExportController extends BaseController
             $query->withArchived()
                   ->with(['contacts', 'invoices' => function ($query) {
                       $query->withArchived()
-                            ->with(['invoice_items', 'payments' => function ($query) {
+                            ->with(['invoices__items', 'payments' => function ($query) {
                                 $query->withArchived();
                             }]);
                   }]);
@@ -198,7 +198,7 @@ class ExportController extends BaseController
         if ($request->input('include') === 'all' || $request->input('invoices')) {
             $data['invoices'] = Invoice::scope()
                 ->invoiceType(INVOICE_TYPE_STANDARD)
-                ->with('user', 'client.contacts', 'invoice_status', 'invoice_items')
+                ->with('user', 'client.contacts', 'invoice_status', 'invoices__items')
                 ->withArchived()
                 ->where('is_recurring', '=', false)
                 ->get();
@@ -207,7 +207,7 @@ class ExportController extends BaseController
         if ($request->input('include') === 'all' || $request->input('quotes')) {
             $data['quotes'] = Invoice::scope()
                 ->invoiceType(INVOICE_TYPE_QUOTE)
-                ->with('user', 'client.contacts', 'invoice_status', 'invoice_items')
+                ->with('user', 'client.contacts', 'invoice_status', 'invoices__items')
                 ->withArchived()
                 ->where('is_recurring', '=', false)
                 ->get();
@@ -216,7 +216,7 @@ class ExportController extends BaseController
         if ($request->input('include') === 'all' || $request->input('recurring')) {
             $data['recurringInvoices'] = Invoice::scope()
                 ->invoiceType(INVOICE_TYPE_STANDARD)
-                ->with('user', 'client.contacts', 'invoice_status', 'frequency', 'invoice_items')
+                ->with('user', 'client.contacts', 'invoice_status', 'frequency', 'invoices__items')
                 ->withArchived()
                 ->where('is_recurring', '=', true)
                 ->get();

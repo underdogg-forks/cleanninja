@@ -240,7 +240,7 @@ class CreateTestData extends Command
                 'client_id' => $client->id,
                 'invoice_date_sql' => date_create()->modify(rand(-100, 100) . ' days')->format('Y-m-d'),
                 'due_date_sql' => date_create()->modify(rand(-100, 100) . ' days')->format('Y-m-d'),
-                'invoice_items' => [[
+                'invoices__items' => [[
                     'product_key' => $this->faker->word,
                     'qty' => $this->faker->randomDigit + 1,
                     'cost' => $this->faker->randomFloat(2, 1, 10),

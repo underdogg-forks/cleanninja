@@ -579,7 +579,7 @@ class AccountController extends BaseController
         $account = Auth::user()->account->load('country');
 
         if ($invoice = Invoice::scope()->invoices()->orderBy('id')->first()) {
-            $invoice->load('account', 'client.contacts', 'invoice_items');
+            $invoice->load('account', 'client.contacts', 'invoices__items');
             $invoice->invoice_date = Utils::fromSqlDate($invoice->invoice_date);
             $invoice->due_date = Utils::fromSqlDate($invoice->due_date);
         } else {

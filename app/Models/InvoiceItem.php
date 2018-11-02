@@ -13,6 +13,8 @@ class InvoiceItem extends EntityModel
     use PresentableTrait;
     use SoftDeletes;
 
+    protected $table = 'invoices__items';
+
     /**
      * @var string
      */

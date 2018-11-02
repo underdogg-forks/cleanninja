@@ -60,7 +60,7 @@ class InvoiceApiController extends BaseAPIController
     {
         $invoices = Invoice::scope()
                         ->withTrashed()
-                        ->with('invoice_items', 'client')
+                        ->with('invoices__items', 'client')
                         ->orderBy('updated_at', 'desc');
 
         // Filter by invoice number
@@ -228,7 +228,7 @@ class InvoiceApiController extends BaseAPIController
         }
 
         $invoice = Invoice::scope($invoice->public_id)
-                        ->with('client', 'invoice_items', 'invitations')
+                        ->with('client', 'invoices__items', 'invitations')
                         ->first();
 
         if (isset($data['download_invoice']) && boolval($data['download_invoice'])) {
@@ -429,7 +429,7 @@ class InvoiceApiController extends BaseAPIController
 
         $invoice = Invoice::scope($publicId)
                         ->withTrashed()
-                        ->with('client', 'invoice_items', 'invitations')
+                        ->with('client', 'invoices__items', 'invitations')
                         ->firstOrFail();
 
         return $this->itemResponse($invoice);

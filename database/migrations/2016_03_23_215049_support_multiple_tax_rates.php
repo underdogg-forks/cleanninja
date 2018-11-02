@@ -17,8 +17,8 @@ class SupportMultipleTaxRates extends Migration
             }
         });
 
-        Schema::table('invoice_items', function ($table) {
-            if (Schema::hasColumn('invoice_items', 'tax_rate')) {
+        Schema::table('invoices__items', function ($table) {
+            if (Schema::hasColumn('invoices__items', 'tax_rate')) {
                 $table->decimal('tax_rate', 13, 3)->change();
             }
         });
@@ -32,8 +32,8 @@ class SupportMultipleTaxRates extends Migration
             $table->decimal('tax_rate2', 13, 3);
         });
 
-        Schema::table('invoice_items', function ($table) {
-            if (Schema::hasColumn('invoice_items', 'tax_rate')) {
+        Schema::table('invoices__items', function ($table) {
+            if (Schema::hasColumn('invoices__items', 'tax_rate')) {
                 $table->renameColumn('tax_rate', 'tax_rate1');
                 $table->renameColumn('tax_name', 'tax_name1');
             }
@@ -61,7 +61,7 @@ class SupportMultipleTaxRates extends Migration
             $table->dropColumn('tax_rate2');
         });
 
-        Schema::table('invoice_items', function ($table) {
+        Schema::table('invoices__items', function ($table) {
             $table->decimal('tax_rate1', 13, 2)->change();
             $table->renameColumn('tax_rate1', 'tax_rate');
             $table->renameColumn('tax_name1', 'tax_name');

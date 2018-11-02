@@ -216,10 +216,10 @@ class BaseAPIController extends Controller
 
         foreach ($included as $include) {
             if ($include == 'invoices') {
-                $data[] = 'invoices.invoice_items';
+                $data[] = 'invoices.invoices__items';
                 $data[] = 'invoices.client.contacts';
             } elseif ($include == 'invoice') {
-                $data[] = 'invoice.invoice_items';
+                $data[] = 'invoice.invoices__items';
                 $data[] = 'invoice.client.contacts';
             } elseif ($include == 'client') {
                 $data[] = 'client.contacts';

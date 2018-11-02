@@ -17,7 +17,7 @@ class IncreasePrecision extends Migration
             $table->decimal('qty', 15, 4)->default(0)->change();
         });
 
-        Schema::table('invoice_items', function ($table) {
+        Schema::table('invoices__items', function ($table) {
             $table->decimal('cost', 15, 4)->change();
             $table->decimal('qty', 15, 4)->default(0)->change();
         });

@@ -54,7 +54,7 @@ class AddRemember2faToken extends Migration
             $table->boolean('signature_on_pdf')->default(false);
         });
 
-        Schema::table('invoice_items', function ($table) {
+        Schema::table('invoices__items', function ($table) {
             $table->float('discount');
         });
 
@@ -135,7 +135,7 @@ class AddRemember2faToken extends Migration
             $table->dropColumn('signature_on_pdf');
         });
 
-        Schema::table('invoice_items', function ($table) {
+        Schema::table('invoices__items', function ($table) {
             $table->dropColumn('discount');
         });
 
