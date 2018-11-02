@@ -2,7 +2,7 @@
 
 function ViewModel(data) {
     var self = this;
-    self.showMore = ko.observable(false);
+    self.showMore = ko.observable(true);
 
     //self.invoice = data ? false : new InvoiceModel();
     self.invoice = ko.observable(data ? false : new InvoiceModel());

@@ -10,7 +10,7 @@ use Str;
  */
 class InvoiceStatus extends Eloquent
 {
-	protected $table = 'invoicing__invoicestatuses';
+	protected $table = 'invoices__statuses';
 
     /**
      * @var bool

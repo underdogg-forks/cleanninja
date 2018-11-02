@@ -53,7 +53,7 @@ class InvoiceRepository extends BaseRepository
         $query = DB::table('invoices')
             ->join('accounts', 'accounts.id', '=', 'invoices.account_id')
             ->join('clients', 'clients.id', '=', 'invoices.client_id')
-            ->join('invoicing__invoicestatuses', 'invoicing__invoicestatuses.id', '=', 'invoices.invoice_status_id')
+            ->join('invoices__statuses', 'invoices__statuses.id', '=', 'invoices.invoice_status_id')
             ->join('contacts', 'contacts.client_id', '=', 'clients.id')
             ->where('invoices.account_id', '=', $accountId)
             ->where('contacts.deleted_at', '=', null)
@@ -78,8 +78,8 @@ class InvoiceRepository extends BaseRepository
                 DB::raw("CONCAT(invoices.invoice_date, invoices.created_at) as date"),
                 DB::raw("CONCAT(COALESCE(invoices.partial_due_date, invoices.due_date), invoices.created_at) as due_date"),
                 DB::raw("CONCAT(COALESCE(invoices.partial_due_date, invoices.due_date), invoices.created_at) as valid_until"),
-                'invoicing__invoicestatuses.name as status',
-                'invoicing__invoicestatuses.name as invoice_status_name',
+                'invoices__statuses.name as status',
+                'invoices__statuses.name as invoice_status_name',
                 'contacts.first_name',
                 'contacts.last_name',
                 'contacts.email',
@@ -147,8 +147,8 @@ class InvoiceRepository extends BaseRepository
         $query = DB::table('invoices')
                     ->join('accounts', 'accounts.id', '=', 'invoices.account_id')
                     ->join('clients', 'clients.id', '=', 'invoices.client_id')
-                    ->join('invoicing__invoicestatuses', 'invoicing__invoicestatuses.id', '=', 'invoices.invoice_status_id')
-                    ->leftJoin('core__frequencies', 'frequencies.id', '=', 'invoices.frequency_id')
+                    ->join('invoices__statuses', 'invoices__statuses.id', '=', 'invoices.invoice_status_id')
+                    ->leftJoin('core__frequencies', 'core__frequencies.id', '=', 'invoices.frequency_id')
                     ->join('contacts', 'contacts.client_id', '=', 'clients.id')
                     ->where('invoices.account_id', '=', $accountId)
                     ->where('invoices.invoice_type_id', '=', $invoiceTypeId)
@@ -162,7 +162,7 @@ class InvoiceRepository extends BaseRepository
                         DB::raw("COALESCE(NULLIF(clients.name,''), NULLIF(CONCAT(contacts.first_name, ' ', contacts.last_name),''), NULLIF(contacts.email,'')) client_name"),
                         'invoices.public_id',
                         'invoices.amount',
-                        'frequencies.name as frequency',
+                        'core__frequencies.name as frequency',
                         'invoices.start_date as start_date_sql',
                         'invoices.end_date as end_date_sql',
                         'invoices.last_sent_date as last_sent_date_sql',
@@ -175,8 +175,8 @@ class InvoiceRepository extends BaseRepository
                         'invoices.deleted_at',
                         'invoices.is_deleted',
                         'invoices.user_id',
-                        'invoicing__invoicestatuses.name as invoice_status_name',
-                        'invoicing__invoicestatuses.name as status',
+                        'invoices__statuses.name as invoice_status_name',
+                        'invoices__statuses.name as status',
                         'invoices.invoice_status_id',
                         'invoices.balance',
                         'invoices.due_date',
@@ -215,7 +215,7 @@ class InvoiceRepository extends BaseRepository
           ->join('accounts', 'accounts.id', '=', 'invitations.account_id')
           ->join('invoices', 'invoices.id', '=', 'invitations.invoice_id')
           ->join('clients', 'clients.id', '=', 'invoices.client_id')
-          ->join('core__frequencies', 'frequencies.id', '=', 'invoices.frequency_id')
+          ->join('core__frequencies', 'core__frequencies.id', '=', 'invoices.frequency_id')
           ->where('invitations.contact_id', '=', $contactId)
           ->where('invitations.deleted_at', '=', null)
           ->where('invoices.invoice_type_id', '=', $invoiceType)
@@ -239,7 +239,7 @@ class InvoiceRepository extends BaseRepository
                 'invoices.end_date',
                 'invoices.auto_bill',
                 'invoices.client_enable_auto_bill',
-                'frequencies.name as frequency'
+                'core__frequencies.name as frequency'
             );
 
         $table = \Datatable::query($query)
