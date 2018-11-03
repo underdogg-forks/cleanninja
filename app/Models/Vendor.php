@@ -18,6 +18,9 @@ class Vendor extends EntityModel
     use PresentableTrait;
     use SoftDeletes;
 
+
+    protected $table = 'vendors';
+
     /**
      * @var string
      */

@@ -12,14 +12,16 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class VendorContact extends EntityModel
 {
     use SoftDeletes;
+
+    /**
+     * @var string
+     */
+    protected $table = 'vendors__contacts';
+
     /**
      * @var array
      */
     protected $dates = ['deleted_at'];
-    /**
-     * @var string
-     */
-    protected $table = 'vendor_contacts';
 
     /**
      * @var array

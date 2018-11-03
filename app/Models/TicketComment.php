@@ -9,6 +9,9 @@ class TicketComment extends EntityModel
 {
     use Searchable;
 
+    protected $table = 'tickets__comments';
+
+
     protected $touches = ['ticket'];
 
     /**

@@ -31,6 +31,10 @@ class Invoice extends EntityModel implements BalanceAffecting
         SoftDeletes::trashed as parentTrashed;
     }
 
+
+    protected $table = 'invoices';
+
+
     /**
      * @var string
      */

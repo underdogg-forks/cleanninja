@@ -8,6 +8,9 @@ namespace App\Models;
  */
 class TicketRelation extends EntityModel
 {
+
+    protected $table = 'tickets__relations';
+
     public $timestamps = false;
 
     protected $hidden = [];

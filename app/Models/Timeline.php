@@ -13,10 +13,7 @@ class Timeline extends Eloquent
 {
     use PresentableTrait;
 
-
     protected $table = 'core__timeline';
-
-
 
     /**
      * @var string

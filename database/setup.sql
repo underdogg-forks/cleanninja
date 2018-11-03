@@ -2525,12 +2525,12 @@ LOCK TABLES `subscriptions` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `task_statuses`
+-- Table structure for table `tasks__statuses`
 --
 
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `task_statuses` (
+CREATE TABLE `tasks__statuses` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` int(10) unsigned NOT NULL,
   `account_id` int(10) unsigned NOT NULL,
@@ -2541,22 +2541,22 @@ CREATE TABLE `task_statuses` (
   `sort_order` smallint(6) NOT NULL DEFAULT '0',
   `public_id` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `task_statuses_account_id_public_id_unique` (`account_id`,`public_id`),
-  KEY `task_statuses_user_id_foreign` (`user_id`),
-  KEY `task_statuses_account_id_index` (`account_id`),
-  KEY `task_statuses_public_id_index` (`public_id`),
-  CONSTRAINT `task_statuses_account_id_foreign` FOREIGN KEY (`account_id`) REFERENCES `accounts` (`id`) ON DELETE CASCADE,
-  CONSTRAINT `task_statuses_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
+  UNIQUE KEY `tasks__statuses_account_id_public_id_unique` (`account_id`,`public_id`),
+  KEY `tasks__statuses_user_id_foreign` (`user_id`),
+  KEY `tasks__statuses_account_id_index` (`account_id`),
+  KEY `tasks__statuses_public_id_index` (`public_id`),
+  CONSTRAINT `tasks__statuses_account_id_foreign` FOREIGN KEY (`account_id`) REFERENCES `accounts` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `tasks__statuses_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `task_statuses`
+-- Dumping data for table `tasks__statuses`
 --
 
-LOCK TABLES `task_statuses` WRITE;
-/*!40000 ALTER TABLE `task_statuses` DISABLE KEYS */;
-/*!40000 ALTER TABLE `task_statuses` ENABLE KEYS */;
+LOCK TABLES `tasks__statuses` WRITE;
+/*!40000 ALTER TABLE `tasks__statuses` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tasks__statuses` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -2597,7 +2597,7 @@ CREATE TABLE `tasks` (
   CONSTRAINT `tasks_client_id_foreign` FOREIGN KEY (`client_id`) REFERENCES `clients` (`id`) ON DELETE CASCADE,
   CONSTRAINT `tasks_invoice_id_foreign` FOREIGN KEY (`invoice_id`) REFERENCES `invoices` (`id`) ON DELETE CASCADE,
   CONSTRAINT `tasks_project_id_foreign` FOREIGN KEY (`project_id`) REFERENCES `projects` (`id`) ON DELETE CASCADE,
-  CONSTRAINT `tasks_task_status_id_foreign` FOREIGN KEY (`task_status_id`) REFERENCES `task_statuses` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `tasks_task_status_id_foreign` FOREIGN KEY (`task_status_id`) REFERENCES `tasks__statuses` (`id`) ON DELETE CASCADE,
   CONSTRAINT `tasks_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;

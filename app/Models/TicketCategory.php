@@ -7,6 +7,8 @@ use Eloquent;
 
 class TicketCategory extends Eloquent
 {
+    protected $table = 'tickets__categories';
+
     /**
      * @return mixed
      */

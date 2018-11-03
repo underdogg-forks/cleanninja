@@ -10,6 +10,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class TaxRate extends EntityModel
 {
     use SoftDeletes;
+
+    protected $table = 'bookkeeping__taxrates';
+
     /**
      * @var array
      */

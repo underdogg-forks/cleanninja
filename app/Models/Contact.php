@@ -21,6 +21,9 @@ class Contact extends EntityModel implements AuthenticatableContract, CanResetPa
     use CanResetPassword;
     use Notifiable;
 
+    protected $table = 'contacts';
+
+
     protected $guard = 'client';
 
     /**

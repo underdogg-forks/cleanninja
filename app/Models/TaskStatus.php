@@ -11,6 +11,9 @@ class TaskStatus extends EntityModel
 {
     use SoftDeletes;
 
+    protected $table = 'tasks__statuses';
+
+
     /**
      * @var bool
      */

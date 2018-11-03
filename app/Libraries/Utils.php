@@ -656,7 +656,7 @@ class Utils
         } elseif ($type === ENTITY_CREDIT) {
             return 'bookkeeping__credits';
         } elseif ($type === ENTITY_TASK_STATUS) {
-            return 'task_statuses';
+            return 'tasks__statuses';
         } elseif ($type === ENTITY_TICKET_STATUS) {
             return 'ticket_statuses';
         } elseif ($type === ENTITY_TICKET_CATEGORY) {

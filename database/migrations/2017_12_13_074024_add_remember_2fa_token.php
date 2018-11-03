@@ -17,8 +17,8 @@ class AddRemember2faToken extends Migration
             $table->string('remember_2fa_token', 100)->nullable();
         });
 
-        Schema::dropIfExists('task_statuses');
-        Schema::create('task_statuses', function ($table) {
+        Schema::dropIfExists('tasks__statuses');
+        Schema::create('tasks__statuses', function ($table) {
             $table->increments('id');
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('account_id')->index();
@@ -41,7 +41,7 @@ class AddRemember2faToken extends Migration
         });
 
         Schema::table('tasks', function ($table) {
-            $table->foreign('task_status_id')->references('id')->on('task_statuses')->onDelete('cascade');
+            $table->foreign('task_status_id')->references('id')->on('tasks__statuses')->onDelete('cascade');
         });
 
         Schema::table('currencies', function ($table) {
@@ -123,7 +123,7 @@ class AddRemember2faToken extends Migration
             $table->dropColumn('task_status_sort_order');
         });
 
-        Schema::dropIfExists('task_statuses');
+        Schema::dropIfExists('tasks__statuses');
 
         Schema::table('currencies', function ($table) {
             $table->dropColumn('exchange_rate');

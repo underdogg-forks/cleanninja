@@ -10,6 +10,9 @@ use Illuminate\Support\Facades\Storage;
  */
 class Document extends EntityModel
 {
+
+    protected $table = 'documents';
+
     /**
      * @return mixed
      */

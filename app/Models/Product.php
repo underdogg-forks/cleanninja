@@ -12,6 +12,10 @@ class Product extends EntityModel
 {
     use PresentableTrait;
     use SoftDeletes;
+
+    protected $table = 'products';
+
+
     /**
      * @var array
      */

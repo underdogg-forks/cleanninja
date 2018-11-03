@@ -9,6 +9,9 @@ use Utils;
  */
 class AccountGatewaySettings extends EntityModel
 {
+
+
+
     /**
      * @var array
      */

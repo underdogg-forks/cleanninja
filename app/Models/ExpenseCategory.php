@@ -10,11 +10,11 @@ use Laracasts\Presenter\PresentableTrait;
  */
 class ExpenseCategory extends EntityModel
 {
-protected $table = 'expenses__categories';
-
     // Expense Categories
     use SoftDeletes;
     use PresentableTrait;
+
+    protected $table = 'expenses__categories';
 
     /**
      * @var array

@@ -16,6 +16,8 @@ class Task extends EntityModel
     use SoftDeletes;
     use PresentableTrait;
 
+    protected $table = 'tasks';
+
     /**
      * @var array
      */

@@ -19,6 +19,8 @@ class Payment extends EntityModel
     use PresentableTrait;
     use SoftDeletes;
 
+    protected $table = 'payments';
+
     /**
      * @var array
      */

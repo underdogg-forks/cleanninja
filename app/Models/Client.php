@@ -18,6 +18,8 @@ class Client extends EntityModel
     use SoftDeletes;
     use HasCustomMessages;
 
+    protected $table = 'clients';
+
     /**
      * @var string
      */

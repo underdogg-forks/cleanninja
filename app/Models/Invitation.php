@@ -15,6 +15,8 @@ class Invitation extends EntityModel
     use SoftDeletes;
     use Inviteable;
 
+    protected $table = 'invitations';
+
     /**
      * @var array
      */

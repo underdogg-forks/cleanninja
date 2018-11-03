@@ -17,6 +17,8 @@ class Ticket extends EntityModel
     use PresentableTrait;
     use SoftDeletes;
 
+    protected $table = 'tickets';
+
     /**
      * @var string
      */

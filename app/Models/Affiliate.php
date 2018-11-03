@@ -9,6 +9,9 @@ use Eloquent;
  */
 class Affiliate extends Eloquent
 {
+
+
+
     /**
      * @var bool
      */

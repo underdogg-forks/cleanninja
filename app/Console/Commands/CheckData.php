@@ -508,7 +508,7 @@ class CheckData extends Command
                 ENTITY_USER,
                 ENTITY_TASK_STATUS,
             ],
-            'task_statuses' => [
+            'tasks__statuses' => [
                 ENTITY_USER,
             ],
             'bookkeeping__credits' => [

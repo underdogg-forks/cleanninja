@@ -10,12 +10,14 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class Subscription extends EntityModel
 {
+    use SoftDeletes;
+
+    protected $table = 'subscriptions';
+
     /**
      * @var bool
      */
     public $timestamps = true;
-
-    use SoftDeletes;
 
     /**
      * @var array

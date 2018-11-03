@@ -9,6 +9,8 @@ class TicketTemplate extends EntityModel
 
     use SoftDeletes;
 
+    protected $table = 'tickets__templates';
+
     /**
      * @var array
      */

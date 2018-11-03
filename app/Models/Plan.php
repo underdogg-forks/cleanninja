@@ -18,7 +18,6 @@ class Plan extends Eloquent
 
 	protected $table = 'core__plans';
 
-
     /**
      * @var string
      */

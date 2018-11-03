@@ -13,6 +13,8 @@ class Proposal extends EntityModel
     use SoftDeletes;
     use PresentableTrait;
 
+    protected $table = 'proposals';
+
     /**
      * @var array
      */

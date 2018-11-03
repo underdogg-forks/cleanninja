@@ -17,6 +17,9 @@ class Expense extends EntityModel
     use SoftDeletes;
     use PresentableTrait;
 
+    protected $table = 'expenses';
+
+
     /**
      * @var array
      */

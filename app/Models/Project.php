@@ -14,6 +14,9 @@ class Project extends EntityModel
     use SoftDeletes;
     use PresentableTrait;
 
+    protected $table = 'projects';
+
+
     /**
      * @var array
      */
